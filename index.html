@@ -13,688 +13,678 @@
 </head>
 
 <body onload="onLoad()" style="background-color:gray;">
-   
- 
-  <!--
-	Stuff to investigate later:
-		(mostly moved to javascript file)
-			
-			
-	-->	
-  
-  
-  
-  <h1>SpyParty .prop making tool for event organizers.</h1> </br>
-	Notes: Test your .prop file before you release it! This tool does not account for all possible errors. Prop files should be installed in the <b>%LOCALAPPDATA%\SpyParty\quickplays\</b> folder, which you may need to create.</br>
-	Hints: For Pick or Any gamemodes, make sure the # of missions needed to win is less than the # of selected missions, or the prop file will not load.  Ensure each venue has at least the minimum amount of guests required for all missions (4-6 depending on enabled missions).</br>
-	It IS possible to include multiple variants of a single venue, you just have to duplicate the venue in the .prop file. Pre-filled data is primarily based on SCL6 (without default selections like on balcony).</br></br>
-	<label>File name: <input type="text" id="filename" value="The Next Big Thing"/>.prop</label></br>
-    <label>Group name:</label> <input type="text" id="group" value="My Group" onChange="onNameChange('group')"/>  (how your prop appears in-game)<b style="color:red"><label id="groupNameError"></label></b></br>
-	<label>Description:</label> <input type="text" id="description" value="What is existence?" onChange="onNameChange('description')"/><b style="color:red"><label id="descriptionNameError"></label></b></br>
-    <b>Prop makers - If this is for a main series event that you might want to get pulled into the game automatically, please include a detailed description including the year and T.O.  See currently live QPs as examples. Use \n for new line.</b></br>
-	<label for="minimal">Hide Unused Venues (in-game)?</label> <input type="checkbox" name="minimal" id="minimal" value="Yes" checked="checked"/></br>
-	<button id="save" onclick="onClickSave()">Save to file</button></br>
+     
+  <h1>SpyParty .prop making tool for event organizers.</h1> <br>
+	Notes: Test your .prop file before you release it! This tool does not account for all possible errors. Prop files should be installed in the <b>%LOCALAPPDATA%\SpyParty\quickplays\</b> folder, which you may need to create.<br>
+	Hints: For Pick or Any gamemodes, make sure the # of missions needed to win is less than the # of selected missions, or the prop file will not load.  Ensure each venue has at least the minimum amount of guests required for all missions (4-6 depending on enabled missions).<br>
+	It IS possible to include multiple variants of a single venue, you just have to duplicate the venue in the .prop file. Pre-filled data is primarily based on SCL6 (without default selections like on balcony).<br><br>
+	<label>File name: <input type="text" id="filename" value="The Next Big Thing"/>.prop</label><br>
+    <label>Group name:</label> <input type="text" id="group" value="My Group" onChange="onNameChange('group')"/>  (how your prop appears in-game)<b style="color:red"><label id="groupNameError"></label></b><br>
+	<label>Description:</label> <input type="text" id="description" value="What is existence?" onChange="onNameChange('description')"/><b style="color:red"><label id="descriptionNameError"></label></b><br>
+    <b>Prop makers - If this is for a main series event that you might want to get pulled into the game automatically, please include a detailed description including the year and T.O.  See currently live QPs as examples. Use \n for new line.</b><br>
+	<label for="minimal">Hide Unused Venues (in-game)?</label> <input type="checkbox" name="minimal" id="minimal" value="Yes" checked="checked"/><br>
+	<button id="save" onclick="onClickSave()">Save to file</button><br>
 	
 	
 	<h3>Aquarium</h3>
-	<label for="aquariumAllow">Enable Aquarium?</label> <input type="checkbox" name="aquariumAllow" id="aquariumAllow" value="Yes" checked="checked" onclick="showHideCheckbox('aquarium',this)"/></br>
+	<label for="aquariumAllow">Enable Aquarium?</label> <input type="checkbox" name="aquariumAllow" id="aquariumAllow" value="Yes" checked="checked" onclick="showHideCheckbox('aquarium',this)"/><br>
 	<div id="aquarium">
-		<label>Quickplay name:</label> <input type="text" id="aquariumName" value="Aquarium" onChange="onNameChange('aquarium')"/><b style="color:red"><label id="aquariumNameError"></label></b></br>
-		<label>Duration in seconds:</label> <input type="number" id="aquariumDuration" value="240" step="15" min="15" oninput="displayTime('aquarium')"/> <label id="aquariumTime"></label></br>
-		<label>Number of Guests:</label> <input type="number" id="aquariumGuests" value="19" step="1" max="21" min="4"/></br>
-		Gametype:</br>
-		<input type="radio" name="aquariumGametype" id="aquariumGametype0" value="Known" onclick="showHideE('aquariumSelectedDiv',false)"/> <label for="aquariumGametype0">Known</label></br>
-		<input type="radio" name="aquariumGametype" id="aquariumGametype1" value="Pick" onclick="showHideE('aquariumSelectedDiv',true)"/> <label for="aquariumGametype1">Pick</label></br>
-		<input type="radio" name="aquariumGametype" id="aquariumGametype2" value="Any" checked="checked" onclick="showHideE('aquariumSelectedDiv',true)"/> <label for="aquariumGametype2">Any</label></br>
-		<div id="aquariumSelectedDiv"><label># of needed Missions to win:</label> <input type="number" id="aquariumNeeded" value="4" step="1" max="7" min="1"  oninput="missionsUpdated('aquarium')"/></br></div>
-		<label># of selected Missions:</label> <input type="number" id="aquariumSelected" value="8" step="1" max="8" min="2" oninput="missionsUpdated('aquarium')"/> <b style="color:red"><label id="aquariumError"></label></b></br>
-		<label for="aquariumSimplified">Simplified Mode?</label> <input type="checkbox" name="aquariumSimplified" id="aquariumSimplified" value="Yes"/></br>
-		<label for="aquariumPreselect">Pre-select missions?</label> <input type="checkbox" name="aquariumPreselect" id="aquariumPreselect" value="Yes" onclick="showHideCheckbox('aquariumDefaults',this)"/></br>
+		<label>Quickplay name:</label> <input type="text" id="aquariumName" value="Aquarium" onChange="onNameChange('aquarium')"/><b style="color:red"><label id="aquariumNameError"></label></b><br>
+		<label>Duration in seconds:</label> <input type="number" id="aquariumDuration" value="240" step="15" min="15" oninput="displayTime('aquarium')"/> <label id="aquariumTime"></label><br>
+		<label>Number of Guests:</label> <input type="number" id="aquariumGuests" value="19" step="1" max="21" min="4"/><br>
+		Gametype:<br>
+		<input type="radio" name="aquariumGametype" id="aquariumGametype0" value="Known" onclick="showHideE('aquariumSelectedDiv',false)"/> <label for="aquariumGametype0">Known</label><br>
+		<input type="radio" name="aquariumGametype" id="aquariumGametype1" value="Pick" onclick="showHideE('aquariumSelectedDiv',true)"/> <label for="aquariumGametype1">Pick</label><br>
+		<input type="radio" name="aquariumGametype" id="aquariumGametype2" value="Any" checked="checked" onclick="showHideE('aquariumSelectedDiv',true)"/> <label for="aquariumGametype2">Any</label><br>
+		<div id="aquariumSelectedDiv"><label># of needed Missions to win:</label> <input type="number" id="aquariumNeeded" value="4" step="1" max="7" min="1"  oninput="missionsUpdated('aquarium')"/><br></div>
+		<label># of selected Missions:</label> <input type="number" id="aquariumSelected" value="8" step="1" max="8" min="2" oninput="missionsUpdated('aquarium')"/> <b style="color:red"><label id="aquariumError"></label></b><br>
+		<label for="aquariumSimplified">Simplified Mode?</label> <input type="checkbox" name="aquariumSimplified" id="aquariumSimplified" value="Yes"/><br>
+		<label for="aquariumPreselect">Pre-select missions?</label> <input type="checkbox" name="aquariumPreselect" id="aquariumPreselect" value="Yes" onclick="showHideCheckbox('aquariumDefaults',this)"/><br>
 		<div id="aquariumDefaults" style="display:none">
-			<input type="checkbox" name="aquariumDefaults" id="aquariumDefault0" value="Bug" onClick="checkListErrors('aquarium','D',this.checked)"/> <label for="aquariumDefault0">Bug Ambassador</label></br>
-			<input type="checkbox" name="aquariumDefaults" id="aquariumDefault1" value="Contact" onClick="checkListErrors('aquarium','D',this.checked)"/> <label for="aquariumDefault1">Contact Double Agent</label></br>
-			<input type="checkbox" name="aquariumDefaults" id="aquariumDefault2" value="Transfer" onClick="checkListErrors('aquarium','D',this.checked)"/> <label for="aquariumDefault2">Transfer Microfilm</label></br>
-			<input type="checkbox" name="aquariumDefaults" id="aquariumDefault3" value="Swap" onClick="checkListErrors('aquarium','D',this.checked)"/> <label for="aquariumDefault3">Swap Statue</label></br>
-			<input type="checkbox" name="aquariumDefaults" id="aquariumDefault4" value="Inspect" onClick="checkListErrors('aquarium','D',this.checked)"/> <label for="aquariumDefault4">Inspect Statues</label></br>
-			<input type="checkbox" name="aquariumDefaults" id="aquariumDefault5" value="Seduce" onClick="checkListErrors('aquarium','D',this.checked)"/> <label for="aquariumDefault5">Seduce Target</label></br>
-			<input type="checkbox" name="aquariumDefaults" id="aquariumDefault6" value="Purloin" onClick="checkListErrors('aquarium','D',this.checked)"/> <label for="aquariumDefault6">Purloin Guest List</label></br>
-			<input type="checkbox" name="aquariumDefaults" id="aquariumDefault7" value="Fingerprint" onClick="checkListErrors('aquarium','D',this.checked)"/> <label for="aquariumDefault7">Fingerprint Ambassador</label></br>
+			<input type="checkbox" name="aquariumDefaults" id="aquariumDefault0" value="Bug" onClick="checkListErrors('aquarium','D',this.checked)"/> <label for="aquariumDefault0">Bug Ambassador</label><br>
+			<input type="checkbox" name="aquariumDefaults" id="aquariumDefault1" value="Contact" onClick="checkListErrors('aquarium','D',this.checked)"/> <label for="aquariumDefault1">Contact Double Agent</label><br>
+			<input type="checkbox" name="aquariumDefaults" id="aquariumDefault2" value="Transfer" onClick="checkListErrors('aquarium','D',this.checked)"/> <label for="aquariumDefault2">Transfer Microfilm</label><br>
+			<input type="checkbox" name="aquariumDefaults" id="aquariumDefault3" value="Swap" onClick="checkListErrors('aquarium','D',this.checked)"/> <label for="aquariumDefault3">Swap Statue</label><br>
+			<input type="checkbox" name="aquariumDefaults" id="aquariumDefault4" value="Inspect" onClick="checkListErrors('aquarium','D',this.checked)"/> <label for="aquariumDefault4">Inspect Statues</label><br>
+			<input type="checkbox" name="aquariumDefaults" id="aquariumDefault5" value="Seduce" onClick="checkListErrors('aquarium','D',this.checked)"/> <label for="aquariumDefault5">Seduce Target</label><br>
+			<input type="checkbox" name="aquariumDefaults" id="aquariumDefault6" value="Purloin" onClick="checkListErrors('aquarium','D',this.checked)"/> <label for="aquariumDefault6">Purloin Guest List</label><br>
+			<input type="checkbox" name="aquariumDefaults" id="aquariumDefault7" value="Fingerprint" onClick="checkListErrors('aquarium','D',this.checked)"/> <label for="aquariumDefault7">Fingerprint Ambassador</label><br>
 			<b style="color:red"><label id="aquariumDError"></label></b>
 		</div>
-		<label for="aquariumProhibit">Prohibit missions?</label> <input type="checkbox" name="aquariumProhibit" id="aquariumProhibit" value="Yes" onclick="showHideCheckbox('aquariumProhibits',this)"/></br>
+		<label for="aquariumProhibit">Prohibit missions?</label> <input type="checkbox" name="aquariumProhibit" id="aquariumProhibit" value="Yes" onclick="showHideCheckbox('aquariumProhibits',this)"/><br>
 		<div id="aquariumProhibits" style="display:none">
-			<input type="checkbox" name="aquariumProhibits" id="aquariumProhibit0" value="Bug" onClick="checkListErrors('aquarium','P',this.checked)"/> <label for="aquariumProhibit0">Bug Ambassador</label></br>
-			<input type="checkbox" name="aquariumProhibits" id="aquariumProhibit1" value="Contact" onClick="checkListErrors('aquarium','P',this.checked)"/> <label for="aquariumProhibit1">Contact Double Agent</label></br>
-			<input type="checkbox" name="aquariumProhibits" id="aquariumProhibit2" value="Transfer" onClick="checkListErrors('aquarium','P',this.checked)"/> <label for="aquariumProhibit2">Transfer Microfilm</label></br>
-			<input type="checkbox" name="aquariumProhibits" id="aquariumProhibit3" value="Swap" onClick="checkListErrors('aquarium','P',this.checked)"/> <label for="aquariumProhibit3">Swap Statue</label></br>
-			<input type="checkbox" name="aquariumProhibits" id="aquariumProhibit4" value="Inspect" onClick="checkListErrors('aquarium','P',this.checked)"/> <label for="aquariumProhibit4">Inspect Statues</label></br>
-			<input type="checkbox" name="aquariumProhibits" id="aquariumProhibit5" value="Seduce" onClick="checkListErrors('aquarium','P',this.checked)"/> <label for="aquariumProhibit5">Seduce Target</label></br>
-			<input type="checkbox" name="aquariumProhibits" id="aquariumProhibit6" value="Purloin" onClick="checkListErrors('aquarium','P',this.checked)"/> <label for="aquariumProhibit6">Purloin Guest List</label></br>
-			<input type="checkbox" name="aquariumProhibits" id="aquariumProhibit7" value="Fingerprint" onClick="checkListErrors('aquarium','P',this.checked)"/> <label for="aquariumProhibit7">Fingerprint Ambassador</label></br>
+			<input type="checkbox" name="aquariumProhibits" id="aquariumProhibit0" value="Bug" onClick="checkListErrors('aquarium','P',this.checked)"/> <label for="aquariumProhibit0">Bug Ambassador</label><br>
+			<input type="checkbox" name="aquariumProhibits" id="aquariumProhibit1" value="Contact" onClick="checkListErrors('aquarium','P',this.checked)"/> <label for="aquariumProhibit1">Contact Double Agent</label><br>
+			<input type="checkbox" name="aquariumProhibits" id="aquariumProhibit2" value="Transfer" onClick="checkListErrors('aquarium','P',this.checked)"/> <label for="aquariumProhibit2">Transfer Microfilm</label><br>
+			<input type="checkbox" name="aquariumProhibits" id="aquariumProhibit3" value="Swap" onClick="checkListErrors('aquarium','P',this.checked)"/> <label for="aquariumProhibit3">Swap Statue</label><br>
+			<input type="checkbox" name="aquariumProhibits" id="aquariumProhibit4" value="Inspect" onClick="checkListErrors('aquarium','P',this.checked)"/> <label for="aquariumProhibit4">Inspect Statues</label><br>
+			<input type="checkbox" name="aquariumProhibits" id="aquariumProhibit5" value="Seduce" onClick="checkListErrors('aquarium','P',this.checked)"/> <label for="aquariumProhibit5">Seduce Target</label><br>
+			<input type="checkbox" name="aquariumProhibits" id="aquariumProhibit6" value="Purloin" onClick="checkListErrors('aquarium','P',this.checked)"/> <label for="aquariumProhibit6">Purloin Guest List</label><br>
+			<input type="checkbox" name="aquariumProhibits" id="aquariumProhibit7" value="Fingerprint" onClick="checkListErrors('aquarium','P',this.checked)"/> <label for="aquariumProhibit7">Fingerprint Ambassador</label><br>
 			<b style="color:red"><label id="aquariumPError"></label></b>
 		</div>
-		<label for="aquariumRequire">Require missions?</label> <input type="checkbox" name="aquariumRequire" id="aquariumRequire" value="Yes" onclick="showHideCheckbox('aquariumRequires',this)"/></br>
+		<label for="aquariumRequire">Require missions?</label> <input type="checkbox" name="aquariumRequire" id="aquariumRequire" value="Yes" onclick="showHideCheckbox('aquariumRequires',this)"/><br>
 		<div id="aquariumRequires" style="display:none">
-			<input type="checkbox" name="aquariumRequires" id="aquariumRequire0" value="Bug" onClick="checkListErrors('aquarium','R',this.checked)"/> <label for="aquariumRequire0">Bug Ambassador</label></br>
-			<input type="checkbox" name="aquariumRequires" id="aquariumRequire1" value="Contact" onClick="checkListErrors('aquarium','R',this.checked)"/> <label for="aquariumRequire1">Contact Double Agent</label></br>
-			<input type="checkbox" name="aquariumRequires" id="aquariumRequire2" value="Transfer" onClick="checkListErrors('aquarium','R',this.checked)"/> <label for="aquariumRequire2">Transfer Microfilm</label></br>
-			<input type="checkbox" name="aquariumRequires" id="aquariumRequire3" value="Swap" onClick="checkListErrors('aquarium','R',this.checked)"/> <label for="aquariumRequire3">Swap Statue</label></br>
-			<input type="checkbox" name="aquariumRequires" id="aquariumRequire4" value="Inspect" onClick="checkListErrors('aquarium','R',this.checked)"/> <label for="aquariumRequire4">Inspect Statues</label></br>
-			<input type="checkbox" name="aquariumRequires" id="aquariumRequire5" value="Seduce" onClick="checkListErrors('aquarium','R',this.checked)"/> <label for="aquariumRequire5">Seduce Target</label></br>
-			<input type="checkbox" name="aquariumRequires" id="aquariumRequire6" value="Purloin" onClick="checkListErrors('aquarium','R',this.checked)"/> <label for="aquariumRequire6">Purloin Guest List</label></br>
-			<input type="checkbox" name="aquariumRequires" id="aquariumRequire7" value="Fingerprint" onClick="checkListErrors('aquarium','R',this.checked)"/> <label for="aquariumRequire7">Fingerprint Ambassador</label></br>
+			<input type="checkbox" name="aquariumRequires" id="aquariumRequire0" value="Bug" onClick="checkListErrors('aquarium','R',this.checked)"/> <label for="aquariumRequire0">Bug Ambassador</label><br>
+			<input type="checkbox" name="aquariumRequires" id="aquariumRequire1" value="Contact" onClick="checkListErrors('aquarium','R',this.checked)"/> <label for="aquariumRequire1">Contact Double Agent</label><br>
+			<input type="checkbox" name="aquariumRequires" id="aquariumRequire2" value="Transfer" onClick="checkListErrors('aquarium','R',this.checked)"/> <label for="aquariumRequire2">Transfer Microfilm</label><br>
+			<input type="checkbox" name="aquariumRequires" id="aquariumRequire3" value="Swap" onClick="checkListErrors('aquarium','R',this.checked)"/> <label for="aquariumRequire3">Swap Statue</label><br>
+			<input type="checkbox" name="aquariumRequires" id="aquariumRequire4" value="Inspect" onClick="checkListErrors('aquarium','R',this.checked)"/> <label for="aquariumRequire4">Inspect Statues</label><br>
+			<input type="checkbox" name="aquariumRequires" id="aquariumRequire5" value="Seduce" onClick="checkListErrors('aquarium','R',this.checked)"/> <label for="aquariumRequire5">Seduce Target</label><br>
+			<input type="checkbox" name="aquariumRequires" id="aquariumRequire6" value="Purloin" onClick="checkListErrors('aquarium','R',this.checked)"/> <label for="aquariumRequire6">Purloin Guest List</label><br>
+			<input type="checkbox" name="aquariumRequires" id="aquariumRequire7" value="Fingerprint" onClick="checkListErrors('aquarium','R',this.checked)"/> <label for="aquariumRequire7">Fingerprint Ambassador</label><br>
 			<b style="color:red"><label id="aquariumRError"></label></b>
 		</div>
-	</div></br>
+	</div><br>
 	
 	<h3>Balcony</h3>
-	<label for="balconyAllow">Enable Balcony?</label> <input type="checkbox" name="balconyAllow" id="balconyAllow" value="Yes" checked="checked" onclick="showHideCheckbox('balcony',this)"/></br>
+	<label for="balconyAllow">Enable Balcony?</label> <input type="checkbox" name="balconyAllow" id="balconyAllow" value="Yes" checked="checked" onclick="showHideCheckbox('balcony',this)"/><br>
 	<div id="balcony">
-		<label>Quickplay name:</label> <input type="text" id="balconyName" value="Balcony" onChange="onNameChange('balcony')"/><b style="color:red"><label id="balconyNameError"></label></b></br>
-		<label>Duration in seconds:</label> <input type="number" id="balconyDuration" value="120" step="15" min="15" oninput="displayTime('balcony')"/>  <label id="balconyTime"></label></br>
-		<label>Number of Guests:</label> <input type="number" id="balconyGuests" value="7" step="1" max="21" min="4"/></br>
-		Gametype:</br>
-		<input type="radio" name="balconyGametype" id="balconyGametype0" value="Known" onclick="showHideE('balconySelectedDiv',false)"/> <label for="balconyGametype0">Known</label></br>
-		<input type="radio" name="balconyGametype" id="balconyGametype1" value="Pick" onclick="showHideE('balconySelectedDiv',true)"/> <label for="balconyGametype1">Pick</label></br>
-		<input type="radio" name="balconyGametype" id="balconyGametype2" value="Any" checked="checked" onclick="showHideE('balconySelectedDiv',true)"/> <label for="balconyGametype2">Any</label></br>
-		<div id="balconySelectedDiv"><label># of needed Missions to win:</label> <input type="number" id="balconyNeeded" value="2" step="1" max="4" min="1" oninput="missionsUpdated('balcony')"/></br></div>
-		<label># of selected Missions:</label> <input type="number" id="balconySelected" value="3" step="1" max="5" min="2" oninput="missionsUpdated('balcony')"/> <b style="color:red"><label id="balconyError"></label></b></br>
-		<label for="balconySimplified">Simplified Mode?</label> <input type="checkbox" name="balconySimplified" id="balconySimplified" value="Yes"/></br>
-		<label for="balconyPreselect">Pre-select missions?</label> <input type="checkbox" name="balconyPreselect" id="balconyPreselect" value="Yes" onclick="showHideCheckbox('balconyDefaults',this)"/></br>
+		<label>Quickplay name:</label> <input type="text" id="balconyName" value="Balcony" onChange="onNameChange('balcony')"/><b style="color:red"><label id="balconyNameError"></label></b><br>
+		<label>Duration in seconds:</label> <input type="number" id="balconyDuration" value="120" step="15" min="15" oninput="displayTime('balcony')"/>  <label id="balconyTime"></label><br>
+		<label>Number of Guests:</label> <input type="number" id="balconyGuests" value="7" step="1" max="21" min="4"/><br>
+		Gametype:<br>
+		<input type="radio" name="balconyGametype" id="balconyGametype0" value="Known" onclick="showHideE('balconySelectedDiv',false)"/> <label for="balconyGametype0">Known</label><br>
+		<input type="radio" name="balconyGametype" id="balconyGametype1" value="Pick" onclick="showHideE('balconySelectedDiv',true)"/> <label for="balconyGametype1">Pick</label><br>
+		<input type="radio" name="balconyGametype" id="balconyGametype2" value="Any" checked="checked" onclick="showHideE('balconySelectedDiv',true)"/> <label for="balconyGametype2">Any</label><br>
+		<div id="balconySelectedDiv"><label># of needed Missions to win:</label> <input type="number" id="balconyNeeded" value="2" step="1" max="4" min="1" oninput="missionsUpdated('balcony')"/><br></div>
+		<label># of selected Missions:</label> <input type="number" id="balconySelected" value="3" step="1" max="5" min="2" oninput="missionsUpdated('balcony')"/> <b style="color:red"><label id="balconyError"></label></b><br>
+		<label for="balconySimplified">Simplified Mode?</label> <input type="checkbox" name="balconySimplified" id="balconySimplified" value="Yes"/><br>
+		<label for="balconyPreselect">Pre-select missions?</label> <input type="checkbox" name="balconyPreselect" id="balconyPreselect" value="Yes" onclick="showHideCheckbox('balconyDefaults',this)"/><br>
 		<div id="balconyDefaults" style="display:none">
-			<input type="checkbox" name="balconyDefaults" id="balconyDefault0" value="Bug" onClick="checkListErrors('balcony','D',this.checked)"/> <label for="balconyDefault0">Bug Ambassador</label></br>
-			<input type="checkbox" name="balconyDefaults" id="balconyDefault1" value="Contact" onClick="checkListErrors('balcony','D',this.checked)"/> <label for="balconyDefault1">Contact Double Agent</label></br>
-			<input type="checkbox" name="balconyDefaults" id="balconyDefault5" value="Seduce" onClick="checkListErrors('balcony','D',this.checked)"/> <label for="balconyDefault5">Seduce Target</label></br>
-			<input type="checkbox" name="balconyDefaults" id="balconyDefault6" value="Purloin" onClick="checkListErrors('balcony','D',this.checked)"/> <label for="balconyDefault6">Purloin Guest List</label></br>
-			<input type="checkbox" name="balconyDefaults" id="balconyDefault7" value="Fingerprint" onClick="checkListErrors('balcony','D',this.checked)"/> <label for="balconyDefault7">Fingerprint Ambassador</label></br>
+			<input type="checkbox" name="balconyDefaults" id="balconyDefault0" value="Bug" onClick="checkListErrors('balcony','D',this.checked)"/> <label for="balconyDefault0">Bug Ambassador</label><br>
+			<input type="checkbox" name="balconyDefaults" id="balconyDefault1" value="Contact" onClick="checkListErrors('balcony','D',this.checked)"/> <label for="balconyDefault1">Contact Double Agent</label><br>
+			<input type="checkbox" name="balconyDefaults" id="balconyDefault5" value="Seduce" onClick="checkListErrors('balcony','D',this.checked)"/> <label for="balconyDefault5">Seduce Target</label><br>
+			<input type="checkbox" name="balconyDefaults" id="balconyDefault6" value="Purloin" onClick="checkListErrors('balcony','D',this.checked)"/> <label for="balconyDefault6">Purloin Guest List</label><br>
+			<input type="checkbox" name="balconyDefaults" id="balconyDefault7" value="Fingerprint" onClick="checkListErrors('balcony','D',this.checked)"/> <label for="balconyDefault7">Fingerprint Ambassador</label><br>
 			<b style="color:red"><label id="balconyDError"></label></b>
 		</div>
-		<label for="balconyProhibit">Prohibit missions?</label> <input type="checkbox" name="balconyProhibit" id="balconyProhibit" value="Yes" onclick="showHideCheckbox('balconyProhibits',this)"/></br>
+		<label for="balconyProhibit">Prohibit missions?</label> <input type="checkbox" name="balconyProhibit" id="balconyProhibit" value="Yes" onclick="showHideCheckbox('balconyProhibits',this)"/><br>
 		<div id="balconyProhibits" style="display:none">
-			<input type="checkbox" name="balconyProhibits" id="balconyProhibit0" value="Bug" onClick="checkListErrors('balcony','P',this.checked)"/> <label for="balconyProhibit0">Bug Ambassador</label></br>
-			<input type="checkbox" name="balconyProhibits" id="balconyProhibit1" value="Contact" onClick="checkListErrors('balcony','P',this.checked)"/> <label for="balconyProhibit1">Contact Double Agent</label></br>
-			<input type="checkbox" name="balconyProhibits" id="balconyProhibit5" value="Seduce" onClick="checkListErrors('balcony','P',this.checked)"/> <label for="balconyProhibit5">Seduce Target</label></br>
-			<input type="checkbox" name="balconyProhibits" id="balconyProhibit6" value="Purloin" onClick="checkListErrors('balcony','P',this.checked)"/> <label for="balconyProhibit6">Purloin Guest List</label></br>
-			<input type="checkbox" name="balconyProhibits" id="balconyProhibit7" value="Fingerprint" onClick="checkListErrors('balcony','P',this.checked)"/> <label for="balconyProhibit7">Fingerprint Ambassador</label></br>
+			<input type="checkbox" name="balconyProhibits" id="balconyProhibit0" value="Bug" onClick="checkListErrors('balcony','P',this.checked)"/> <label for="balconyProhibit0">Bug Ambassador</label><br>
+			<input type="checkbox" name="balconyProhibits" id="balconyProhibit1" value="Contact" onClick="checkListErrors('balcony','P',this.checked)"/> <label for="balconyProhibit1">Contact Double Agent</label><br>
+			<input type="checkbox" name="balconyProhibits" id="balconyProhibit5" value="Seduce" onClick="checkListErrors('balcony','P',this.checked)"/> <label for="balconyProhibit5">Seduce Target</label><br>
+			<input type="checkbox" name="balconyProhibits" id="balconyProhibit6" value="Purloin" onClick="checkListErrors('balcony','P',this.checked)"/> <label for="balconyProhibit6">Purloin Guest List</label><br>
+			<input type="checkbox" name="balconyProhibits" id="balconyProhibit7" value="Fingerprint" onClick="checkListErrors('balcony','P',this.checked)"/> <label for="balconyProhibit7">Fingerprint Ambassador</label><br>
 			<b style="color:red"><label id="balconyPError"></label></b>
 		</div>
-		<label for="balconyRequire">Require missions?</label> <input type="checkbox" name="balconyRequire" id="balconyRequire" value="Yes" onclick="showHideCheckbox('balconyRequires',this)"/></br>
+		<label for="balconyRequire">Require missions?</label> <input type="checkbox" name="balconyRequire" id="balconyRequire" value="Yes" onclick="showHideCheckbox('balconyRequires',this)"/><br>
 		<div id="balconyRequires" style="display:none">
-			<input type="checkbox" name="balconyRequires" id="balconyRequire0" value="Bug" onClick="checkListErrors('balcony','R',this.checked)"/> <label for="balconyRequire0">Bug Ambassador</label></br>
-			<input type="checkbox" name="balconyRequires" id="balconyRequire1" value="Contact" onClick="checkListErrors('balcony','R',this.checked)"/> <label for="balconyRequire1">Contact Double Agent</label></br>
-			<input type="checkbox" name="balconyRequires" id="balconyRequire5" value="Seduce" onClick="checkListErrors('balcony','R',this.checked)"/> <label for="balconyRequire5">Seduce Target</label></br>
-			<input type="checkbox" name="balconyRequires" id="balconyRequire6" value="Purloin" onClick="checkListErrors('balcony','R',this.checked)"/> <label for="balconyRequire6">Purloin Guest List</label></br>
-			<input type="checkbox" name="balconyRequires" id="balconyRequire7" value="Fingerprint" onClick="checkListErrors('balcony','R',this.checked)"/> <label for="balconyRequire7">Fingerprint Ambassador</label></br>
+			<input type="checkbox" name="balconyRequires" id="balconyRequire0" value="Bug" onClick="checkListErrors('balcony','R',this.checked)"/> <label for="balconyRequire0">Bug Ambassador</label><br>
+			<input type="checkbox" name="balconyRequires" id="balconyRequire1" value="Contact" onClick="checkListErrors('balcony','R',this.checked)"/> <label for="balconyRequire1">Contact Double Agent</label><br>
+			<input type="checkbox" name="balconyRequires" id="balconyRequire5" value="Seduce" onClick="checkListErrors('balcony','R',this.checked)"/> <label for="balconyRequire5">Seduce Target</label><br>
+			<input type="checkbox" name="balconyRequires" id="balconyRequire6" value="Purloin" onClick="checkListErrors('balcony','R',this.checked)"/> <label for="balconyRequire6">Purloin Guest List</label><br>
+			<input type="checkbox" name="balconyRequires" id="balconyRequire7" value="Fingerprint" onClick="checkListErrors('balcony','R',this.checked)"/> <label for="balconyRequire7">Fingerprint Ambassador</label><br>
 			<b style="color:red"><label id="balconyRError"></label></b>
 		</div>
-	</div></br>
+	</div><br>
 	
 	
 	<h3>Ballroom</h3>
-	<label for="ballroomAllow">Enable Ballroom?</label> <input type="checkbox" name="ballroomAllow" id="ballroomAllow" value="Yes" checked="checked" onclick="showHideCheckbox('ballroom',this)"/></br>
+	<label for="ballroomAllow">Enable Ballroom?</label> <input type="checkbox" name="ballroomAllow" id="ballroomAllow" value="Yes" checked="checked" onclick="showHideCheckbox('ballroom',this)"/><br>
 	<div id="ballroom">
-		<label>Quickplay name:</label> <input type="text" id="ballroomName" value="Ballroom" onChange="onNameChange('ballroom')"/><b style="color:red"><label id="ballroomNameError"></label></b></br>
-		<label>Duration in seconds:</label> <input type="number" id="ballroomDuration" value="210" step="15" min="15" oninput="displayTime('ballroom')"/> <label id="ballroomTime"></label></br>
-		<label>Number of Guests:</label> <input type="number" id="ballroomGuests" value="15" step="1" max="21" min="4"/></br>
-		Gametype:</br>
-		<input type="radio" name="ballroomGametype" id="ballroomGametype0" value="Known" onclick="showHideE('ballroomSelectedDiv',false)"/> <label for="ballroomGametype0">Known</label></br>
-		<input type="radio" name="ballroomGametype" id="ballroomGametype1" value="Pick" onclick="showHideE('ballroomSelectedDiv',true)"/> <label for="ballroomGametype1">Pick</label></br>
-		<input type="radio" name="ballroomGametype" id="ballroomGametype2" value="Any" checked="checked" onclick="showHideE('ballroomSelectedDiv',true)"/> <label for="ballroomGametype2">Any</label></br>
-		<div id="ballroomSelectedDiv"><label># of needed Missions to win:</label> <input type="number" id="ballroomNeeded" value="4" step="1" max="7" min="1" oninput="missionsUpdated('ballroom')"/></br></div>
-		<label># of selected Missions:</label> <input type="number" id="ballroomSelected" value="8" step="1" max="8" min="2" oninput="missionsUpdated('ballroom')"/> <b style="color:red"><label id="ballroomError"></label></b></br>
-		<label for="ballroomSimplified">Simplified Mode?</label> <input type="checkbox" name="ballroomSimplified" id="ballroomSimplified" value="Yes"/></br>
-		<label for="ballroomPreselect">Pre-select missions?</label> <input type="checkbox" name="ballroomPreselect" id="ballroomPreselect" value="Yes" onclick="showHideCheckbox('ballroomDefaults',this)"/></br>
+		<label>Quickplay name:</label> <input type="text" id="ballroomName" value="Ballroom" onChange="onNameChange('ballroom')"/><b style="color:red"><label id="ballroomNameError"></label></b><br>
+		<label>Duration in seconds:</label> <input type="number" id="ballroomDuration" value="210" step="15" min="15" oninput="displayTime('ballroom')"/> <label id="ballroomTime"></label><br>
+		<label>Number of Guests:</label> <input type="number" id="ballroomGuests" value="15" step="1" max="21" min="4"/><br>
+		Gametype:<br>
+		<input type="radio" name="ballroomGametype" id="ballroomGametype0" value="Known" onclick="showHideE('ballroomSelectedDiv',false)"/> <label for="ballroomGametype0">Known</label><br>
+		<input type="radio" name="ballroomGametype" id="ballroomGametype1" value="Pick" onclick="showHideE('ballroomSelectedDiv',true)"/> <label for="ballroomGametype1">Pick</label><br>
+		<input type="radio" name="ballroomGametype" id="ballroomGametype2" value="Any" checked="checked" onclick="showHideE('ballroomSelectedDiv',true)"/> <label for="ballroomGametype2">Any</label><br>
+		<div id="ballroomSelectedDiv"><label># of needed Missions to win:</label> <input type="number" id="ballroomNeeded" value="4" step="1" max="7" min="1" oninput="missionsUpdated('ballroom')"/><br></div>
+		<label># of selected Missions:</label> <input type="number" id="ballroomSelected" value="8" step="1" max="8" min="2" oninput="missionsUpdated('ballroom')"/> <b style="color:red"><label id="ballroomError"></label></b><br>
+		<label for="ballroomSimplified">Simplified Mode?</label> <input type="checkbox" name="ballroomSimplified" id="ballroomSimplified" value="Yes"/><br>
+		<label for="ballroomPreselect">Pre-select missions?</label> <input type="checkbox" name="ballroomPreselect" id="ballroomPreselect" value="Yes" onclick="showHideCheckbox('ballroomDefaults',this)"/><br>
 		<div id="ballroomDefaults" style="display:none">
-			<input type="checkbox" name="ballroomDefaults" id="ballroomDefault0" value="Bug" onClick="checkListErrors('ballroom','D',this.checked)"/> <label for="ballroomDefault0">Bug Ambassador</label></br>
-			<input type="checkbox" name="ballroomDefaults" id="ballroomDefault1" value="Contact" onClick="checkListErrors('ballroom','D',this.checked)"/> <label for="ballroomDefault1">Contact Double Agent</label></br>
-			<input type="checkbox" name="ballroomDefaults" id="ballroomDefault2" value="Transfer" onClick="checkListErrors('ballroom','D',this.checked)"/> <label for="ballroomDefault2">Transfer Microfilm</label></br>
-			<input type="checkbox" name="ballroomDefaults" id="ballroomDefault3" value="Swap" onClick="checkListErrors('ballroom','D',this.checked)"/> <label for="ballroomDefault3">Swap Statue</label></br>
-			<input type="checkbox" name="ballroomDefaults" id="ballroomDefault4" value="Inspect" onClick="checkListErrors('ballroom','D',this.checked)"/> <label for="ballroomDefault4">Inspect Statues</label></br>
-			<input type="checkbox" name="ballroomDefaults" id="ballroomDefault5" value="Seduce" onClick="checkListErrors('ballroom','D',this.checked)"/> <label for="ballroomDefault5">Seduce Target</label></br>
-			<input type="checkbox" name="ballroomDefaults" id="ballroomDefault6" value="Purloin" onClick="checkListErrors('ballroom','D',this.checked)"/> <label for="ballroomDefault6">Purloin Guest List</label></br>
-			<input type="checkbox" name="ballroomDefaults" id="ballroomDefault7" value="Fingerprint" onClick="checkListErrors('ballroom','D',this.checked)"/> <label for="ballroomDefault7">Fingerprint Ambassador</label></br>
+			<input type="checkbox" name="ballroomDefaults" id="ballroomDefault0" value="Bug" onClick="checkListErrors('ballroom','D',this.checked)"/> <label for="ballroomDefault0">Bug Ambassador</label><br>
+			<input type="checkbox" name="ballroomDefaults" id="ballroomDefault1" value="Contact" onClick="checkListErrors('ballroom','D',this.checked)"/> <label for="ballroomDefault1">Contact Double Agent</label><br>
+			<input type="checkbox" name="ballroomDefaults" id="ballroomDefault2" value="Transfer" onClick="checkListErrors('ballroom','D',this.checked)"/> <label for="ballroomDefault2">Transfer Microfilm</label><br>
+			<input type="checkbox" name="ballroomDefaults" id="ballroomDefault3" value="Swap" onClick="checkListErrors('ballroom','D',this.checked)"/> <label for="ballroomDefault3">Swap Statue</label><br>
+			<input type="checkbox" name="ballroomDefaults" id="ballroomDefault4" value="Inspect" onClick="checkListErrors('ballroom','D',this.checked)"/> <label for="ballroomDefault4">Inspect Statues</label><br>
+			<input type="checkbox" name="ballroomDefaults" id="ballroomDefault5" value="Seduce" onClick="checkListErrors('ballroom','D',this.checked)"/> <label for="ballroomDefault5">Seduce Target</label><br>
+			<input type="checkbox" name="ballroomDefaults" id="ballroomDefault6" value="Purloin" onClick="checkListErrors('ballroom','D',this.checked)"/> <label for="ballroomDefault6">Purloin Guest List</label><br>
+			<input type="checkbox" name="ballroomDefaults" id="ballroomDefault7" value="Fingerprint" onClick="checkListErrors('ballroom','D',this.checked)"/> <label for="ballroomDefault7">Fingerprint Ambassador</label><br>
 			<b style="color:red"><label id="ballroomDError"></label></b>
 		</div>
-		<label for="ballroomProhibit">Prohibit missions?</label> <input type="checkbox" name="ballroomProhibit" id="ballroomProhibit" value="Yes" onclick="showHideCheckbox('ballroomProhibits',this)"/></br>
+		<label for="ballroomProhibit">Prohibit missions?</label> <input type="checkbox" name="ballroomProhibit" id="ballroomProhibit" value="Yes" onclick="showHideCheckbox('ballroomProhibits',this)"/><br>
 		<div id="ballroomProhibits" style="display:none">
-			<input type="checkbox" name="ballroomProhibits" id="ballroomProhibit0" value="Bug" onClick="checkListErrors('ballroom','P',this.checked)"/> <label for="ballroomProhibit0">Bug Ambassador</label></br>
-			<input type="checkbox" name="ballroomProhibits" id="ballroomProhibit1" value="Contact" onClick="checkListErrors('ballroom','P',this.checked)"/> <label for="ballroomProhibit1">Contact Double Agent</label></br>
-			<input type="checkbox" name="ballroomProhibits" id="ballroomProhibit2" value="Transfer" onClick="checkListErrors('ballroom','P',this.checked)"/> <label for="ballroomProhibit2">Transfer Microfilm</label></br>
-			<input type="checkbox" name="ballroomProhibits" id="ballroomProhibit3" value="Swap" onClick="checkListErrors('ballroom','P',this.checked)"/> <label for="ballroomProhibit3">Swap Statue</label></br>
-			<input type="checkbox" name="ballroomProhibits" id="ballroomProhibit4" value="Inspect" onClick="checkListErrors('ballroom','P',this.checked)"/> <label for="ballroomProhibit4">Inspect Statues</label></br>
-			<input type="checkbox" name="ballroomProhibits" id="ballroomProhibit5" value="Seduce" onClick="checkListErrors('ballroom','P',this.checked)"/> <label for="ballroomProhibit5">Seduce Target</label></br>
-			<input type="checkbox" name="ballroomProhibits" id="ballroomProhibit6" value="Purloin" onClick="checkListErrors('ballroom','P',this.checked)"/> <label for="ballroomProhibit6">Purloin Guest List</label></br>
-			<input type="checkbox" name="ballroomProhibits" id="ballroomProhibit7" value="Fingerprint" onClick="checkListErrors('ballroom','P',this.checked)"/> <label for="ballroomProhibit7">Fingerprint Ambassador</label></br>
+			<input type="checkbox" name="ballroomProhibits" id="ballroomProhibit0" value="Bug" onClick="checkListErrors('ballroom','P',this.checked)"/> <label for="ballroomProhibit0">Bug Ambassador</label><br>
+			<input type="checkbox" name="ballroomProhibits" id="ballroomProhibit1" value="Contact" onClick="checkListErrors('ballroom','P',this.checked)"/> <label for="ballroomProhibit1">Contact Double Agent</label><br>
+			<input type="checkbox" name="ballroomProhibits" id="ballroomProhibit2" value="Transfer" onClick="checkListErrors('ballroom','P',this.checked)"/> <label for="ballroomProhibit2">Transfer Microfilm</label><br>
+			<input type="checkbox" name="ballroomProhibits" id="ballroomProhibit3" value="Swap" onClick="checkListErrors('ballroom','P',this.checked)"/> <label for="ballroomProhibit3">Swap Statue</label><br>
+			<input type="checkbox" name="ballroomProhibits" id="ballroomProhibit4" value="Inspect" onClick="checkListErrors('ballroom','P',this.checked)"/> <label for="ballroomProhibit4">Inspect Statues</label><br>
+			<input type="checkbox" name="ballroomProhibits" id="ballroomProhibit5" value="Seduce" onClick="checkListErrors('ballroom','P',this.checked)"/> <label for="ballroomProhibit5">Seduce Target</label><br>
+			<input type="checkbox" name="ballroomProhibits" id="ballroomProhibit6" value="Purloin" onClick="checkListErrors('ballroom','P',this.checked)"/> <label for="ballroomProhibit6">Purloin Guest List</label><br>
+			<input type="checkbox" name="ballroomProhibits" id="ballroomProhibit7" value="Fingerprint" onClick="checkListErrors('ballroom','P',this.checked)"/> <label for="ballroomProhibit7">Fingerprint Ambassador</label><br>
 			<b style="color:red"><label id="ballroomPError"></label></b>
 		</div>
-		<label for="ballroomRequire">Require missions?</label> <input type="checkbox" name="ballroomRequire" id="ballroomRequire" value="Yes" onclick="showHideCheckbox('ballroomRequires',this)"/></br>
+		<label for="ballroomRequire">Require missions?</label> <input type="checkbox" name="ballroomRequire" id="ballroomRequire" value="Yes" onclick="showHideCheckbox('ballroomRequires',this)"/><br>
 		<div id="ballroomRequires" style="display:none">
-			<input type="checkbox" name="ballroomRequires" id="ballroomRequire0" value="Bug" onClick="checkListErrors('ballroom','R',this.checked)"/> <label for="ballroomRequire0">Bug Ambassador</label></br>
-			<input type="checkbox" name="ballroomRequires" id="ballroomRequire1" value="Contact" onClick="checkListErrors('ballroom','R',this.checked)"/> <label for="ballroomRequire1">Contact Double Agent</label></br>
-			<input type="checkbox" name="ballroomRequires" id="ballroomRequire2" value="Transfer" onClick="checkListErrors('ballroom','R',this.checked)"/> <label for="ballroomRequire2">Transfer Microfilm</label></br>
-			<input type="checkbox" name="ballroomRequires" id="ballroomRequire3" value="Swap" onClick="checkListErrors('ballroom','R',this.checked)"/> <label for="ballroomRequire3">Swap Statue</label></br>
-			<input type="checkbox" name="ballroomRequires" id="ballroomRequire4" value="Inspect" onClick="checkListErrors('ballroom','R',this.checked)"/> <label for="ballroomRequire4">Inspect Statues</label></br>
-			<input type="checkbox" name="ballroomRequires" id="ballroomRequire5" value="Seduce" onClick="checkListErrors('ballroom','R',this.checked)"/> <label for="ballroomRequire5">Seduce Target</label></br>
-			<input type="checkbox" name="ballroomRequires" id="ballroomRequire6" value="Purloin" onClick="checkListErrors('ballroom','R',this.checked)"/> <label for="ballroomRequire6">Purloin Guest List</label></br>
-			<input type="checkbox" name="ballroomRequires" id="ballroomRequire7" value="Fingerprint" onClick="checkListErrors('ballroom','R',this.checked)"/> <label for="ballroomRequire7">Fingerprint Ambassador</label></br>
+			<input type="checkbox" name="ballroomRequires" id="ballroomRequire0" value="Bug" onClick="checkListErrors('ballroom','R',this.checked)"/> <label for="ballroomRequire0">Bug Ambassador</label><br>
+			<input type="checkbox" name="ballroomRequires" id="ballroomRequire1" value="Contact" onClick="checkListErrors('ballroom','R',this.checked)"/> <label for="ballroomRequire1">Contact Double Agent</label><br>
+			<input type="checkbox" name="ballroomRequires" id="ballroomRequire2" value="Transfer" onClick="checkListErrors('ballroom','R',this.checked)"/> <label for="ballroomRequire2">Transfer Microfilm</label><br>
+			<input type="checkbox" name="ballroomRequires" id="ballroomRequire3" value="Swap" onClick="checkListErrors('ballroom','R',this.checked)"/> <label for="ballroomRequire3">Swap Statue</label><br>
+			<input type="checkbox" name="ballroomRequires" id="ballroomRequire4" value="Inspect" onClick="checkListErrors('ballroom','R',this.checked)"/> <label for="ballroomRequire4">Inspect Statues</label><br>
+			<input type="checkbox" name="ballroomRequires" id="ballroomRequire5" value="Seduce" onClick="checkListErrors('ballroom','R',this.checked)"/> <label for="ballroomRequire5">Seduce Target</label><br>
+			<input type="checkbox" name="ballroomRequires" id="ballroomRequire6" value="Purloin" onClick="checkListErrors('ballroom','R',this.checked)"/> <label for="ballroomRequire6">Purloin Guest List</label><br>
+			<input type="checkbox" name="ballroomRequires" id="ballroomRequire7" value="Fingerprint" onClick="checkListErrors('ballroom','R',this.checked)"/> <label for="ballroomRequire7">Fingerprint Ambassador</label><br>
 			<b style="color:red"><label id="ballroomRError"></label></b>
 		</div>
-	</div></br>
+	</div><br>
 	
 	
 	<h3>Courtyard</h3>
-	<label for="courtyardAllow">Enable Courtyard?</label> <input type="checkbox" name="courtyardAllow" id="courtyardAllow" value="Yes" checked="checked" onclick="showHideCheckbox('courtyard',this)"/></br>
+	<label for="courtyardAllow">Enable Courtyard?</label> <input type="checkbox" name="courtyardAllow" id="courtyardAllow" value="Yes" checked="checked" onclick="showHideCheckbox('courtyard',this)"/><br>
 	<div id="courtyard">
-		<label>Quickplay name:</label> <input type="text" id="courtyardName" value="Courtyard" onChange="onNameChange('courtyard')"/><b style="color:red"><label id="courtyardNameError"></label></b></br>
-		<label>Duration in seconds:</label> <input type="number" id="courtyardDuration" value="195" step="15" min="15" oninput="displayTime('courtyard')"/> <label id="courtyardTime"></label></br>
-		<label>Number of Guests:</label> <input type="number" id="courtyardGuests" value="16" step="1" max="21" min="4"/></br>
-		Gametype:</br>
-		<input type="radio" name="courtyardGametype" id="courtyardGametype0" value="Known" onclick="showHideE('courtyardSelectedDiv',false)"/> <label for="courtyardGametype0">Known</label></br>
-		<input type="radio" name="courtyardGametype" id="courtyardGametype1" value="Pick" onclick="showHideE('courtyardSelectedDiv',true)"/> <label for="courtyardGametype1">Pick</label></br>
-		<input type="radio" name="courtyardGametype" id="courtyardGametype2" value="Any" checked="checked" onclick="showHideE('courtyardSelectedDiv',true)"/> <label for="courtyardGametype2">Any</label></br>
-		<div id="courtyardSelectedDiv"><label># of needed Missions to win:</label> <input type="number" id="courtyardNeeded" value="4" step="1" max="6" min="1" oninput="missionsUpdated('courtyard')"/></br></div>
-		<label># of selected Missions:</label> <input type="number" id="courtyardSelected" value="7" step="1" max="7" min="2" oninput="missionsUpdated('courtyard')"/> <b style="color:red"><label id="courtyardError"></label></b></br>
-		<label for="courtyardSimplified">Simplified Mode?</label> <input type="checkbox" name="courtyardSimplified" id="courtyardSimplified" value="Yes"/></br>
-		<label for="courtyardPreselect">Pre-select missions?</label> <input type="checkbox" name="courtyardPreselect" id="courtyardPreselect" value="Yes" onclick="showHideCheckbox('courtyardDefaults',this)"/></br>
+		<label>Quickplay name:</label> <input type="text" id="courtyardName" value="Courtyard" onChange="onNameChange('courtyard')"/><b style="color:red"><label id="courtyardNameError"></label></b><br>
+		<label>Duration in seconds:</label> <input type="number" id="courtyardDuration" value="195" step="15" min="15" oninput="displayTime('courtyard')"/> <label id="courtyardTime"></label><br>
+		<label>Number of Guests:</label> <input type="number" id="courtyardGuests" value="16" step="1" max="21" min="4"/><br>
+		Gametype:<br>
+		<input type="radio" name="courtyardGametype" id="courtyardGametype0" value="Known" onclick="showHideE('courtyardSelectedDiv',false)"/> <label for="courtyardGametype0">Known</label><br>
+		<input type="radio" name="courtyardGametype" id="courtyardGametype1" value="Pick" onclick="showHideE('courtyardSelectedDiv',true)"/> <label for="courtyardGametype1">Pick</label><br>
+		<input type="radio" name="courtyardGametype" id="courtyardGametype2" value="Any" checked="checked" onclick="showHideE('courtyardSelectedDiv',true)"/> <label for="courtyardGametype2">Any</label><br>
+		<div id="courtyardSelectedDiv"><label># of needed Missions to win:</label> <input type="number" id="courtyardNeeded" value="4" step="1" max="6" min="1" oninput="missionsUpdated('courtyard')"/><br></div>
+		<label># of selected Missions:</label> <input type="number" id="courtyardSelected" value="7" step="1" max="7" min="2" oninput="missionsUpdated('courtyard')"/> <b style="color:red"><label id="courtyardError"></label></b><br>
+		<label for="courtyardSimplified">Simplified Mode?</label> <input type="checkbox" name="courtyardSimplified" id="courtyardSimplified" value="Yes"/><br>
+		<label for="courtyardPreselect">Pre-select missions?</label> <input type="checkbox" name="courtyardPreselect" id="courtyardPreselect" value="Yes" onclick="showHideCheckbox('courtyardDefaults',this)"/><br>
 		<div id="courtyardDefaults" style="display:none">
-			<input type="checkbox" name="courtyardDefaults" id="courtyardDefault0" value="Bug" onClick="checkListErrors('courtyard','D',this.checked)"/> <label for="courtyardDefault0">Bug Ambassador</label></br>
-			<input type="checkbox" name="courtyardDefaults" id="courtyardDefault1" value="Contact" onClick="checkListErrors('courtyard','D',this.checked)"/> <label for="courtyardDefault1">Contact Double Agent</label></br>
-			<input type="checkbox" name="courtyardDefaults" id="courtyardDefault3" value="Swap" onClick="checkListErrors('courtyard','D',this.checked)"/> <label for="courtyardDefault3">Swap Statue</label></br>
-			<input type="checkbox" name="courtyardDefaults" id="courtyardDefault4" value="Inspect" onClick="checkListErrors('courtyard','D',this.checked)"/> <label for="courtyardDefault4">Inspect Statues</label></br>
-			<input type="checkbox" name="courtyardDefaults" id="courtyardDefault5" value="Seduce" onClick="checkListErrors('courtyard','D',this.checked)"/> <label for="courtyardDefault5">Seduce Target</label></br>
-			<input type="checkbox" name="courtyardDefaults" id="courtyardDefault6" value="Purloin" onClick="checkListErrors('courtyard','D',this.checked)"/> <label for="courtyardDefault6">Purloin Guest List</label></br>
-			<input type="checkbox" name="courtyardDefaults" id="courtyardDefault7" value="Fingerprint" onClick="checkListErrors('courtyard','D',this.checked)"/> <label for="courtyardDefault7">Fingerprint Ambassador</label></br>
+			<input type="checkbox" name="courtyardDefaults" id="courtyardDefault0" value="Bug" onClick="checkListErrors('courtyard','D',this.checked)"/> <label for="courtyardDefault0">Bug Ambassador</label><br>
+			<input type="checkbox" name="courtyardDefaults" id="courtyardDefault1" value="Contact" onClick="checkListErrors('courtyard','D',this.checked)"/> <label for="courtyardDefault1">Contact Double Agent</label><br>
+			<input type="checkbox" name="courtyardDefaults" id="courtyardDefault3" value="Swap" onClick="checkListErrors('courtyard','D',this.checked)"/> <label for="courtyardDefault3">Swap Statue</label><br>
+			<input type="checkbox" name="courtyardDefaults" id="courtyardDefault4" value="Inspect" onClick="checkListErrors('courtyard','D',this.checked)"/> <label for="courtyardDefault4">Inspect Statues</label><br>
+			<input type="checkbox" name="courtyardDefaults" id="courtyardDefault5" value="Seduce" onClick="checkListErrors('courtyard','D',this.checked)"/> <label for="courtyardDefault5">Seduce Target</label><br>
+			<input type="checkbox" name="courtyardDefaults" id="courtyardDefault6" value="Purloin" onClick="checkListErrors('courtyard','D',this.checked)"/> <label for="courtyardDefault6">Purloin Guest List</label><br>
+			<input type="checkbox" name="courtyardDefaults" id="courtyardDefault7" value="Fingerprint" onClick="checkListErrors('courtyard','D',this.checked)"/> <label for="courtyardDefault7">Fingerprint Ambassador</label><br>
 			<b style="color:red"><label id="courtyardDError"></label></b>
 		</div>
-		<label for="courtyardProhibit">Prohibit missions?</label> <input type="checkbox" name="courtyardProhibit" id="courtyardProhibit" value="Yes" onclick="showHideCheckbox('courtyardProhibits',this)"/></br>
+		<label for="courtyardProhibit">Prohibit missions?</label> <input type="checkbox" name="courtyardProhibit" id="courtyardProhibit" value="Yes" onclick="showHideCheckbox('courtyardProhibits',this)"/><br>
 		<div id="courtyardProhibits" style="display:none">
-			<input type="checkbox" name="courtyardProhibits" id="courtyardProhibit0" value="Bug" onClick="checkListErrors('courtyard','P',this.checked)"/> <label for="courtyardProhibit0">Bug Ambassador</label></br>
-			<input type="checkbox" name="courtyardProhibits" id="courtyardProhibit1" value="Contact" onClick="checkListErrors('courtyard','P',this.checked)"/> <label for="courtyardProhibit1">Contact Double Agent</label></br>
-			<input type="checkbox" name="courtyardProhibits" id="courtyardProhibit3" value="Swap" onClick="checkListErrors('courtyard','P',this.checked)"/> <label for="courtyardProhibit3">Swap Statue</label></br>
-			<input type="checkbox" name="courtyardProhibits" id="courtyardProhibit4" value="Inspect" onClick="checkListErrors('courtyard','P',this.checked)"/> <label for="courtyardProhibit4">Inspect Statues</label></br>
-			<input type="checkbox" name="courtyardProhibits" id="courtyardProhibit5" value="Seduce" onClick="checkListErrors('courtyard','P',this.checked)"/> <label for="courtyardProhibit5">Seduce Target</label></br>
-			<input type="checkbox" name="courtyardProhibits" id="courtyardProhibit6" value="Purloin" onClick="checkListErrors('courtyard','P',this.checked)"/> <label for="courtyardProhibit6">Purloin Guest List</label></br>
-			<input type="checkbox" name="courtyardProhibits" id="courtyardProhibit7" value="Fingerprint" onClick="checkListErrors('courtyard','P',this.checked)"/> <label for="courtyardProhibit7">Fingerprint Ambassador</label></br>
+			<input type="checkbox" name="courtyardProhibits" id="courtyardProhibit0" value="Bug" onClick="checkListErrors('courtyard','P',this.checked)"/> <label for="courtyardProhibit0">Bug Ambassador</label><br>
+			<input type="checkbox" name="courtyardProhibits" id="courtyardProhibit1" value="Contact" onClick="checkListErrors('courtyard','P',this.checked)"/> <label for="courtyardProhibit1">Contact Double Agent</label><br>
+			<input type="checkbox" name="courtyardProhibits" id="courtyardProhibit3" value="Swap" onClick="checkListErrors('courtyard','P',this.checked)"/> <label for="courtyardProhibit3">Swap Statue</label><br>
+			<input type="checkbox" name="courtyardProhibits" id="courtyardProhibit4" value="Inspect" onClick="checkListErrors('courtyard','P',this.checked)"/> <label for="courtyardProhibit4">Inspect Statues</label><br>
+			<input type="checkbox" name="courtyardProhibits" id="courtyardProhibit5" value="Seduce" onClick="checkListErrors('courtyard','P',this.checked)"/> <label for="courtyardProhibit5">Seduce Target</label><br>
+			<input type="checkbox" name="courtyardProhibits" id="courtyardProhibit6" value="Purloin" onClick="checkListErrors('courtyard','P',this.checked)"/> <label for="courtyardProhibit6">Purloin Guest List</label><br>
+			<input type="checkbox" name="courtyardProhibits" id="courtyardProhibit7" value="Fingerprint" onClick="checkListErrors('courtyard','P',this.checked)"/> <label for="courtyardProhibit7">Fingerprint Ambassador</label><br>
 			<b style="color:red"><label id="courtyardPError"></label></b>
 		</div>
-		<label for="courtyardRequire">Require missions?</label> <input type="checkbox" name="courtyardRequire" id="courtyardRequire" value="Yes" onclick="showHideCheckbox('courtyardRequires',this)"/></br>
+		<label for="courtyardRequire">Require missions?</label> <input type="checkbox" name="courtyardRequire" id="courtyardRequire" value="Yes" onclick="showHideCheckbox('courtyardRequires',this)"/><br>
 		<div id="courtyardRequires" style="display:none">
-			<input type="checkbox" name="courtyardRequires" id="courtyardRequire0" value="Bug" onClick="checkListErrors('courtyard','R',this.checked)"/> <label for="courtyardRequire0">Bug Ambassador</label></br>
-			<input type="checkbox" name="courtyardRequires" id="courtyardRequire1" value="Contact" onClick="checkListErrors('courtyard','R',this.checked)"/> <label for="courtyardRequire1">Contact Double Agent</label></br>
-			<input type="checkbox" name="courtyardRequires" id="courtyardRequire3" value="Swap" onClick="checkListErrors('courtyard','R',this.checked)"/> <label for="courtyardRequire3">Swap Statue</label></br>
-			<input type="checkbox" name="courtyardRequires" id="courtyardRequire4" value="Inspect" onClick="checkListErrors('courtyard','R',this.checked)"/> <label for="courtyardRequire4">Inspect Statues</label></br>
-			<input type="checkbox" name="courtyardRequires" id="courtyardRequire5" value="Seduce" onClick="checkListErrors('courtyard','R',this.checked)"/> <label for="courtyardRequire5">Seduce Target</label></br>
-			<input type="checkbox" name="courtyardRequires" id="courtyardRequire6" value="Purloin" onClick="checkListErrors('courtyard','R',this.checked)"/> <label for="courtyardRequire6">Purloin Guest List</label></br>
-			<input type="checkbox" name="courtyardRequires" id="courtyardRequire7" value="Fingerprint" onClick="checkListErrors('courtyard','R',this.checked)"/> <label for="courtyardRequire7">Fingerprint Ambassador</label></br>
+			<input type="checkbox" name="courtyardRequires" id="courtyardRequire0" value="Bug" onClick="checkListErrors('courtyard','R',this.checked)"/> <label for="courtyardRequire0">Bug Ambassador</label><br>
+			<input type="checkbox" name="courtyardRequires" id="courtyardRequire1" value="Contact" onClick="checkListErrors('courtyard','R',this.checked)"/> <label for="courtyardRequire1">Contact Double Agent</label><br>
+			<input type="checkbox" name="courtyardRequires" id="courtyardRequire3" value="Swap" onClick="checkListErrors('courtyard','R',this.checked)"/> <label for="courtyardRequire3">Swap Statue</label><br>
+			<input type="checkbox" name="courtyardRequires" id="courtyardRequire4" value="Inspect" onClick="checkListErrors('courtyard','R',this.checked)"/> <label for="courtyardRequire4">Inspect Statues</label><br>
+			<input type="checkbox" name="courtyardRequires" id="courtyardRequire5" value="Seduce" onClick="checkListErrors('courtyard','R',this.checked)"/> <label for="courtyardRequire5">Seduce Target</label><br>
+			<input type="checkbox" name="courtyardRequires" id="courtyardRequire6" value="Purloin" onClick="checkListErrors('courtyard','R',this.checked)"/> <label for="courtyardRequire6">Purloin Guest List</label><br>
+			<input type="checkbox" name="courtyardRequires" id="courtyardRequire7" value="Fingerprint" onClick="checkListErrors('courtyard','R',this.checked)"/> <label for="courtyardRequire7">Fingerprint Ambassador</label><br>
 			<b style="color:red"><label id="courtyardRError"></label></b>
 		</div>
-	</div></br>
+	</div><br>
 	
 	
 	
 	<h3>Gallery</h3>
-	<label for="galleryAllow">Enable Gallery?</label> <input type="checkbox" name="galleryAllow" id="galleryAllow" value="Yes" checked="checked" onclick="showHideCheckbox('gallery',this)"/></br>
+	<label for="galleryAllow">Enable Gallery?</label> <input type="checkbox" name="galleryAllow" id="galleryAllow" value="Yes" checked="checked" onclick="showHideCheckbox('gallery',this)"/><br>
 	<div id="gallery">
-		<label>Quickplay name:</label> <input type="text" id="galleryName" value="Gallery" onChange="onNameChange('gallery')"/><b style="color:red"><label id="galleryNameError"></label></b></br>
-		<label>Duration in seconds:</label> <input type="number" id="galleryDuration" value="240" step="15" min="15" oninput="displayTime('gallery')"/> <label id="galleryTime"></label></br>
-		<label>Number of Guests:</label> <input type="number" id="galleryGuests" value="21" step="1" max="21" min="4"/></br>
-		Gametype:</br>
-		<input type="radio" name="galleryGametype" id="galleryGametype0" value="Known" onclick="showHideE('gallerySelectedDiv',false)"/> <label for="galleryGametype0">Known</label></br>
-		<input type="radio" name="galleryGametype" id="galleryGametype1" value="Pick" onclick="showHideE('gallerySelectedDiv',true)"/> <label for="galleryGametype1">Pick</label></br>
-		<input type="radio" name="galleryGametype" id="galleryGametype2" value="Any" checked="checked" onclick="showHideE('gallerySelectedDiv',true)"/> <label for="galleryGametype2">Any</label></br>
-		<div id="gallerySelectedDiv"><label># of needed Missions to win:</label> <input type="number" id="galleryNeeded" value="4" step="1" max="7" min="1" oninput="missionsUpdated('gallery')"/></br></div>
-		<label># of selected Missions:</label> <input type="number" id="gallerySelected" value="8" step="1" max="8" min="2" oninput="missionsUpdated('gallery')"/> <b style="color:red"><label id="galleryError"></label></b></br>
-		<label for="gallerySimplified">Simplified Mode?</label> <input type="checkbox" name="gallerySimplified" id="gallerySimplified" value="Yes"/></br>
-		<label for="galleryPreselect">Pre-select missions?</label> <input type="checkbox" name="galleryPreselect" id="galleryPreselect" value="Yes" onclick="showHideCheckbox('galleryDefaults',this)"/></br>
+		<label>Quickplay name:</label> <input type="text" id="galleryName" value="Gallery" onChange="onNameChange('gallery')"/><b style="color:red"><label id="galleryNameError"></label></b><br>
+		<label>Duration in seconds:</label> <input type="number" id="galleryDuration" value="240" step="15" min="15" oninput="displayTime('gallery')"/> <label id="galleryTime"></label><br>
+		<label>Number of Guests:</label> <input type="number" id="galleryGuests" value="21" step="1" max="21" min="4"/><br>
+		Gametype:<br>
+		<input type="radio" name="galleryGametype" id="galleryGametype0" value="Known" onclick="showHideE('gallerySelectedDiv',false)"/> <label for="galleryGametype0">Known</label><br>
+		<input type="radio" name="galleryGametype" id="galleryGametype1" value="Pick" onclick="showHideE('gallerySelectedDiv',true)"/> <label for="galleryGametype1">Pick</label><br>
+		<input type="radio" name="galleryGametype" id="galleryGametype2" value="Any" checked="checked" onclick="showHideE('gallerySelectedDiv',true)"/> <label for="galleryGametype2">Any</label><br>
+		<div id="gallerySelectedDiv"><label># of needed Missions to win:</label> <input type="number" id="galleryNeeded" value="4" step="1" max="7" min="1" oninput="missionsUpdated('gallery')"/><br></div>
+		<label># of selected Missions:</label> <input type="number" id="gallerySelected" value="8" step="1" max="8" min="2" oninput="missionsUpdated('gallery')"/> <b style="color:red"><label id="galleryError"></label></b><br>
+		<label for="gallerySimplified">Simplified Mode?</label> <input type="checkbox" name="gallerySimplified" id="gallerySimplified" value="Yes"/><br>
+		<label for="galleryPreselect">Pre-select missions?</label> <input type="checkbox" name="galleryPreselect" id="galleryPreselect" value="Yes" onclick="showHideCheckbox('galleryDefaults',this)"/><br>
 		<div id="galleryDefaults" style="display:none">
-			<input type="checkbox" name="galleryDefaults" id="galleryDefault0" value="Bug" onClick="checkListErrors('gallery','D',this.checked)"/> <label for="galleryDefault0">Bug Ambassador</label></br>
-			<input type="checkbox" name="galleryDefaults" id="galleryDefault1" value="Contact" onClick="checkListErrors('gallery','D',this.checked)"/> <label for="galleryDefault1">Contact Double Agent</label></br>
-			<input type="checkbox" name="galleryDefaults" id="galleryDefault2" value="Transfer" onClick="checkListErrors('gallery','D',this.checked)"/> <label for="galleryDefault2">Transfer Microfilm</label></br>
-			<input type="checkbox" name="galleryDefaults" id="galleryDefault3" value="Swap" onClick="checkListErrors('gallery','D',this.checked)"/> <label for="galleryDefault3">Swap Statue</label></br>
-			<input type="checkbox" name="galleryDefaults" id="galleryDefault4" value="Inspect" onClick="checkListErrors('gallery','D',this.checked)"/> <label for="galleryDefault4">Inspect Statues</label></br>
-			<input type="checkbox" name="galleryDefaults" id="galleryDefault5" value="Seduce" onClick="checkListErrors('gallery','D',this.checked)"/> <label for="galleryDefault5">Seduce Target</label></br>
-			<input type="checkbox" name="galleryDefaults" id="galleryDefault6" value="Purloin" onClick="checkListErrors('gallery','D',this.checked)"/> <label for="galleryDefault6">Purloin Guest List</label></br>
-			<input type="checkbox" name="galleryDefaults" id="galleryDefault7" value="Fingerprint" onClick="checkListErrors('gallery','D',this.checked)"/> <label for="galleryDefault7">Fingerprint Ambassador</label></br>
+			<input type="checkbox" name="galleryDefaults" id="galleryDefault0" value="Bug" onClick="checkListErrors('gallery','D',this.checked)"/> <label for="galleryDefault0">Bug Ambassador</label><br>
+			<input type="checkbox" name="galleryDefaults" id="galleryDefault1" value="Contact" onClick="checkListErrors('gallery','D',this.checked)"/> <label for="galleryDefault1">Contact Double Agent</label><br>
+			<input type="checkbox" name="galleryDefaults" id="galleryDefault2" value="Transfer" onClick="checkListErrors('gallery','D',this.checked)"/> <label for="galleryDefault2">Transfer Microfilm</label><br>
+			<input type="checkbox" name="galleryDefaults" id="galleryDefault3" value="Swap" onClick="checkListErrors('gallery','D',this.checked)"/> <label for="galleryDefault3">Swap Statue</label><br>
+			<input type="checkbox" name="galleryDefaults" id="galleryDefault4" value="Inspect" onClick="checkListErrors('gallery','D',this.checked)"/> <label for="galleryDefault4">Inspect Statues</label><br>
+			<input type="checkbox" name="galleryDefaults" id="galleryDefault5" value="Seduce" onClick="checkListErrors('gallery','D',this.checked)"/> <label for="galleryDefault5">Seduce Target</label><br>
+			<input type="checkbox" name="galleryDefaults" id="galleryDefault6" value="Purloin" onClick="checkListErrors('gallery','D',this.checked)"/> <label for="galleryDefault6">Purloin Guest List</label><br>
+			<input type="checkbox" name="galleryDefaults" id="galleryDefault7" value="Fingerprint" onClick="checkListErrors('gallery','D',this.checked)"/> <label for="galleryDefault7">Fingerprint Ambassador</label><br>
 			<b style="color:red"><label id="galleryDError"></label></b>
 		</div>
-		<label for="galleryProhibit">Prohibit missions?</label> <input type="checkbox" name="galleryProhibit" id="galleryProhibit" value="Yes" onclick="showHideCheckbox('galleryProhibits',this)"/></br>
+		<label for="galleryProhibit">Prohibit missions?</label> <input type="checkbox" name="galleryProhibit" id="galleryProhibit" value="Yes" onclick="showHideCheckbox('galleryProhibits',this)"/><br>
 		<div id="galleryProhibits" style="display:none">
-			<input type="checkbox" name="galleryProhibits" id="galleryProhibit0" value="Bug" onClick="checkListErrors('gallery','P',this.checked)"/> <label for="galleryProhibit0">Bug Ambassador</label></br>
-			<input type="checkbox" name="galleryProhibits" id="galleryProhibit1" value="Contact" onClick="checkListErrors('gallery','P',this.checked)"/> <label for="galleryProhibit1">Contact Double Agent</label></br>
-			<input type="checkbox" name="galleryProhibits" id="galleryProhibit2" value="Transfer" onClick="checkListErrors('gallery','P',this.checked)"/> <label for="galleryProhibit2">Transfer Microfilm</label></br>
-			<input type="checkbox" name="galleryProhibits" id="galleryProhibit3" value="Swap" onClick="checkListErrors('gallery','P',this.checked)"/> <label for="galleryProhibit3">Swap Statue</label></br>
-			<input type="checkbox" name="galleryProhibits" id="galleryProhibit4" value="Inspect" onClick="checkListErrors('gallery','P',this.checked)"/> <label for="galleryProhibit4">Inspect Statues</label></br>
-			<input type="checkbox" name="galleryProhibits" id="galleryProhibit5" value="Seduce" onClick="checkListErrors('gallery','P',this.checked)"/> <label for="galleryProhibit5">Seduce Target</label></br>
-			<input type="checkbox" name="galleryProhibits" id="galleryProhibit6" value="Purloin" onClick="checkListErrors('gallery','P',this.checked)"/> <label for="galleryProhibit6">Purloin Guest List</label></br>
-			<input type="checkbox" name="galleryProhibits" id="galleryProhibit7" value="Fingerprint" onClick="checkListErrors('gallery','P',this.checked)"/> <label for="galleryProhibit7">Fingerprint Ambassador</label></br>
+			<input type="checkbox" name="galleryProhibits" id="galleryProhibit0" value="Bug" onClick="checkListErrors('gallery','P',this.checked)"/> <label for="galleryProhibit0">Bug Ambassador</label><br>
+			<input type="checkbox" name="galleryProhibits" id="galleryProhibit1" value="Contact" onClick="checkListErrors('gallery','P',this.checked)"/> <label for="galleryProhibit1">Contact Double Agent</label><br>
+			<input type="checkbox" name="galleryProhibits" id="galleryProhibit2" value="Transfer" onClick="checkListErrors('gallery','P',this.checked)"/> <label for="galleryProhibit2">Transfer Microfilm</label><br>
+			<input type="checkbox" name="galleryProhibits" id="galleryProhibit3" value="Swap" onClick="checkListErrors('gallery','P',this.checked)"/> <label for="galleryProhibit3">Swap Statue</label><br>
+			<input type="checkbox" name="galleryProhibits" id="galleryProhibit4" value="Inspect" onClick="checkListErrors('gallery','P',this.checked)"/> <label for="galleryProhibit4">Inspect Statues</label><br>
+			<input type="checkbox" name="galleryProhibits" id="galleryProhibit5" value="Seduce" onClick="checkListErrors('gallery','P',this.checked)"/> <label for="galleryProhibit5">Seduce Target</label><br>
+			<input type="checkbox" name="galleryProhibits" id="galleryProhibit6" value="Purloin" onClick="checkListErrors('gallery','P',this.checked)"/> <label for="galleryProhibit6">Purloin Guest List</label><br>
+			<input type="checkbox" name="galleryProhibits" id="galleryProhibit7" value="Fingerprint" onClick="checkListErrors('gallery','P',this.checked)"/> <label for="galleryProhibit7">Fingerprint Ambassador</label><br>
 			<b style="color:red"><label id="galleryPError"></label></b>
 		</div>
-		<label for="galleryRequire">Require missions?</label> <input type="checkbox" name="galleryRequire" id="galleryRequire" value="Yes" onclick="showHideCheckbox('galleryRequires',this)"/></br>
+		<label for="galleryRequire">Require missions?</label> <input type="checkbox" name="galleryRequire" id="galleryRequire" value="Yes" onclick="showHideCheckbox('galleryRequires',this)"/><br>
 		<div id="galleryRequires" style="display:none">
-			<input type="checkbox" name="galleryRequires" id="galleryRequire0" value="Bug" onClick="checkListErrors('gallery','R',this.checked)"/> <label for="galleryRequire0">Bug Ambassador</label></br>
-			<input type="checkbox" name="galleryRequires" id="galleryRequire1" value="Contact" onClick="checkListErrors('gallery','R',this.checked)"/> <label for="galleryRequire1">Contact Double Agent</label></br>
-			<input type="checkbox" name="galleryRequires" id="galleryRequire2" value="Transfer" onClick="checkListErrors('gallery','R',this.checked)"/> <label for="galleryRequire2">Transfer Microfilm</label></br>
-			<input type="checkbox" name="galleryRequires" id="galleryRequire3" value="Swap" onClick="checkListErrors('gallery','R',this.checked)"/> <label for="galleryRequire3">Swap Statue</label></br>
-			<input type="checkbox" name="galleryRequires" id="galleryRequire4" value="Inspect" onClick="checkListErrors('gallery','R',this.checked)"/> <label for="galleryRequire4">Inspect Statues</label></br>
-			<input type="checkbox" name="galleryRequires" id="galleryRequire5" value="Seduce" onClick="checkListErrors('gallery','R',this.checked)"/> <label for="galleryRequire5">Seduce Target</label></br>
-			<input type="checkbox" name="galleryRequires" id="galleryRequire6" value="Purloin" onClick="checkListErrors('gallery','R',this.checked)"/> <label for="galleryRequire6">Purloin Guest List</label></br>
-			<input type="checkbox" name="galleryRequires" id="galleryRequire7" value="Fingerprint" onClick="checkListErrors('gallery','R',this.checked)"/> <label for="galleryRequire7">Fingerprint Ambassador</label></br>
+			<input type="checkbox" name="galleryRequires" id="galleryRequire0" value="Bug" onClick="checkListErrors('gallery','R',this.checked)"/> <label for="galleryRequire0">Bug Ambassador</label><br>
+			<input type="checkbox" name="galleryRequires" id="galleryRequire1" value="Contact" onClick="checkListErrors('gallery','R',this.checked)"/> <label for="galleryRequire1">Contact Double Agent</label><br>
+			<input type="checkbox" name="galleryRequires" id="galleryRequire2" value="Transfer" onClick="checkListErrors('gallery','R',this.checked)"/> <label for="galleryRequire2">Transfer Microfilm</label><br>
+			<input type="checkbox" name="galleryRequires" id="galleryRequire3" value="Swap" onClick="checkListErrors('gallery','R',this.checked)"/> <label for="galleryRequire3">Swap Statue</label><br>
+			<input type="checkbox" name="galleryRequires" id="galleryRequire4" value="Inspect" onClick="checkListErrors('gallery','R',this.checked)"/> <label for="galleryRequire4">Inspect Statues</label><br>
+			<input type="checkbox" name="galleryRequires" id="galleryRequire5" value="Seduce" onClick="checkListErrors('gallery','R',this.checked)"/> <label for="galleryRequire5">Seduce Target</label><br>
+			<input type="checkbox" name="galleryRequires" id="galleryRequire6" value="Purloin" onClick="checkListErrors('gallery','R',this.checked)"/> <label for="galleryRequire6">Purloin Guest List</label><br>
+			<input type="checkbox" name="galleryRequires" id="galleryRequire7" value="Fingerprint" onClick="checkListErrors('gallery','R',this.checked)"/> <label for="galleryRequire7">Fingerprint Ambassador</label><br>
 			<b style="color:red"><label id="galleryRError"></label></b>
 		</div>
-	</div></br>
+	</div><br>
 	
 	
 	<h3>High-rise</h3>
-	<label for="highriseAllow">Enable High-rise?</label> <input type="checkbox" name="highriseAllow" id="highriseAllow" value="Yes" checked="checked" onclick="showHideCheckbox('highrise',this)"/></br>
+	<label for="highriseAllow">Enable High-rise?</label> <input type="checkbox" name="highriseAllow" id="highriseAllow" value="Yes" checked="checked" onclick="showHideCheckbox('highrise',this)"/><br>
 	<div id="highrise">
-		<label>Quickplay name:</label> <input type="text" id="highriseName" value="High-rise" onChange="onNameChange('highrise')"/><b style="color:red"><label id="highriseNameError"></label></b></br>
-		<label>Duration in seconds:</label> <input type="number" id="highriseDuration" value="210" step="15" min="15" oninput="displayTime('highrise')"/> <label id="highriseTime"></label></br>
-		<label>Number of Guests:</label> <input type="number" id="highriseGuests" value="11" step="1" max="21" min="4"/></br>
-		Gametype:</br>
-		<input type="radio" name="highriseGametype" id="highriseGametype0" value="Known" onclick="showHideE('highriseSelectedDiv',false)"/> <label for="highriseGametype0">Known</label></br>
-		<input type="radio" name="highriseGametype" id="highriseGametype1" value="Pick" onclick="showHideE('highriseSelectedDiv',true)"/> <label for="highriseGametype1">Pick</label></br>
-		<input type="radio" name="highriseGametype" id="highriseGametype2" value="Any" checked="checked" onclick="showHideE('highriseSelectedDiv',true)"/> <label for="highriseGametype2">Any</label></br>
-		<div id="highriseSelectedDiv"><label># of needed Missions to win:</label> <input type="number" id="highriseNeeded" value="3" step="1" max="7" min="1" oninput="missionsUpdated('highrise')"/></br></div>
-		<label># of selected Missions:</label> <input type="number" id="highriseSelected" value="5" step="1" max="8" min="2" oninput="missionsUpdated('highrise')"/> <b style="color:red"><label id="highriseError"></label></b></br>
-		<label for="highriseSimplified">Simplified Mode?</label> <input type="checkbox" name="highriseSimplified" id="highriseSimplified" value="Yes"/></br>
-		<label for="highrisePreselect">Pre-select missions?</label> <input type="checkbox" name="highrisePreselect" id="highrisePreselect" value="Yes" onclick="showHideCheckbox('highriseDefaults',this)"/></br>
+		<label>Quickplay name:</label> <input type="text" id="highriseName" value="High-rise" onChange="onNameChange('highrise')"/><b style="color:red"><label id="highriseNameError"></label></b><br>
+		<label>Duration in seconds:</label> <input type="number" id="highriseDuration" value="210" step="15" min="15" oninput="displayTime('highrise')"/> <label id="highriseTime"></label><br>
+		<label>Number of Guests:</label> <input type="number" id="highriseGuests" value="11" step="1" max="21" min="4"/><br>
+		Gametype:<br>
+		<input type="radio" name="highriseGametype" id="highriseGametype0" value="Known" onclick="showHideE('highriseSelectedDiv',false)"/> <label for="highriseGametype0">Known</label><br>
+		<input type="radio" name="highriseGametype" id="highriseGametype1" value="Pick" onclick="showHideE('highriseSelectedDiv',true)"/> <label for="highriseGametype1">Pick</label><br>
+		<input type="radio" name="highriseGametype" id="highriseGametype2" value="Any" checked="checked" onclick="showHideE('highriseSelectedDiv',true)"/> <label for="highriseGametype2">Any</label><br>
+		<div id="highriseSelectedDiv"><label># of needed Missions to win:</label> <input type="number" id="highriseNeeded" value="3" step="1" max="7" min="1" oninput="missionsUpdated('highrise')"/><br></div>
+		<label># of selected Missions:</label> <input type="number" id="highriseSelected" value="5" step="1" max="8" min="2" oninput="missionsUpdated('highrise')"/> <b style="color:red"><label id="highriseError"></label></b><br>
+		<label for="highriseSimplified">Simplified Mode?</label> <input type="checkbox" name="highriseSimplified" id="highriseSimplified" value="Yes"/><br>
+		<label for="highrisePreselect">Pre-select missions?</label> <input type="checkbox" name="highrisePreselect" id="highrisePreselect" value="Yes" onclick="showHideCheckbox('highriseDefaults',this)"/><br>
 		<div id="highriseDefaults" style="display:none">
-			<input type="checkbox" name="highriseDefaults" id="highriseDefault0" value="Bug" onClick="checkListErrors('highrise','D',this.checked)"/> <label for="highriseDefault0">Bug Ambassador</label></br>
-			<input type="checkbox" name="highriseDefaults" id="highriseDefault1" value="Contact" onClick="checkListErrors('highrise','D',this.checked)"/> <label for="highriseDefault1">Contact Double Agent</label></br>
-			<input type="checkbox" name="highriseDefaults" id="highriseDefault2" value="Transfer" onClick="checkListErrors('highrise','D',this.checked)"/> <label for="highriseDefault2">Transfer Microfilm</label></br>
-			<input type="checkbox" name="highriseDefaults" id="highriseDefault3" value="Swap" onClick="checkListErrors('highrise','D',this.checked)"/> <label for="highriseDefault3">Swap Statue</label></br>
-			<input type="checkbox" name="highriseDefaults" id="highriseDefault4" value="Inspect" onClick="checkListErrors('highrise','D',this.checked)"/> <label for="highriseDefault4">Inspect Statues</label></br>
-			<input type="checkbox" name="highriseDefaults" id="highriseDefault5" value="Seduce" onClick="checkListErrors('highrise','D',this.checked)"/> <label for="highriseDefault5">Seduce Target</label></br>
-			<input type="checkbox" name="highriseDefaults" id="highriseDefault6" value="Purloin" onClick="checkListErrors('highrise','D',this.checked)"/> <label for="highriseDefault6">Purloin Guest List</label></br>
-			<input type="checkbox" name="highriseDefaults" id="highriseDefault7" value="Fingerprint" onClick="checkListErrors('highrise','D',this.checked)"/> <label for="highriseDefault7">Fingerprint Ambassador</label></br>
+			<input type="checkbox" name="highriseDefaults" id="highriseDefault0" value="Bug" onClick="checkListErrors('highrise','D',this.checked)"/> <label for="highriseDefault0">Bug Ambassador</label><br>
+			<input type="checkbox" name="highriseDefaults" id="highriseDefault1" value="Contact" onClick="checkListErrors('highrise','D',this.checked)"/> <label for="highriseDefault1">Contact Double Agent</label><br>
+			<input type="checkbox" name="highriseDefaults" id="highriseDefault2" value="Transfer" onClick="checkListErrors('highrise','D',this.checked)"/> <label for="highriseDefault2">Transfer Microfilm</label><br>
+			<input type="checkbox" name="highriseDefaults" id="highriseDefault3" value="Swap" onClick="checkListErrors('highrise','D',this.checked)"/> <label for="highriseDefault3">Swap Statue</label><br>
+			<input type="checkbox" name="highriseDefaults" id="highriseDefault4" value="Inspect" onClick="checkListErrors('highrise','D',this.checked)"/> <label for="highriseDefault4">Inspect Statues</label><br>
+			<input type="checkbox" name="highriseDefaults" id="highriseDefault5" value="Seduce" onClick="checkListErrors('highrise','D',this.checked)"/> <label for="highriseDefault5">Seduce Target</label><br>
+			<input type="checkbox" name="highriseDefaults" id="highriseDefault6" value="Purloin" onClick="checkListErrors('highrise','D',this.checked)"/> <label for="highriseDefault6">Purloin Guest List</label><br>
+			<input type="checkbox" name="highriseDefaults" id="highriseDefault7" value="Fingerprint" onClick="checkListErrors('highrise','D',this.checked)"/> <label for="highriseDefault7">Fingerprint Ambassador</label><br>
 			<b style="color:red"><label id="highriseDError"></label></b>
 		</div>
-		<label for="highriseProhibit">Prohibit missions?</label> <input type="checkbox" name="highriseProhibit" id="highriseProhibit" value="Yes" onclick="showHideCheckbox('highriseProhibits',this)"/></br>
+		<label for="highriseProhibit">Prohibit missions?</label> <input type="checkbox" name="highriseProhibit" id="highriseProhibit" value="Yes" onclick="showHideCheckbox('highriseProhibits',this)"/><br>
 		<div id="highriseProhibits" style="display:none">
-			<input type="checkbox" name="highriseProhibits" id="highriseProhibit0" value="Bug" onClick="checkListErrors('highrise','P',this.checked)"/> <label for="highriseProhibit0">Bug Ambassador</label></br>
-			<input type="checkbox" name="highriseProhibits" id="highriseProhibit1" value="Contact" onClick="checkListErrors('highrise','P',this.checked)"/> <label for="highriseProhibit1">Contact Double Agent</label></br>
-			<input type="checkbox" name="highriseProhibits" id="highriseProhibit2" value="Transfer" onClick="checkListErrors('highrise','P',this.checked)"/> <label for="highriseProhibit2">Transfer Microfilm</label></br>
-			<input type="checkbox" name="highriseProhibits" id="highriseProhibit3" value="Swap" onClick="checkListErrors('highrise','P',this.checked)"/> <label for="highriseProhibit3">Swap Statue</label></br>
-			<input type="checkbox" name="highriseProhibits" id="highriseProhibit4" value="Inspect" onClick="checkListErrors('highrise','P',this.checked)"/> <label for="highriseProhibit4">Inspect Statues</label></br>
-			<input type="checkbox" name="highriseProhibits" id="highriseProhibit5" value="Seduce" onClick="checkListErrors('highrise','P',this.checked)"/> <label for="highriseProhibit5">Seduce Target</label></br>
-			<input type="checkbox" name="highriseProhibits" id="highriseProhibit6" value="Purloin" onClick="checkListErrors('highrise','P',this.checked)"/> <label for="highriseProhibit6">Purloin Guest List</label></br>
-			<input type="checkbox" name="highriseProhibits" id="highriseProhibit7" value="Fingerprint" onClick="checkListErrors('highrise','P',this.checked)"/> <label for="highriseProhibit7">Fingerprint Ambassador</label></br>
+			<input type="checkbox" name="highriseProhibits" id="highriseProhibit0" value="Bug" onClick="checkListErrors('highrise','P',this.checked)"/> <label for="highriseProhibit0">Bug Ambassador</label><br>
+			<input type="checkbox" name="highriseProhibits" id="highriseProhibit1" value="Contact" onClick="checkListErrors('highrise','P',this.checked)"/> <label for="highriseProhibit1">Contact Double Agent</label><br>
+			<input type="checkbox" name="highriseProhibits" id="highriseProhibit2" value="Transfer" onClick="checkListErrors('highrise','P',this.checked)"/> <label for="highriseProhibit2">Transfer Microfilm</label><br>
+			<input type="checkbox" name="highriseProhibits" id="highriseProhibit3" value="Swap" onClick="checkListErrors('highrise','P',this.checked)"/> <label for="highriseProhibit3">Swap Statue</label><br>
+			<input type="checkbox" name="highriseProhibits" id="highriseProhibit4" value="Inspect" onClick="checkListErrors('highrise','P',this.checked)"/> <label for="highriseProhibit4">Inspect Statues</label><br>
+			<input type="checkbox" name="highriseProhibits" id="highriseProhibit5" value="Seduce" onClick="checkListErrors('highrise','P',this.checked)"/> <label for="highriseProhibit5">Seduce Target</label><br>
+			<input type="checkbox" name="highriseProhibits" id="highriseProhibit6" value="Purloin" onClick="checkListErrors('highrise','P',this.checked)"/> <label for="highriseProhibit6">Purloin Guest List</label><br>
+			<input type="checkbox" name="highriseProhibits" id="highriseProhibit7" value="Fingerprint" onClick="checkListErrors('highrise','P',this.checked)"/> <label for="highriseProhibit7">Fingerprint Ambassador</label><br>
 			<b style="color:red"><label id="highrisePError"></label></b>
 		</div>
-		<label for="highriseRequire">Require missions?</label> <input type="checkbox" name="highriseRequire" id="highriseRequire" value="Yes" onclick="showHideCheckbox('highriseRequires',this)"/></br>
+		<label for="highriseRequire">Require missions?</label> <input type="checkbox" name="highriseRequire" id="highriseRequire" value="Yes" onclick="showHideCheckbox('highriseRequires',this)"/><br>
 		<div id="highriseRequires" style="display:none">
-			<input type="checkbox" name="highriseRequires" id="highriseRequire0" value="Bug" onClick="checkListErrors('highrise','R',this.checked)"/> <label for="highriseRequire0">Bug Ambassador</label></br>
-			<input type="checkbox" name="highriseRequires" id="highriseRequire1" value="Contact" onClick="checkListErrors('highrise','R',this.checked)"/> <label for="highriseRequire1">Contact Double Agent</label></br>
-			<input type="checkbox" name="highriseRequires" id="highriseRequire2" value="Transfer" onClick="checkListErrors('highrise','R',this.checked)"/> <label for="highriseRequire2">Transfer Microfilm</label></br>
-			<input type="checkbox" name="highriseRequires" id="highriseRequire3" value="Swap" onClick="checkListErrors('highrise','R',this.checked)"/> <label for="highriseRequire3">Swap Statue</label></br>
-			<input type="checkbox" name="highriseRequires" id="highriseRequire4" value="Inspect" onClick="checkListErrors('highrise','R',this.checked)"/> <label for="highriseRequire4">Inspect Statues</label></br>
-			<input type="checkbox" name="highriseRequires" id="highriseRequire5" value="Seduce" onClick="checkListErrors('highrise','R',this.checked)"/> <label for="highriseRequire5">Seduce Target</label></br>
-			<input type="checkbox" name="highriseRequires" id="highriseRequire6" value="Purloin" onClick="checkListErrors('highrise','R',this.checked)"/> <label for="highriseRequire6">Purloin Guest List</label></br>
-			<input type="checkbox" name="highriseRequires" id="highriseRequire7" value="Fingerprint" onClick="checkListErrors('highrise','R',this.checked)"/> <label for="highriseRequire7">Fingerprint Ambassador</label></br>
+			<input type="checkbox" name="highriseRequires" id="highriseRequire0" value="Bug" onClick="checkListErrors('highrise','R',this.checked)"/> <label for="highriseRequire0">Bug Ambassador</label><br>
+			<input type="checkbox" name="highriseRequires" id="highriseRequire1" value="Contact" onClick="checkListErrors('highrise','R',this.checked)"/> <label for="highriseRequire1">Contact Double Agent</label><br>
+			<input type="checkbox" name="highriseRequires" id="highriseRequire2" value="Transfer" onClick="checkListErrors('highrise','R',this.checked)"/> <label for="highriseRequire2">Transfer Microfilm</label><br>
+			<input type="checkbox" name="highriseRequires" id="highriseRequire3" value="Swap" onClick="checkListErrors('highrise','R',this.checked)"/> <label for="highriseRequire3">Swap Statue</label><br>
+			<input type="checkbox" name="highriseRequires" id="highriseRequire4" value="Inspect" onClick="checkListErrors('highrise','R',this.checked)"/> <label for="highriseRequire4">Inspect Statues</label><br>
+			<input type="checkbox" name="highriseRequires" id="highriseRequire5" value="Seduce" onClick="checkListErrors('highrise','R',this.checked)"/> <label for="highriseRequire5">Seduce Target</label><br>
+			<input type="checkbox" name="highriseRequires" id="highriseRequire6" value="Purloin" onClick="checkListErrors('highrise','R',this.checked)"/> <label for="highriseRequire6">Purloin Guest List</label><br>
+			<input type="checkbox" name="highriseRequires" id="highriseRequire7" value="Fingerprint" onClick="checkListErrors('highrise','R',this.checked)"/> <label for="highriseRequire7">Fingerprint Ambassador</label><br>
 			<b style="color:red"><label id="highriseRError"></label></b>
 		</div>
-	</div></br>
+	</div><br>
 	
 	<h3>Library</h3>
-	<label for="libraryAllow">Enable Library?</label> <input type="checkbox" name="libraryAllow" id="libraryAllow" value="Yes" checked="checked" onclick="showHideCheckbox('library',this)"/></br>
+	<label for="libraryAllow">Enable Library?</label> <input type="checkbox" name="libraryAllow" id="libraryAllow" value="Yes" checked="checked" onclick="showHideCheckbox('library',this)"/><br>
 	<div id="library">
-		<label>Quickplay name:</label> <input type="text" id="libraryName" value="Library" onChange="onNameChange('library')"/><b style="color:red"><label id="libraryNameError"></label></b></br>
-		<label>Duration in seconds:</label> <input type="number" id="libraryDuration" value="285" step="15" min="15" oninput="displayTime('library')"/> <label id="libraryTime"></label></br>
-		<label>Number of Guests:</label> <input type="number" id="libraryGuests" value="21" step="1" max="21" min="4"/></br>
-		Gametype:</br>
-		<input type="radio" name="libraryGametype" id="libraryGametype0" value="Known" onclick="showHideE('librarySelectedDiv',false)"/> <label for="libraryGametype0">Known</label></br>
-		<input type="radio" name="libraryGametype" id="libraryGametype1" value="Pick" onclick="showHideE('librarySelectedDiv',true)"/> <label for="libraryGametype1">Pick</label></br>
-		<input type="radio" name="libraryGametype" id="libraryGametype2" value="Any" checked="checked" onclick="showHideE('librarySelectedDiv',true)"/> <label for="libraryGametype2">Any</label></br>
-		<div id="librarySelectedDiv"><label># of needed Missions to win:</label> <input type="number" id="libraryNeeded" value="5" step="1" max="7" min="1" oninput="missionsUpdated('library')"/></br></div>
-		<label># of selected Missions:</label> <input type="number" id="librarySelected" value="8" step="1" max="8" min="2" oninput="missionsUpdated('library')"/> <b style="color:red"><label id="libraryError"></label></b></br>
-		<label for="librarySimplified">Simplified Mode?</label> <input type="checkbox" name="librarySimplified" id="librarySimplified" value="Yes"/></br>
-		<label for="libraryPreselect">Pre-select missions?</label> <input type="checkbox" name="libraryPreselect" id="libraryPreselect" value="Yes" onclick="showHideCheckbox('libraryDefaults',this)"/></br>
+		<label>Quickplay name:</label> <input type="text" id="libraryName" value="Library" onChange="onNameChange('library')"/><b style="color:red"><label id="libraryNameError"></label></b><br>
+		<label>Duration in seconds:</label> <input type="number" id="libraryDuration" value="285" step="15" min="15" oninput="displayTime('library')"/> <label id="libraryTime"></label><br>
+		<label>Number of Guests:</label> <input type="number" id="libraryGuests" value="21" step="1" max="21" min="4"/><br>
+		Gametype:<br>
+		<input type="radio" name="libraryGametype" id="libraryGametype0" value="Known" onclick="showHideE('librarySelectedDiv',false)"/> <label for="libraryGametype0">Known</label><br>
+		<input type="radio" name="libraryGametype" id="libraryGametype1" value="Pick" onclick="showHideE('librarySelectedDiv',true)"/> <label for="libraryGametype1">Pick</label><br>
+		<input type="radio" name="libraryGametype" id="libraryGametype2" value="Any" checked="checked" onclick="showHideE('librarySelectedDiv',true)"/> <label for="libraryGametype2">Any</label><br>
+		<div id="librarySelectedDiv"><label># of needed Missions to win:</label> <input type="number" id="libraryNeeded" value="5" step="1" max="7" min="1" oninput="missionsUpdated('library')"/><br></div>
+		<label># of selected Missions:</label> <input type="number" id="librarySelected" value="8" step="1" max="8" min="2" oninput="missionsUpdated('library')"/> <b style="color:red"><label id="libraryError"></label></b><br>
+		<label for="librarySimplified">Simplified Mode?</label> <input type="checkbox" name="librarySimplified" id="librarySimplified" value="Yes"/><br>
+		<label for="libraryPreselect">Pre-select missions?</label> <input type="checkbox" name="libraryPreselect" id="libraryPreselect" value="Yes" onclick="showHideCheckbox('libraryDefaults',this)"/><br>
 		<div id="libraryDefaults" style="display:none">
-			<input type="checkbox" name="libraryDefaults" id="libraryDefault0" value="Bug" onClick="checkListErrors('library','D',this.checked)"/> <label for="libraryDefault0">Bug Ambassador</label></br>
-			<input type="checkbox" name="libraryDefaults" id="libraryDefault1" value="Contact" onClick="checkListErrors('library','D',this.checked)"/> <label for="libraryDefault1">Contact Double Agent</label></br>
-			<input type="checkbox" name="libraryDefaults" id="libraryDefault2" value="Transfer" onClick="checkListErrors('library','D',this.checked)"/> <label for="libraryDefault2">Transfer Microfilm</label></br>
-			<input type="checkbox" name="libraryDefaults" id="libraryDefault3" value="Swap" onClick="checkListErrors('library','D',this.checked)"/> <label for="libraryDefault3">Swap Statue</label></br>
-			<input type="checkbox" name="libraryDefaults" id="libraryDefault4" value="Inspect" onClick="checkListErrors('library','D',this.checked)"/> <label for="libraryDefault4">Inspect Statues</label></br>
-			<input type="checkbox" name="libraryDefaults" id="libraryDefault5" value="Seduce" onClick="checkListErrors('library','D',this.checked)"/> <label for="libraryDefault5">Seduce Target</label></br>
-			<input type="checkbox" name="libraryDefaults" id="libraryDefault6" value="Purloin" onClick="checkListErrors('library','D',this.checked)"/> <label for="libraryDefault6">Purloin Guest List</label></br>
-			<input type="checkbox" name="libraryDefaults" id="libraryDefault7" value="Fingerprint" onClick="checkListErrors('library','D',this.checked)"/> <label for="libraryDefault7">Fingerprint Ambassador</label></br>
+			<input type="checkbox" name="libraryDefaults" id="libraryDefault0" value="Bug" onClick="checkListErrors('library','D',this.checked)"/> <label for="libraryDefault0">Bug Ambassador</label><br>
+			<input type="checkbox" name="libraryDefaults" id="libraryDefault1" value="Contact" onClick="checkListErrors('library','D',this.checked)"/> <label for="libraryDefault1">Contact Double Agent</label><br>
+			<input type="checkbox" name="libraryDefaults" id="libraryDefault2" value="Transfer" onClick="checkListErrors('library','D',this.checked)"/> <label for="libraryDefault2">Transfer Microfilm</label><br>
+			<input type="checkbox" name="libraryDefaults" id="libraryDefault3" value="Swap" onClick="checkListErrors('library','D',this.checked)"/> <label for="libraryDefault3">Swap Statue</label><br>
+			<input type="checkbox" name="libraryDefaults" id="libraryDefault4" value="Inspect" onClick="checkListErrors('library','D',this.checked)"/> <label for="libraryDefault4">Inspect Statues</label><br>
+			<input type="checkbox" name="libraryDefaults" id="libraryDefault5" value="Seduce" onClick="checkListErrors('library','D',this.checked)"/> <label for="libraryDefault5">Seduce Target</label><br>
+			<input type="checkbox" name="libraryDefaults" id="libraryDefault6" value="Purloin" onClick="checkListErrors('library','D',this.checked)"/> <label for="libraryDefault6">Purloin Guest List</label><br>
+			<input type="checkbox" name="libraryDefaults" id="libraryDefault7" value="Fingerprint" onClick="checkListErrors('library','D',this.checked)"/> <label for="libraryDefault7">Fingerprint Ambassador</label><br>
 			<b style="color:red"><label id="libraryDError"></label></b>
 		</div>
-		<label for="libraryProhibit">Prohibit missions?</label> <input type="checkbox" name="libraryProhibit" id="libraryProhibit" value="Yes" onclick="showHideCheckbox('libraryProhibits',this)"/></br>
+		<label for="libraryProhibit">Prohibit missions?</label> <input type="checkbox" name="libraryProhibit" id="libraryProhibit" value="Yes" onclick="showHideCheckbox('libraryProhibits',this)"/><br>
 		<div id="libraryProhibits" style="display:none">
-			<input type="checkbox" name="libraryProhibits" id="libraryProhibit0" value="Bug" onClick="checkListErrors('library','P',this.checked)"/> <label for="libraryProhibit0">Bug Ambassador</label></br>
-			<input type="checkbox" name="libraryProhibits" id="libraryProhibit1" value="Contact" onClick="checkListErrors('library','P',this.checked)"/> <label for="libraryProhibit1">Contact Double Agent</label></br>
-			<input type="checkbox" name="libraryProhibits" id="libraryProhibit2" value="Transfer" onClick="checkListErrors('library','P',this.checked)"/> <label for="libraryProhibit2">Transfer Microfilm</label></br>
-			<input type="checkbox" name="libraryProhibits" id="libraryProhibit3" value="Swap" onClick="checkListErrors('library','P',this.checked)"/> <label for="libraryProhibit3">Swap Statue</label></br>
-			<input type="checkbox" name="libraryProhibits" id="libraryProhibit4" value="Inspect" onClick="checkListErrors('library','P',this.checked)"/> <label for="libraryProhibit4">Inspect Statues</label></br>
-			<input type="checkbox" name="libraryProhibits" id="libraryProhibit5" value="Seduce" onClick="checkListErrors('library','P',this.checked)"/> <label for="libraryProhibit5">Seduce Target</label></br>
-			<input type="checkbox" name="libraryProhibits" id="libraryProhibit6" value="Purloin" onClick="checkListErrors('library','P',this.checked)"/> <label for="libraryProhibit6">Purloin Guest List</label></br>
-			<input type="checkbox" name="libraryProhibits" id="libraryProhibit7" value="Fingerprint" onClick="checkListErrors('library','P',this.checked)"/> <label for="libraryProhibit7">Fingerprint Ambassador</label></br>
+			<input type="checkbox" name="libraryProhibits" id="libraryProhibit0" value="Bug" onClick="checkListErrors('library','P',this.checked)"/> <label for="libraryProhibit0">Bug Ambassador</label><br>
+			<input type="checkbox" name="libraryProhibits" id="libraryProhibit1" value="Contact" onClick="checkListErrors('library','P',this.checked)"/> <label for="libraryProhibit1">Contact Double Agent</label><br>
+			<input type="checkbox" name="libraryProhibits" id="libraryProhibit2" value="Transfer" onClick="checkListErrors('library','P',this.checked)"/> <label for="libraryProhibit2">Transfer Microfilm</label><br>
+			<input type="checkbox" name="libraryProhibits" id="libraryProhibit3" value="Swap" onClick="checkListErrors('library','P',this.checked)"/> <label for="libraryProhibit3">Swap Statue</label><br>
+			<input type="checkbox" name="libraryProhibits" id="libraryProhibit4" value="Inspect" onClick="checkListErrors('library','P',this.checked)"/> <label for="libraryProhibit4">Inspect Statues</label><br>
+			<input type="checkbox" name="libraryProhibits" id="libraryProhibit5" value="Seduce" onClick="checkListErrors('library','P',this.checked)"/> <label for="libraryProhibit5">Seduce Target</label><br>
+			<input type="checkbox" name="libraryProhibits" id="libraryProhibit6" value="Purloin" onClick="checkListErrors('library','P',this.checked)"/> <label for="libraryProhibit6">Purloin Guest List</label><br>
+			<input type="checkbox" name="libraryProhibits" id="libraryProhibit7" value="Fingerprint" onClick="checkListErrors('library','P',this.checked)"/> <label for="libraryProhibit7">Fingerprint Ambassador</label><br>
 			<b style="color:red"><label id="libraryPError"></label></b>
 		</div>
-		<label for="libraryRequire">Require missions?</label> <input type="checkbox" name="libraryRequire" id="libraryRequire" value="Yes" onclick="showHideCheckbox('libraryRequires',this)"/></br>
+		<label for="libraryRequire">Require missions?</label> <input type="checkbox" name="libraryRequire" id="libraryRequire" value="Yes" onclick="showHideCheckbox('libraryRequires',this)"/><br>
 		<div id="libraryRequires" style="display:none">
-			<input type="checkbox" name="libraryRequires" id="libraryRequire0" value="Bug" onClick="checkListErrors('library','R',this.checked)"/> <label for="libraryRequire0">Bug Ambassador</label></br>
-			<input type="checkbox" name="libraryRequires" id="libraryRequire1" value="Contact" onClick="checkListErrors('library','R',this.checked)"/> <label for="libraryRequire1">Contact Double Agent</label></br>
-			<input type="checkbox" name="libraryRequires" id="libraryRequire2" value="Transfer" onClick="checkListErrors('library','R',this.checked)"/> <label for="libraryRequire2">Transfer Microfilm</label></br>
-			<input type="checkbox" name="libraryRequires" id="libraryRequire3" value="Swap" onClick="checkListErrors('library','R',this.checked)"/> <label for="libraryRequire3">Swap Statue</label></br>
-			<input type="checkbox" name="libraryRequires" id="libraryRequire4" value="Inspect" onClick="checkListErrors('library','R',this.checked)"/> <label for="libraryRequire4">Inspect Statues</label></br>
-			<input type="checkbox" name="libraryRequires" id="libraryRequire5" value="Seduce" onClick="checkListErrors('library','R',this.checked)"/> <label for="libraryRequire5">Seduce Target</label></br>
-			<input type="checkbox" name="libraryRequires" id="libraryRequire6" value="Purloin" onClick="checkListErrors('library','R',this.checked)"/> <label for="libraryRequire6">Purloin Guest List</label></br>
-			<input type="checkbox" name="libraryRequires" id="libraryRequire7" value="Fingerprint" onClick="checkListErrors('library','R',this.checked)"/> <label for="libraryRequire7">Fingerprint Ambassador</label></br>
+			<input type="checkbox" name="libraryRequires" id="libraryRequire0" value="Bug" onClick="checkListErrors('library','R',this.checked)"/> <label for="libraryRequire0">Bug Ambassador</label><br>
+			<input type="checkbox" name="libraryRequires" id="libraryRequire1" value="Contact" onClick="checkListErrors('library','R',this.checked)"/> <label for="libraryRequire1">Contact Double Agent</label><br>
+			<input type="checkbox" name="libraryRequires" id="libraryRequire2" value="Transfer" onClick="checkListErrors('library','R',this.checked)"/> <label for="libraryRequire2">Transfer Microfilm</label><br>
+			<input type="checkbox" name="libraryRequires" id="libraryRequire3" value="Swap" onClick="checkListErrors('library','R',this.checked)"/> <label for="libraryRequire3">Swap Statue</label><br>
+			<input type="checkbox" name="libraryRequires" id="libraryRequire4" value="Inspect" onClick="checkListErrors('library','R',this.checked)"/> <label for="libraryRequire4">Inspect Statues</label><br>
+			<input type="checkbox" name="libraryRequires" id="libraryRequire5" value="Seduce" onClick="checkListErrors('library','R',this.checked)"/> <label for="libraryRequire5">Seduce Target</label><br>
+			<input type="checkbox" name="libraryRequires" id="libraryRequire6" value="Purloin" onClick="checkListErrors('library','R',this.checked)"/> <label for="libraryRequire6">Purloin Guest List</label><br>
+			<input type="checkbox" name="libraryRequires" id="libraryRequire7" value="Fingerprint" onClick="checkListErrors('library','R',this.checked)"/> <label for="libraryRequire7">Fingerprint Ambassador</label><br>
 			<b style="color:red"><label id="libraryRError"></label></b>
 		</div>
-	</div></br>
+	</div><br>
 	
 	
 	<h3>Moderne</h3>
-	<label for="moderneAllow">Enable Moderne?</label> <input type="checkbox" name="moderneAllow" id="moderneAllow" value="Yes" checked="checked" onclick="showHideCheckbox('moderne',this)"/></br>
+	<label for="moderneAllow">Enable Moderne?</label> <input type="checkbox" name="moderneAllow" id="moderneAllow" value="Yes" checked="checked" onclick="showHideCheckbox('moderne',this)"/><br>
 	<div id="moderne">
-		<label>Quickplay name:</label> <input type="text" id="moderneName" value="Moderne" onChange="onNameChange('moderne')"/><b style="color:red"><label id="moderneNameError"></label></b></br>
-		<label>Duration in seconds:</label> <input type="number" id="moderneDuration" value="255" step="15" min="15" oninput="displayTime('moderne')"/> <label id="moderneTime"></label></br>
-		<label>Number of Guests:</label> <input type="number" id="moderneGuests" value="20" step="1" max="21" min="4"/></br>
-		Gametype:</br>
-		<input type="radio" name="moderneGametype" id="moderneGametype0" value="Known" onclick="showHideE('moderneSelectedDiv',false)"/> <label for="moderneGametype0">Known</label></br>
-		<input type="radio" name="moderneGametype" id="moderneGametype1" value="Pick" onclick="showHideE('moderneSelectedDiv',true)"/> <label for="moderneGametype1">Pick</label></br>
-		<input type="radio" name="moderneGametype" id="moderneGametype2" value="Any" checked="checked" onclick="showHideE('moderneSelectedDiv',true)"/> <label for="moderneGametype2">Any</label></br>
-		<div id="moderneSelectedDiv"><label># of needed Missions to win:</label> <input type="number" id="moderneNeeded" value="4" step="1" max="7" min="1" oninput="missionsUpdated('moderne')"/></br></div>
-		<label># of selected Missions:</label> <input type="number" id="moderneSelected" value="8" step="1" max="8" min="2" oninput="missionsUpdated('moderne')"/> <b style="color:red"><label id="moderneError"></label></b></br>
-		<label for="moderneSimplified">Simplified Mode?</label> <input type="checkbox" name="moderneSimplified" id="moderneSimplified" value="Yes"/></br>
-		<label for="modernePreselect">Pre-select missions?</label> <input type="checkbox" name="modernePreselect" id="modernePreselect" value="Yes" onclick="showHideCheckbox('moderneDefaults',this)"/></br>
+		<label>Quickplay name:</label> <input type="text" id="moderneName" value="Moderne" onChange="onNameChange('moderne')"/><b style="color:red"><label id="moderneNameError"></label></b><br>
+		<label>Duration in seconds:</label> <input type="number" id="moderneDuration" value="255" step="15" min="15" oninput="displayTime('moderne')"/> <label id="moderneTime"></label><br>
+		<label>Number of Guests:</label> <input type="number" id="moderneGuests" value="20" step="1" max="21" min="4"/><br>
+		Gametype:<br>
+		<input type="radio" name="moderneGametype" id="moderneGametype0" value="Known" onclick="showHideE('moderneSelectedDiv',false)"/> <label for="moderneGametype0">Known</label><br>
+		<input type="radio" name="moderneGametype" id="moderneGametype1" value="Pick" onclick="showHideE('moderneSelectedDiv',true)"/> <label for="moderneGametype1">Pick</label><br>
+		<input type="radio" name="moderneGametype" id="moderneGametype2" value="Any" checked="checked" onclick="showHideE('moderneSelectedDiv',true)"/> <label for="moderneGametype2">Any</label><br>
+		<div id="moderneSelectedDiv"><label># of needed Missions to win:</label> <input type="number" id="moderneNeeded" value="4" step="1" max="7" min="1" oninput="missionsUpdated('moderne')"/><br></div>
+		<label># of selected Missions:</label> <input type="number" id="moderneSelected" value="8" step="1" max="8" min="2" oninput="missionsUpdated('moderne')"/> <b style="color:red"><label id="moderneError"></label></b><br>
+		<label for="moderneSimplified">Simplified Mode?</label> <input type="checkbox" name="moderneSimplified" id="moderneSimplified" value="Yes"/><br>
+		<label for="modernePreselect">Pre-select missions?</label> <input type="checkbox" name="modernePreselect" id="modernePreselect" value="Yes" onclick="showHideCheckbox('moderneDefaults',this)"/><br>
 		<div id="moderneDefaults" style="display:none">
-			<input type="checkbox" name="moderneDefaults" id="moderneDefault0" value="Bug" onClick="checkListErrors('moderne','D',this.checked)"/> <label for="moderneDefault0">Bug Ambassador</label></br>
-			<input type="checkbox" name="moderneDefaults" id="moderneDefault1" value="Contact" onClick="checkListErrors('moderne','D',this.checked)"/> <label for="moderneDefault1">Contact Double Agent</label></br>
-			<input type="checkbox" name="moderneDefaults" id="moderneDefault2" value="Transfer" onClick="checkListErrors('moderne','D',this.checked)"/> <label for="moderneDefault2">Transfer Microfilm</label></br>
-			<input type="checkbox" name="moderneDefaults" id="moderneDefault3" value="Swap" onClick="checkListErrors('moderne','D',this.checked)"/> <label for="moderneDefault3">Swap Statue</label></br>
-			<input type="checkbox" name="moderneDefaults" id="moderneDefault4" value="Inspect" onClick="checkListErrors('moderne','D',this.checked)"/> <label for="moderneDefault4">Inspect Statues</label></br>
-			<input type="checkbox" name="moderneDefaults" id="moderneDefault5" value="Seduce" onClick="checkListErrors('moderne','D',this.checked)"/> <label for="moderneDefault5">Seduce Target</label></br>
-			<input type="checkbox" name="moderneDefaults" id="moderneDefault6" value="Purloin" onClick="checkListErrors('moderne','D',this.checked)"/> <label for="moderneDefault6">Purloin Guest List</label></br>
-			<input type="checkbox" name="moderneDefaults" id="moderneDefault7" value="Fingerprint" onClick="checkListErrors('moderne','D',this.checked)"/> <label for="moderneDefault7">Fingerprint Ambassador</label></br>
+			<input type="checkbox" name="moderneDefaults" id="moderneDefault0" value="Bug" onClick="checkListErrors('moderne','D',this.checked)"/> <label for="moderneDefault0">Bug Ambassador</label><br>
+			<input type="checkbox" name="moderneDefaults" id="moderneDefault1" value="Contact" onClick="checkListErrors('moderne','D',this.checked)"/> <label for="moderneDefault1">Contact Double Agent</label><br>
+			<input type="checkbox" name="moderneDefaults" id="moderneDefault2" value="Transfer" onClick="checkListErrors('moderne','D',this.checked)"/> <label for="moderneDefault2">Transfer Microfilm</label><br>
+			<input type="checkbox" name="moderneDefaults" id="moderneDefault3" value="Swap" onClick="checkListErrors('moderne','D',this.checked)"/> <label for="moderneDefault3">Swap Statue</label><br>
+			<input type="checkbox" name="moderneDefaults" id="moderneDefault4" value="Inspect" onClick="checkListErrors('moderne','D',this.checked)"/> <label for="moderneDefault4">Inspect Statues</label><br>
+			<input type="checkbox" name="moderneDefaults" id="moderneDefault5" value="Seduce" onClick="checkListErrors('moderne','D',this.checked)"/> <label for="moderneDefault5">Seduce Target</label><br>
+			<input type="checkbox" name="moderneDefaults" id="moderneDefault6" value="Purloin" onClick="checkListErrors('moderne','D',this.checked)"/> <label for="moderneDefault6">Purloin Guest List</label><br>
+			<input type="checkbox" name="moderneDefaults" id="moderneDefault7" value="Fingerprint" onClick="checkListErrors('moderne','D',this.checked)"/> <label for="moderneDefault7">Fingerprint Ambassador</label><br>
 			<b style="color:red"><label id="moderneDError"></label></b>
 		</div>
-		<label for="moderneProhibit">Prohibit missions?</label> <input type="checkbox" name="moderneProhibit" id="moderneProhibit" value="Yes" onclick="showHideCheckbox('moderneProhibits',this)"/></br>
+		<label for="moderneProhibit">Prohibit missions?</label> <input type="checkbox" name="moderneProhibit" id="moderneProhibit" value="Yes" onclick="showHideCheckbox('moderneProhibits',this)"/><br>
 		<div id="moderneProhibits" style="display:none">
-			<input type="checkbox" name="moderneProhibits" id="moderneProhibit0" value="Bug" onClick="checkListErrors('moderne','P',this.checked)"/> <label for="moderneProhibit0">Bug Ambassador</label></br>
-			<input type="checkbox" name="moderneProhibits" id="moderneProhibit1" value="Contact" onClick="checkListErrors('moderne','P',this.checked)"/> <label for="moderneProhibit1">Contact Double Agent</label></br>
-			<input type="checkbox" name="moderneProhibits" id="moderneProhibit2" value="Transfer" onClick="checkListErrors('moderne','P',this.checked)"/> <label for="moderneProhibit2">Transfer Microfilm</label></br>
-			<input type="checkbox" name="moderneProhibits" id="moderneProhibit3" value="Swap" onClick="checkListErrors('moderne','P',this.checked)"/> <label for="moderneProhibit3">Swap Statue</label></br>
-			<input type="checkbox" name="moderneProhibits" id="moderneProhibit4" value="Inspect" onClick="checkListErrors('moderne','P',this.checked)"/> <label for="moderneProhibit4">Inspect Statues</label></br>
-			<input type="checkbox" name="moderneProhibits" id="moderneProhibit5" value="Seduce" onClick="checkListErrors('moderne','P',this.checked)"/> <label for="moderneProhibit5">Seduce Target</label></br>
-			<input type="checkbox" name="moderneProhibits" id="moderneProhibit6" value="Purloin" onClick="checkListErrors('moderne','P',this.checked)"/> <label for="moderneProhibit6">Purloin Guest List</label></br>
-			<input type="checkbox" name="moderneProhibits" id="moderneProhibit7" value="Fingerprint" onClick="checkListErrors('moderne','P',this.checked)"/> <label for="moderneProhibit7">Fingerprint Ambassador</label></br>
+			<input type="checkbox" name="moderneProhibits" id="moderneProhibit0" value="Bug" onClick="checkListErrors('moderne','P',this.checked)"/> <label for="moderneProhibit0">Bug Ambassador</label><br>
+			<input type="checkbox" name="moderneProhibits" id="moderneProhibit1" value="Contact" onClick="checkListErrors('moderne','P',this.checked)"/> <label for="moderneProhibit1">Contact Double Agent</label><br>
+			<input type="checkbox" name="moderneProhibits" id="moderneProhibit2" value="Transfer" onClick="checkListErrors('moderne','P',this.checked)"/> <label for="moderneProhibit2">Transfer Microfilm</label><br>
+			<input type="checkbox" name="moderneProhibits" id="moderneProhibit3" value="Swap" onClick="checkListErrors('moderne','P',this.checked)"/> <label for="moderneProhibit3">Swap Statue</label><br>
+			<input type="checkbox" name="moderneProhibits" id="moderneProhibit4" value="Inspect" onClick="checkListErrors('moderne','P',this.checked)"/> <label for="moderneProhibit4">Inspect Statues</label><br>
+			<input type="checkbox" name="moderneProhibits" id="moderneProhibit5" value="Seduce" onClick="checkListErrors('moderne','P',this.checked)"/> <label for="moderneProhibit5">Seduce Target</label><br>
+			<input type="checkbox" name="moderneProhibits" id="moderneProhibit6" value="Purloin" onClick="checkListErrors('moderne','P',this.checked)"/> <label for="moderneProhibit6">Purloin Guest List</label><br>
+			<input type="checkbox" name="moderneProhibits" id="moderneProhibit7" value="Fingerprint" onClick="checkListErrors('moderne','P',this.checked)"/> <label for="moderneProhibit7">Fingerprint Ambassador</label><br>
 			<b style="color:red"><label id="modernePError"></label></b>
 		</div>
-		<label for="moderneRequire">Require missions?</label> <input type="checkbox" name="moderneRequire" id="moderneRequire" value="Yes" onclick="showHideCheckbox('moderneRequires',this)"/></br>
+		<label for="moderneRequire">Require missions?</label> <input type="checkbox" name="moderneRequire" id="moderneRequire" value="Yes" onclick="showHideCheckbox('moderneRequires',this)"/><br>
 		<div id="moderneRequires" style="display:none">
-			<input type="checkbox" name="moderneRequires" id="moderneRequire0" value="Bug" onClick="checkListErrors('moderne','R',this.checked)"/> <label for="moderneRequire0">Bug Ambassador</label></br>
-			<input type="checkbox" name="moderneRequires" id="moderneRequire1" value="Contact" onClick="checkListErrors('moderne','R',this.checked)"/> <label for="moderneRequire1">Contact Double Agent</label></br>
-			<input type="checkbox" name="moderneRequires" id="moderneRequire2" value="Transfer" onClick="checkListErrors('moderne','R',this.checked)"/> <label for="moderneRequire2">Transfer Microfilm</label></br>
-			<input type="checkbox" name="moderneRequires" id="moderneRequire3" value="Swap" onClick="checkListErrors('moderne','R',this.checked)"/> <label for="moderneRequire3">Swap Statue</label></br>
-			<input type="checkbox" name="moderneRequires" id="moderneRequire4" value="Inspect" onClick="checkListErrors('moderne','R',this.checked)"/> <label for="moderneRequire4">Inspect Statues</label></br>
-			<input type="checkbox" name="moderneRequires" id="moderneRequire5" value="Seduce" onClick="checkListErrors('moderne','R',this.checked)"/> <label for="moderneRequire5">Seduce Target</label></br>
-			<input type="checkbox" name="moderneRequires" id="moderneRequire6" value="Purloin" onClick="checkListErrors('moderne','R',this.checked)"/> <label for="moderneRequire6">Purloin Guest List</label></br>
-			<input type="checkbox" name="moderneRequires" id="moderneRequire7" value="Fingerprint" onClick="checkListErrors('moderne','R',this.checked)"/> <label for="moderneRequire7">Fingerprint Ambassador</label></br>
+			<input type="checkbox" name="moderneRequires" id="moderneRequire0" value="Bug" onClick="checkListErrors('moderne','R',this.checked)"/> <label for="moderneRequire0">Bug Ambassador</label><br>
+			<input type="checkbox" name="moderneRequires" id="moderneRequire1" value="Contact" onClick="checkListErrors('moderne','R',this.checked)"/> <label for="moderneRequire1">Contact Double Agent</label><br>
+			<input type="checkbox" name="moderneRequires" id="moderneRequire2" value="Transfer" onClick="checkListErrors('moderne','R',this.checked)"/> <label for="moderneRequire2">Transfer Microfilm</label><br>
+			<input type="checkbox" name="moderneRequires" id="moderneRequire3" value="Swap" onClick="checkListErrors('moderne','R',this.checked)"/> <label for="moderneRequire3">Swap Statue</label><br>
+			<input type="checkbox" name="moderneRequires" id="moderneRequire4" value="Inspect" onClick="checkListErrors('moderne','R',this.checked)"/> <label for="moderneRequire4">Inspect Statues</label><br>
+			<input type="checkbox" name="moderneRequires" id="moderneRequire5" value="Seduce" onClick="checkListErrors('moderne','R',this.checked)"/> <label for="moderneRequire5">Seduce Target</label><br>
+			<input type="checkbox" name="moderneRequires" id="moderneRequire6" value="Purloin" onClick="checkListErrors('moderne','R',this.checked)"/> <label for="moderneRequire6">Purloin Guest List</label><br>
+			<input type="checkbox" name="moderneRequires" id="moderneRequire7" value="Fingerprint" onClick="checkListErrors('moderne','R',this.checked)"/> <label for="moderneRequire7">Fingerprint Ambassador</label><br>
 			<b style="color:red"><label id="moderneRError"></label></b>
 		</div>
-	</div></br>
+	</div><br>
 	
 	
 	<h3>Pub</h3>
-	<label for="pubAllow">Enable Pub?</label> <input type="checkbox" name="pubAllow" id="pubAllow" value="Yes" checked="checked" onclick="showHideCheckbox('pub',this)"/></br>
+	<label for="pubAllow">Enable Pub?</label> <input type="checkbox" name="pubAllow" id="pubAllow" value="Yes" checked="checked" onclick="showHideCheckbox('pub',this)"/><br>
 	<div id="pub">
-		<label>Quickplay name:</label> <input type="text" id="pubName" value="Pub" onChange="onNameChange('pub')"/><b style="color:red"><label id="pubNameError"></label></b></br>
-		<label>Duration in seconds:</label> <input type="number" id="pubDuration" value="210" step="15" min="15" oninput="displayTime('pub')"/> <label id="pubTime"></label></br>
-		<label>Number of Guests:</label> <input type="number" id="pubGuests" value="13" step="1" max="21" min="4"/></br>
-		Gametype:</br>
-		<input type="radio" name="pubGametype" id="pubGametype0" value="Known" onclick="showHideE('pubSelectedDiv',false)"/> <label for="pubGametype0">Known</label></br>
-		<input type="radio" name="pubGametype" id="pubGametype1" value="Pick" onclick="showHideE('pubSelectedDiv',true)"/> <label for="pubGametype1">Pick</label></br>
-		<input type="radio" name="pubGametype" id="pubGametype2" value="Any" checked="checked" onclick="showHideE('pubSelectedDiv',true)"/> <label for="pubGametype2">Any</label></br>
-		<div id="pubSelectedDiv"><label># of needed Missions to win:</label> <input type="number" id="pubNeeded" value="3" step="1" max="6" min="1" oninput="missionsUpdated('pub')"/></br></div>
-		<label># of selected Missions:</label> <input type="number" id="pubSelected" value="6" step="1" max="7" min="2" oninput="missionsUpdated('pub')"/> <b style="color:red"><label id="pubError"></label></b></br>
-		<label for="pubSimplified">Simplified Mode?</label> <input type="checkbox" name="pubSimplified" id="pubSimplified" value="Yes"/></br>
-		<label for="pubPreselect">Pre-select missions?</label> <input type="checkbox" name="pubPreselect" id="pubPreselect" value="Yes" onclick="showHideCheckbox('pubDefaults',this)"/></br>
+		<label>Quickplay name:</label> <input type="text" id="pubName" value="Pub" onChange="onNameChange('pub')"/><b style="color:red"><label id="pubNameError"></label></b><br>
+		<label>Duration in seconds:</label> <input type="number" id="pubDuration" value="210" step="15" min="15" oninput="displayTime('pub')"/> <label id="pubTime"></label><br>
+		<label>Number of Guests:</label> <input type="number" id="pubGuests" value="13" step="1" max="21" min="4"/><br>
+		Gametype:<br>
+		<input type="radio" name="pubGametype" id="pubGametype0" value="Known" onclick="showHideE('pubSelectedDiv',false)"/> <label for="pubGametype0">Known</label><br>
+		<input type="radio" name="pubGametype" id="pubGametype1" value="Pick" onclick="showHideE('pubSelectedDiv',true)"/> <label for="pubGametype1">Pick</label><br>
+		<input type="radio" name="pubGametype" id="pubGametype2" value="Any" checked="checked" onclick="showHideE('pubSelectedDiv',true)"/> <label for="pubGametype2">Any</label><br>
+		<div id="pubSelectedDiv"><label># of needed Missions to win:</label> <input type="number" id="pubNeeded" value="3" step="1" max="6" min="1" oninput="missionsUpdated('pub')"/><br></div>
+		<label># of selected Missions:</label> <input type="number" id="pubSelected" value="6" step="1" max="7" min="2" oninput="missionsUpdated('pub')"/> <b style="color:red"><label id="pubError"></label></b><br>
+		<label for="pubSimplified">Simplified Mode?</label> <input type="checkbox" name="pubSimplified" id="pubSimplified" value="Yes"/><br>
+		<label for="pubPreselect">Pre-select missions?</label> <input type="checkbox" name="pubPreselect" id="pubPreselect" value="Yes" onclick="showHideCheckbox('pubDefaults',this)"/><br>
 		<div id="pubDefaults" style="display:none">
-			<input type="checkbox" name="pubDefaults" id="pubDefault0" value="Bug" onClick="checkListErrors('pub','D',this.checked)"/> <label for="pubDefault0">Bug Ambassador</label></br>
-			<input type="checkbox" name="pubDefaults" id="pubDefault1" value="Contact" onClick="checkListErrors('pub','D',this.checked)"/> <label for="pubDefault1">Contact Double Agent</label></br>
-			<input type="checkbox" name="pubDefaults" id="pubDefault3" value="Swap" onClick="checkListErrors('pub','D',this.checked)"/> <label for="pubDefault3">Swap Statue</label></br>
-			<input type="checkbox" name="pubDefaults" id="pubDefault4" value="Inspect" onClick="checkListErrors('pub','D',this.checked)"/> <label for="pubDefault4">Inspect Statues</label></br>
-			<input type="checkbox" name="pubDefaults" id="pubDefault5" value="Seduce" onClick="checkListErrors('pub','D',this.checked)"/> <label for="pubDefault5">Seduce Target</label></br>
-			<input type="checkbox" name="pubDefaults" id="pubDefault6" value="Purloin" onClick="checkListErrors('pub','D',this.checked)"/> <label for="pubDefault6">Purloin Guest List</label></br>
-			<input type="checkbox" name="pubDefaults" id="pubDefault7" value="Fingerprint" onClick="checkListErrors('pub','D',this.checked)"/> <label for="pubDefault7">Fingerprint Ambassador</label></br>
+			<input type="checkbox" name="pubDefaults" id="pubDefault0" value="Bug" onClick="checkListErrors('pub','D',this.checked)"/> <label for="pubDefault0">Bug Ambassador</label><br>
+			<input type="checkbox" name="pubDefaults" id="pubDefault1" value="Contact" onClick="checkListErrors('pub','D',this.checked)"/> <label for="pubDefault1">Contact Double Agent</label><br>
+			<input type="checkbox" name="pubDefaults" id="pubDefault3" value="Swap" onClick="checkListErrors('pub','D',this.checked)"/> <label for="pubDefault3">Swap Statue</label><br>
+			<input type="checkbox" name="pubDefaults" id="pubDefault4" value="Inspect" onClick="checkListErrors('pub','D',this.checked)"/> <label for="pubDefault4">Inspect Statues</label><br>
+			<input type="checkbox" name="pubDefaults" id="pubDefault5" value="Seduce" onClick="checkListErrors('pub','D',this.checked)"/> <label for="pubDefault5">Seduce Target</label><br>
+			<input type="checkbox" name="pubDefaults" id="pubDefault6" value="Purloin" onClick="checkListErrors('pub','D',this.checked)"/> <label for="pubDefault6">Purloin Guest List</label><br>
+			<input type="checkbox" name="pubDefaults" id="pubDefault7" value="Fingerprint" onClick="checkListErrors('pub','D',this.checked)"/> <label for="pubDefault7">Fingerprint Ambassador</label><br>
 			<b style="color:red"><label id="pubDError"></label></b>
 		</div>
-		<label for="pubProhibit">Prohibit missions?</label> <input type="checkbox" name="pubProhibit" id="pubProhibit" value="Yes" onclick="showHideCheckbox('pubProhibits',this)"/></br>
+		<label for="pubProhibit">Prohibit missions?</label> <input type="checkbox" name="pubProhibit" id="pubProhibit" value="Yes" onclick="showHideCheckbox('pubProhibits',this)"/><br>
 		<div id="pubProhibits" style="display:none">
-			<input type="checkbox" name="pubProhibits" id="pubProhibit0" value="Bug" onClick="checkListErrors('pub','P',this.checked)"/> <label for="pubProhibit0">Bug Ambassador</label></br>
-			<input type="checkbox" name="pubProhibits" id="pubProhibit1" value="Contact" onClick="checkListErrors('pub','P',this.checked)"/> <label for="pubProhibit1">Contact Double Agent</label></br>
-			<input type="checkbox" name="pubProhibits" id="pubProhibit3" value="Swap" onClick="checkListErrors('pub','P',this.checked)"/> <label for="pubProhibit3">Swap Statue</label></br>
-			<input type="checkbox" name="pubProhibits" id="pubProhibit4" value="Inspect" onClick="checkListErrors('pub','P',this.checked)"/> <label for="pubProhibit4">Inspect Statues</label></br>
-			<input type="checkbox" name="pubProhibits" id="pubProhibit5" value="Seduce" onClick="checkListErrors('pub','P',this.checked)"/> <label for="pubProhibit5">Seduce Target</label></br>
-			<input type="checkbox" name="pubProhibits" id="pubProhibit6" value="Purloin" onClick="checkListErrors('pub','P',this.checked)"/> <label for="pubProhibit6">Purloin Guest List</label></br>
-			<input type="checkbox" name="pubProhibits" id="pubProhibit7" value="Fingerprint" onClick="checkListErrors('pub','P',this.checked)"/> <label for="pubProhibit7">Fingerprint Ambassador</label></br>
+			<input type="checkbox" name="pubProhibits" id="pubProhibit0" value="Bug" onClick="checkListErrors('pub','P',this.checked)"/> <label for="pubProhibit0">Bug Ambassador</label><br>
+			<input type="checkbox" name="pubProhibits" id="pubProhibit1" value="Contact" onClick="checkListErrors('pub','P',this.checked)"/> <label for="pubProhibit1">Contact Double Agent</label><br>
+			<input type="checkbox" name="pubProhibits" id="pubProhibit3" value="Swap" onClick="checkListErrors('pub','P',this.checked)"/> <label for="pubProhibit3">Swap Statue</label><br>
+			<input type="checkbox" name="pubProhibits" id="pubProhibit4" value="Inspect" onClick="checkListErrors('pub','P',this.checked)"/> <label for="pubProhibit4">Inspect Statues</label><br>
+			<input type="checkbox" name="pubProhibits" id="pubProhibit5" value="Seduce" onClick="checkListErrors('pub','P',this.checked)"/> <label for="pubProhibit5">Seduce Target</label><br>
+			<input type="checkbox" name="pubProhibits" id="pubProhibit6" value="Purloin" onClick="checkListErrors('pub','P',this.checked)"/> <label for="pubProhibit6">Purloin Guest List</label><br>
+			<input type="checkbox" name="pubProhibits" id="pubProhibit7" value="Fingerprint" onClick="checkListErrors('pub','P',this.checked)"/> <label for="pubProhibit7">Fingerprint Ambassador</label><br>
 			<b style="color:red"><label id="pubPError"></label></b>
 		</div>
-		<label for="pubRequire">Require missions?</label> <input type="checkbox" name="pubRequire" id="pubRequire" value="Yes" onclick="showHideCheckbox('pubRequires',this)"/></br>
+		<label for="pubRequire">Require missions?</label> <input type="checkbox" name="pubRequire" id="pubRequire" value="Yes" onclick="showHideCheckbox('pubRequires',this)"/><br>
 		<div id="pubRequires" style="display:none">
-			<input type="checkbox" name="pubRequires" id="pubRequire0" value="Bug" onClick="checkListErrors('pub','R',this.checked)"/> <label for="pubRequire0">Bug Ambassador</label></br>
-			<input type="checkbox" name="pubRequires" id="pubRequire1" value="Contact" onClick="checkListErrors('pub','R',this.checked)"/> <label for="pubRequire1">Contact Double Agent</label></br>
-			<input type="checkbox" name="pubRequires" id="pubRequire3" value="Swap" onClick="checkListErrors('pub','R',this.checked)"/> <label for="pubRequire3">Swap Statue</label></br>
-			<input type="checkbox" name="pubRequires" id="pubRequire4" value="Inspect" onClick="checkListErrors('pub','R',this.checked)"/> <label for="pubRequire4">Inspect Statues</label></br>
-			<input type="checkbox" name="pubRequires" id="pubRequire5" value="Seduce" onClick="checkListErrors('pub','R',this.checked)"/> <label for="pubRequire5">Seduce Target</label></br>
-			<input type="checkbox" name="pubRequires" id="pubRequire6" value="Purloin" onClick="checkListErrors('pub','R',this.checked)"/> <label for="pubRequire6">Purloin Guest List</label></br>
-			<input type="checkbox" name="pubRequires" id="pubRequire7" value="Fingerprint" onClick="checkListErrors('pub','R',this.checked)"/> <label for="pubRequire7">Fingerprint Ambassador</label></br>
+			<input type="checkbox" name="pubRequires" id="pubRequire0" value="Bug" onClick="checkListErrors('pub','R',this.checked)"/> <label for="pubRequire0">Bug Ambassador</label><br>
+			<input type="checkbox" name="pubRequires" id="pubRequire1" value="Contact" onClick="checkListErrors('pub','R',this.checked)"/> <label for="pubRequire1">Contact Double Agent</label><br>
+			<input type="checkbox" name="pubRequires" id="pubRequire3" value="Swap" onClick="checkListErrors('pub','R',this.checked)"/> <label for="pubRequire3">Swap Statue</label><br>
+			<input type="checkbox" name="pubRequires" id="pubRequire4" value="Inspect" onClick="checkListErrors('pub','R',this.checked)"/> <label for="pubRequire4">Inspect Statues</label><br>
+			<input type="checkbox" name="pubRequires" id="pubRequire5" value="Seduce" onClick="checkListErrors('pub','R',this.checked)"/> <label for="pubRequire5">Seduce Target</label><br>
+			<input type="checkbox" name="pubRequires" id="pubRequire6" value="Purloin" onClick="checkListErrors('pub','R',this.checked)"/> <label for="pubRequire6">Purloin Guest List</label><br>
+			<input type="checkbox" name="pubRequires" id="pubRequire7" value="Fingerprint" onClick="checkListErrors('pub','R',this.checked)"/> <label for="pubRequire7">Fingerprint Ambassador</label><br>
 			<b style="color:red"><label id="pubRError"></label></b>
 		</div>
-	</div></br>
+	</div><br>
 	
 	
 	<h3>Redwoods</h3>
-	<label for="redwoodsAllow">Enable Redwoods?</label> <input type="checkbox" name="redwoodsAllow" id="redwoodsAllow" value="Yes" checked="checked" onclick="showHideCheckbox('redwoods',this)"/></br>
+	<label for="redwoodsAllow">Enable Redwoods?</label> <input type="checkbox" name="redwoodsAllow" id="redwoodsAllow" value="Yes" checked="checked" onclick="showHideCheckbox('redwoods',this)"/><br>
 	<div id="redwoods">
-		<label>Quickplay name:</label> <input type="text" id="redwoodsName" value="Redwoods" onChange="onNameChange('redwoods')"/><b style="color:red"><label id="redwoodsNameError"></label></b></br>
-		<label>Duration in seconds:</label> <input type="number" id="redwoodsDuration" value="210" step="15" min="15" oninput="displayTime('redwoods')"/> <label id="redwoodsTime"></label></br>
-		<label>Number of Guests:</label> <input type="number" id="redwoodsGuests" value="14" step="1" max="21" min="4"/></br>
-		Gametype:</br>
-		<input type="radio" name="redwoodsGametype" id="redwoodsGametype0" value="Known" onclick="showHideE('redwoodsSelectedDiv',false)"/> <label for="redwoodsGametype0">Known</label></br>
-		<input type="radio" name="redwoodsGametype" id="redwoodsGametype1" value="Pick" onclick="showHideE('redwoodsSelectedDiv',true)"/> <label for="redwoodsGametype1">Pick</label></br>
-		<input type="radio" name="redwoodsGametype" id="redwoodsGametype2" value="Any" checked="checked" onclick="showHideE('redwoodsSelectedDiv',true)"/> <label for="redwoodsGametype2">Any</label></br>
-		<div id="redwoodsSelectedDiv"><label># of needed Missions to win:</label> <input type="number" id="redwoodsNeeded" value="4" step="1" max="7" min="1" oninput="missionsUpdated('redwoods')"/></br></div>
-		<label># of selected Missions:</label> <input type="number" id="redwoodsSelected" value="8" step="1" max="8" min="2" oninput="missionsUpdated('redwoods')"/> <b style="color:red"><label id="redwoodsError"></label></b></br>
-		<label for="redwoodsSimplified">Simplified Mode?</label> <input type="checkbox" name="redwoodsSimplified" id="redwoodsSimplified" value="Yes"/></br>
-		<label for="redwoodsPreselect">Pre-select missions?</label> <input type="checkbox" name="redwoodsPreselect" id="redwoodsPreselect" value="Yes" onclick="showHideCheckbox('redwoodsDefaults',this)"/></br>
+		<label>Quickplay name:</label> <input type="text" id="redwoodsName" value="Redwoods" onChange="onNameChange('redwoods')"/><b style="color:red"><label id="redwoodsNameError"></label></b><br>
+		<label>Duration in seconds:</label> <input type="number" id="redwoodsDuration" value="210" step="15" min="15" oninput="displayTime('redwoods')"/> <label id="redwoodsTime"></label><br>
+		<label>Number of Guests:</label> <input type="number" id="redwoodsGuests" value="14" step="1" max="21" min="4"/><br>
+		Gametype:<br>
+		<input type="radio" name="redwoodsGametype" id="redwoodsGametype0" value="Known" onclick="showHideE('redwoodsSelectedDiv',false)"/> <label for="redwoodsGametype0">Known</label><br>
+		<input type="radio" name="redwoodsGametype" id="redwoodsGametype1" value="Pick" onclick="showHideE('redwoodsSelectedDiv',true)"/> <label for="redwoodsGametype1">Pick</label><br>
+		<input type="radio" name="redwoodsGametype" id="redwoodsGametype2" value="Any" checked="checked" onclick="showHideE('redwoodsSelectedDiv',true)"/> <label for="redwoodsGametype2">Any</label><br>
+		<div id="redwoodsSelectedDiv"><label># of needed Missions to win:</label> <input type="number" id="redwoodsNeeded" value="4" step="1" max="7" min="1" oninput="missionsUpdated('redwoods')"/><br></div>
+		<label># of selected Missions:</label> <input type="number" id="redwoodsSelected" value="8" step="1" max="8" min="2" oninput="missionsUpdated('redwoods')"/> <b style="color:red"><label id="redwoodsError"></label></b><br>
+		<label for="redwoodsSimplified">Simplified Mode?</label> <input type="checkbox" name="redwoodsSimplified" id="redwoodsSimplified" value="Yes"/><br>
+		<label for="redwoodsPreselect">Pre-select missions?</label> <input type="checkbox" name="redwoodsPreselect" id="redwoodsPreselect" value="Yes" onclick="showHideCheckbox('redwoodsDefaults',this)"/><br>
 		<div id="redwoodsDefaults" style="display:none">
-			<input type="checkbox" name="redwoodsDefaults" id="redwoodsDefault0" value="Bug" onClick="checkListErrors('redwoods','D',this.checked)"/> <label for="redwoodsDefault0">Bug Ambassador</label></br>
-			<input type="checkbox" name="redwoodsDefaults" id="redwoodsDefault1" value="Contact" onClick="checkListErrors('redwoods','D',this.checked)"/> <label for="redwoodsDefault1">Contact Double Agent</label></br>
-			<input type="checkbox" name="redwoodsDefaults" id="redwoodsDefault2" value="Transfer" onClick="checkListErrors('redwoods','D',this.checked)"/> <label for="redwoodsDefault2">Transfer Microfilm</label></br>
-			<input type="checkbox" name="redwoodsDefaults" id="redwoodsDefault3" value="Swap" onClick="checkListErrors('redwoods','D',this.checked)"/> <label for="redwoodsDefault3">Swap Statue</label></br>
-			<input type="checkbox" name="redwoodsDefaults" id="redwoodsDefault4" value="Inspect" onClick="checkListErrors('redwoods','D',this.checked)"/> <label for="redwoodsDefault4">Inspect Statues</label></br>
-			<input type="checkbox" name="redwoodsDefaults" id="redwoodsDefault5" value="Seduce" onClick="checkListErrors('redwoods','D',this.checked)"/> <label for="redwoodsDefault5">Seduce Target</label></br>
-			<input type="checkbox" name="redwoodsDefaults" id="redwoodsDefault6" value="Purloin" onClick="checkListErrors('redwoods','D',this.checked)"/> <label for="redwoodsDefault6">Purloin Guest List</label></br>
-			<input type="checkbox" name="redwoodsDefaults" id="redwoodsDefault7" value="Fingerprint" onClick="checkListErrors('redwoods','D',this.checked)"/> <label for="redwoodsDefault7">Fingerprint Ambassador</label></br>
+			<input type="checkbox" name="redwoodsDefaults" id="redwoodsDefault0" value="Bug" onClick="checkListErrors('redwoods','D',this.checked)"/> <label for="redwoodsDefault0">Bug Ambassador</label><br>
+			<input type="checkbox" name="redwoodsDefaults" id="redwoodsDefault1" value="Contact" onClick="checkListErrors('redwoods','D',this.checked)"/> <label for="redwoodsDefault1">Contact Double Agent</label><br>
+			<input type="checkbox" name="redwoodsDefaults" id="redwoodsDefault2" value="Transfer" onClick="checkListErrors('redwoods','D',this.checked)"/> <label for="redwoodsDefault2">Transfer Microfilm</label><br>
+			<input type="checkbox" name="redwoodsDefaults" id="redwoodsDefault3" value="Swap" onClick="checkListErrors('redwoods','D',this.checked)"/> <label for="redwoodsDefault3">Swap Statue</label><br>
+			<input type="checkbox" name="redwoodsDefaults" id="redwoodsDefault4" value="Inspect" onClick="checkListErrors('redwoods','D',this.checked)"/> <label for="redwoodsDefault4">Inspect Statues</label><br>
+			<input type="checkbox" name="redwoodsDefaults" id="redwoodsDefault5" value="Seduce" onClick="checkListErrors('redwoods','D',this.checked)"/> <label for="redwoodsDefault5">Seduce Target</label><br>
+			<input type="checkbox" name="redwoodsDefaults" id="redwoodsDefault6" value="Purloin" onClick="checkListErrors('redwoods','D',this.checked)"/> <label for="redwoodsDefault6">Purloin Guest List</label><br>
+			<input type="checkbox" name="redwoodsDefaults" id="redwoodsDefault7" value="Fingerprint" onClick="checkListErrors('redwoods','D',this.checked)"/> <label for="redwoodsDefault7">Fingerprint Ambassador</label><br>
 			<b style="color:red"><label id="redwoodsDError"></label></b>
 		</div>
-		<label for="redwoodsProhibit">Prohibit missions?</label> <input type="checkbox" name="redwoodsProhibit" id="redwoodsProhibit" value="Yes" onclick="showHideCheckbox('redwoodsProhibits',this)"/></br>
+		<label for="redwoodsProhibit">Prohibit missions?</label> <input type="checkbox" name="redwoodsProhibit" id="redwoodsProhibit" value="Yes" onclick="showHideCheckbox('redwoodsProhibits',this)"/><br>
 		<div id="redwoodsProhibits" style="display:none">
-			<input type="checkbox" name="redwoodsProhibits" id="redwoodsProhibit0" value="Bug" onClick="checkListErrors('redwoods','P',this.checked)"/> <label for="redwoodsProhibit0">Bug Ambassador</label></br>
-			<input type="checkbox" name="redwoodsProhibits" id="redwoodsProhibit1" value="Contact" onClick="checkListErrors('redwoods','P',this.checked)"/> <label for="redwoodsProhibit1">Contact Double Agent</label></br>
-			<input type="checkbox" name="redwoodsProhibits" id="redwoodsProhibit2" value="Transfer" onClick="checkListErrors('redwoods','P',this.checked)"/> <label for="redwoodsProhibit2">Transfer Microfilm</label></br>
-			<input type="checkbox" name="redwoodsProhibits" id="redwoodsProhibit3" value="Swap" onClick="checkListErrors('redwoods','P',this.checked)"/> <label for="redwoodsProhibit3">Swap Statue</label></br>
-			<input type="checkbox" name="redwoodsProhibits" id="redwoodsProhibit4" value="Inspect" onClick="checkListErrors('redwoods','P',this.checked)"/> <label for="redwoodsProhibit4">Inspect Statues</label></br>
-			<input type="checkbox" name="redwoodsProhibits" id="redwoodsProhibit5" value="Seduce" onClick="checkListErrors('redwoods','P',this.checked)"/> <label for="redwoodsProhibit5">Seduce Target</label></br>
-			<input type="checkbox" name="redwoodsProhibits" id="redwoodsProhibit6" value="Purloin" onClick="checkListErrors('redwoods','P',this.checked)"/> <label for="redwoodsProhibit6">Purloin Guest List</label></br>
-			<input type="checkbox" name="redwoodsProhibits" id="redwoodsProhibit7" value="Fingerprint" onClick="checkListErrors('redwoods','P',this.checked)"/> <label for="redwoodsProhibit7">Fingerprint Ambassador</label></br>
+			<input type="checkbox" name="redwoodsProhibits" id="redwoodsProhibit0" value="Bug" onClick="checkListErrors('redwoods','P',this.checked)"/> <label for="redwoodsProhibit0">Bug Ambassador</label><br>
+			<input type="checkbox" name="redwoodsProhibits" id="redwoodsProhibit1" value="Contact" onClick="checkListErrors('redwoods','P',this.checked)"/> <label for="redwoodsProhibit1">Contact Double Agent</label><br>
+			<input type="checkbox" name="redwoodsProhibits" id="redwoodsProhibit2" value="Transfer" onClick="checkListErrors('redwoods','P',this.checked)"/> <label for="redwoodsProhibit2">Transfer Microfilm</label><br>
+			<input type="checkbox" name="redwoodsProhibits" id="redwoodsProhibit3" value="Swap" onClick="checkListErrors('redwoods','P',this.checked)"/> <label for="redwoodsProhibit3">Swap Statue</label><br>
+			<input type="checkbox" name="redwoodsProhibits" id="redwoodsProhibit4" value="Inspect" onClick="checkListErrors('redwoods','P',this.checked)"/> <label for="redwoodsProhibit4">Inspect Statues</label><br>
+			<input type="checkbox" name="redwoodsProhibits" id="redwoodsProhibit5" value="Seduce" onClick="checkListErrors('redwoods','P',this.checked)"/> <label for="redwoodsProhibit5">Seduce Target</label><br>
+			<input type="checkbox" name="redwoodsProhibits" id="redwoodsProhibit6" value="Purloin" onClick="checkListErrors('redwoods','P',this.checked)"/> <label for="redwoodsProhibit6">Purloin Guest List</label><br>
+			<input type="checkbox" name="redwoodsProhibits" id="redwoodsProhibit7" value="Fingerprint" onClick="checkListErrors('redwoods','P',this.checked)"/> <label for="redwoodsProhibit7">Fingerprint Ambassador</label><br>
 			<b style="color:red"><label id="redwoodsPError"></label></b>
 		</div>
-		<label for="redwoodsRequire">Require missions?</label> <input type="checkbox" name="redwoodsRequire" id="redwoodsRequire" value="Yes" onclick="showHideCheckbox('redwoodsRequires',this)"/></br>
+		<label for="redwoodsRequire">Require missions?</label> <input type="checkbox" name="redwoodsRequire" id="redwoodsRequire" value="Yes" onclick="showHideCheckbox('redwoodsRequires',this)"/><br>
 		<div id="redwoodsRequires" style="display:none">
-			<input type="checkbox" name="redwoodsRequires" id="redwoodsRequire0" value="Bug" onClick="checkListErrors('redwoods','R',this.checked)"/> <label for="redwoodsRequire0">Bug Ambassador</label></br>
-			<input type="checkbox" name="redwoodsRequires" id="redwoodsRequire1" value="Contact" onClick="checkListErrors('redwoods','R',this.checked)"/> <label for="redwoodsRequire1">Contact Double Agent</label></br>
-			<input type="checkbox" name="redwoodsRequires" id="redwoodsRequire2" value="Transfer" onClick="checkListErrors('redwoods','R',this.checked)"/> <label for="redwoodsRequire2">Transfer Microfilm</label></br>
-			<input type="checkbox" name="redwoodsRequires" id="redwoodsRequire3" value="Swap" onClick="checkListErrors('redwoods','R',this.checked)"/> <label for="redwoodsRequire3">Swap Statue</label></br>
-			<input type="checkbox" name="redwoodsRequires" id="redwoodsRequire4" value="Inspect" onClick="checkListErrors('redwoods','R',this.checked)"/> <label for="redwoodsRequire4">Inspect Statues</label></br>
-			<input type="checkbox" name="redwoodsRequires" id="redwoodsRequire5" value="Seduce" onClick="checkListErrors('redwoods','R',this.checked)"/> <label for="redwoodsRequire5">Seduce Target</label></br>
-			<input type="checkbox" name="redwoodsRequires" id="redwoodsRequire6" value="Purloin" onClick="checkListErrors('redwoods','R',this.checked)"/> <label for="redwoodsRequire6">Purloin Guest List</label></br>
-			<input type="checkbox" name="redwoodsRequires" id="redwoodsRequire7" value="Fingerprint" onClick="checkListErrors('redwoods','R',this.checked)"/> <label for="redwoodsRequire7">Fingerprint Ambassador</label></br>
+			<input type="checkbox" name="redwoodsRequires" id="redwoodsRequire0" value="Bug" onClick="checkListErrors('redwoods','R',this.checked)"/> <label for="redwoodsRequire0">Bug Ambassador</label><br>
+			<input type="checkbox" name="redwoodsRequires" id="redwoodsRequire1" value="Contact" onClick="checkListErrors('redwoods','R',this.checked)"/> <label for="redwoodsRequire1">Contact Double Agent</label><br>
+			<input type="checkbox" name="redwoodsRequires" id="redwoodsRequire2" value="Transfer" onClick="checkListErrors('redwoods','R',this.checked)"/> <label for="redwoodsRequire2">Transfer Microfilm</label><br>
+			<input type="checkbox" name="redwoodsRequires" id="redwoodsRequire3" value="Swap" onClick="checkListErrors('redwoods','R',this.checked)"/> <label for="redwoodsRequire3">Swap Statue</label><br>
+			<input type="checkbox" name="redwoodsRequires" id="redwoodsRequire4" value="Inspect" onClick="checkListErrors('redwoods','R',this.checked)"/> <label for="redwoodsRequire4">Inspect Statues</label><br>
+			<input type="checkbox" name="redwoodsRequires" id="redwoodsRequire5" value="Seduce" onClick="checkListErrors('redwoods','R',this.checked)"/> <label for="redwoodsRequire5">Seduce Target</label><br>
+			<input type="checkbox" name="redwoodsRequires" id="redwoodsRequire6" value="Purloin" onClick="checkListErrors('redwoods','R',this.checked)"/> <label for="redwoodsRequire6">Purloin Guest List</label><br>
+			<input type="checkbox" name="redwoodsRequires" id="redwoodsRequire7" value="Fingerprint" onClick="checkListErrors('redwoods','R',this.checked)"/> <label for="redwoodsRequire7">Fingerprint Ambassador</label><br>
 			<b style="color:red"><label id="redwoodsRError"></label></b>
 		</div>
-	</div></br>
+	</div><br>
 	
 	
 	<h3>Teien</h3>
-	<label for="teienAllow">Enable Teien?</label> <input type="checkbox" name="teienAllow" id="teienAllow" value="Yes" checked="checked" onclick="showHideCheckbox('teien',this)"/></br>
+	<label for="teienAllow">Enable Teien?</label> <input type="checkbox" name="teienAllow" id="teienAllow" value="Yes" checked="checked" onclick="showHideCheckbox('teien',this)"/><br>
 	<div id="teien">
-		<label>Quickplay name:</label> <input type="text" id="teienName" value="Teien" onChange="onNameChange('teien')"/><b style="color:red"><label id="teienNameError"></label></b></br>
-		<label>Duration in seconds:</label> <input type="number" id="teienDuration" value="210" step="15" min="15" oninput="displayTime('teien')"/> <label id="teienTime"></label></br>
-		<label>Number of Guests:</label> <input type="number" id="teienGuests" value="12" step="1" max="21" min="4"/></br>
-		Gametype:</br>
-		<input type="radio" name="teienGametype" id="teienGametype0" value="Known" onclick="showHideE('teienSelectedDiv',false)"/> <label for="teienGametype0">Known</label></br>
-		<input type="radio" name="teienGametype" id="teienGametype1" value="Pick" onclick="showHideE('teienSelectedDiv',true)"/> <label for="teienGametype1">Pick</label></br>
-		<input type="radio" name="teienGametype" id="teienGametype2" value="Any" checked="checked" onclick="showHideE('teienSelectedDiv',true)"/> <label for="teienGametype2">Any</label></br>
-		<div id="teienSelectedDiv"><label># of needed Missions to win:</label> <input type="number" id="teienNeeded" value="4" step="1" max="7" min="1" oninput="missionsUpdated('teien')"/></br></div>
-		<label># of selected Missions:</label> <input type="number" id="teienSelected" value="8" step="1" max="8" min="2" oninput="missionsUpdated('teien')"/> <b style="color:red"><label id="teienError"></label></b></br>
-		<label for="teienSimplified">Simplified Mode?</label> <input type="checkbox" name="teienSimplified" id="teienSimplified" value="Yes"/></br>
-		<label for="teienPreselect">Pre-select missions?</label> <input type="checkbox" name="teienPreselect" id="teienPreselect" value="Yes" onclick="showHideCheckbox('teienDefaults',this)"/></br>
+		<label>Quickplay name:</label> <input type="text" id="teienName" value="Teien" onChange="onNameChange('teien')"/><b style="color:red"><label id="teienNameError"></label></b><br>
+		<label>Duration in seconds:</label> <input type="number" id="teienDuration" value="210" step="15" min="15" oninput="displayTime('teien')"/> <label id="teienTime"></label><br>
+		<label>Number of Guests:</label> <input type="number" id="teienGuests" value="12" step="1" max="21" min="4"/><br>
+		Gametype:<br>
+		<input type="radio" name="teienGametype" id="teienGametype0" value="Known" onclick="showHideE('teienSelectedDiv',false)"/> <label for="teienGametype0">Known</label><br>
+		<input type="radio" name="teienGametype" id="teienGametype1" value="Pick" onclick="showHideE('teienSelectedDiv',true)"/> <label for="teienGametype1">Pick</label><br>
+		<input type="radio" name="teienGametype" id="teienGametype2" value="Any" checked="checked" onclick="showHideE('teienSelectedDiv',true)"/> <label for="teienGametype2">Any</label><br>
+		<div id="teienSelectedDiv"><label># of needed Missions to win:</label> <input type="number" id="teienNeeded" value="4" step="1" max="7" min="1" oninput="missionsUpdated('teien')"/><br></div>
+		<label># of selected Missions:</label> <input type="number" id="teienSelected" value="8" step="1" max="8" min="2" oninput="missionsUpdated('teien')"/> <b style="color:red"><label id="teienError"></label></b><br>
+		<label for="teienSimplified">Simplified Mode?</label> <input type="checkbox" name="teienSimplified" id="teienSimplified" value="Yes"/><br>
+		<label for="teienPreselect">Pre-select missions?</label> <input type="checkbox" name="teienPreselect" id="teienPreselect" value="Yes" onclick="showHideCheckbox('teienDefaults',this)"/><br>
 		<div id="teienDefaults" style="display:none">
-			<input type="checkbox" name="teienDefaults" id="teienDefault0" value="Bug" onClick="checkListErrors('teien','D',this.checked)"/> <label for="teienDefault0">Bug Ambassador</label></br>
-			<input type="checkbox" name="teienDefaults" id="teienDefault1" value="Contact" onClick="checkListErrors('teien','D',this.checked)"/> <label for="teienDefault1">Contact Double Agent</label></br>
-			<input type="checkbox" name="teienDefaults" id="teienDefault2" value="Transfer" onClick="checkListErrors('teien','D',this.checked)"/> <label for="teienDefault2">Transfer Microfilm</label></br>
-			<input type="checkbox" name="teienDefaults" id="teienDefault3" value="Swap" onClick="checkListErrors('teien','D',this.checked)"/> <label for="teienDefault3">Swap Statue</label></br>
-			<input type="checkbox" name="teienDefaults" id="teienDefault4" value="Inspect" onClick="checkListErrors('teien','D',this.checked)"/> <label for="teienDefault4">Inspect Statues</label></br>
-			<input type="checkbox" name="teienDefaults" id="teienDefault5" value="Seduce" onClick="checkListErrors('teien','D',this.checked)"/> <label for="teienDefault5">Seduce Target</label></br>
-			<input type="checkbox" name="teienDefaults" id="teienDefault6" value="Purloin" onClick="checkListErrors('teien','D',this.checked)"/> <label for="teienDefault6">Purloin Guest List</label></br>
-			<input type="checkbox" name="teienDefaults" id="teienDefault7" value="Fingerprint" onClick="checkListErrors('teien','D',this.checked)"/> <label for="teienDefault7">Fingerprint Ambassador</label></br>
+			<input type="checkbox" name="teienDefaults" id="teienDefault0" value="Bug" onClick="checkListErrors('teien','D',this.checked)"/> <label for="teienDefault0">Bug Ambassador</label><br>
+			<input type="checkbox" name="teienDefaults" id="teienDefault1" value="Contact" onClick="checkListErrors('teien','D',this.checked)"/> <label for="teienDefault1">Contact Double Agent</label><br>
+			<input type="checkbox" name="teienDefaults" id="teienDefault2" value="Transfer" onClick="checkListErrors('teien','D',this.checked)"/> <label for="teienDefault2">Transfer Microfilm</label><br>
+			<input type="checkbox" name="teienDefaults" id="teienDefault3" value="Swap" onClick="checkListErrors('teien','D',this.checked)"/> <label for="teienDefault3">Swap Statue</label><br>
+			<input type="checkbox" name="teienDefaults" id="teienDefault4" value="Inspect" onClick="checkListErrors('teien','D',this.checked)"/> <label for="teienDefault4">Inspect Statues</label><br>
+			<input type="checkbox" name="teienDefaults" id="teienDefault5" value="Seduce" onClick="checkListErrors('teien','D',this.checked)"/> <label for="teienDefault5">Seduce Target</label><br>
+			<input type="checkbox" name="teienDefaults" id="teienDefault6" value="Purloin" onClick="checkListErrors('teien','D',this.checked)"/> <label for="teienDefault6">Purloin Guest List</label><br>
+			<input type="checkbox" name="teienDefaults" id="teienDefault7" value="Fingerprint" onClick="checkListErrors('teien','D',this.checked)"/> <label for="teienDefault7">Fingerprint Ambassador</label><br>
 			<b style="color:red"><label id="teienDError"></label></b>
 		</div>
-		<label for="teienProhibit">Prohibit missions?</label> <input type="checkbox" name="teienProhibit" id="teienProhibit" value="Yes" onclick="showHideCheckbox('teienProhibits',this)"/></br>
+		<label for="teienProhibit">Prohibit missions?</label> <input type="checkbox" name="teienProhibit" id="teienProhibit" value="Yes" onclick="showHideCheckbox('teienProhibits',this)"/><br>
 		<div id="teienProhibits" style="display:none">
-			<input type="checkbox" name="teienProhibits" id="teienProhibit0" value="Bug" onClick="checkListErrors('teien','P',this.checked)"/> <label for="teienProhibit0">Bug Ambassador</label></br>
-			<input type="checkbox" name="teienProhibits" id="teienProhibit1" value="Contact" onClick="checkListErrors('teien','P',this.checked)"/> <label for="teienProhibit1">Contact Double Agent</label></br>
-			<input type="checkbox" name="teienProhibits" id="teienProhibit2" value="Transfer" onClick="checkListErrors('teien','P',this.checked)"/> <label for="teienProhibit2">Transfer Microfilm</label></br>
-			<input type="checkbox" name="teienProhibits" id="teienProhibit3" value="Swap" onClick="checkListErrors('teien','P',this.checked)"/> <label for="teienProhibit3">Swap Statue</label></br>
-			<input type="checkbox" name="teienProhibits" id="teienProhibit4" value="Inspect" onClick="checkListErrors('teien','P',this.checked)"/> <label for="teienProhibit4">Inspect Statues</label></br>
-			<input type="checkbox" name="teienProhibits" id="teienProhibit5" value="Seduce" onClick="checkListErrors('teien','P',this.checked)"/> <label for="teienProhibit5">Seduce Target</label></br>
-			<input type="checkbox" name="teienProhibits" id="teienProhibit6" value="Purloin" onClick="checkListErrors('teien','P',this.checked)"/> <label for="teienProhibit6">Purloin Guest List</label></br>
-			<input type="checkbox" name="teienProhibits" id="teienProhibit7" value="Fingerprint" onClick="checkListErrors('teien','P',this.checked)"/> <label for="teienProhibit7">Fingerprint Ambassador</label></br>
+			<input type="checkbox" name="teienProhibits" id="teienProhibit0" value="Bug" onClick="checkListErrors('teien','P',this.checked)"/> <label for="teienProhibit0">Bug Ambassador</label><br>
+			<input type="checkbox" name="teienProhibits" id="teienProhibit1" value="Contact" onClick="checkListErrors('teien','P',this.checked)"/> <label for="teienProhibit1">Contact Double Agent</label><br>
+			<input type="checkbox" name="teienProhibits" id="teienProhibit2" value="Transfer" onClick="checkListErrors('teien','P',this.checked)"/> <label for="teienProhibit2">Transfer Microfilm</label><br>
+			<input type="checkbox" name="teienProhibits" id="teienProhibit3" value="Swap" onClick="checkListErrors('teien','P',this.checked)"/> <label for="teienProhibit3">Swap Statue</label><br>
+			<input type="checkbox" name="teienProhibits" id="teienProhibit4" value="Inspect" onClick="checkListErrors('teien','P',this.checked)"/> <label for="teienProhibit4">Inspect Statues</label><br>
+			<input type="checkbox" name="teienProhibits" id="teienProhibit5" value="Seduce" onClick="checkListErrors('teien','P',this.checked)"/> <label for="teienProhibit5">Seduce Target</label><br>
+			<input type="checkbox" name="teienProhibits" id="teienProhibit6" value="Purloin" onClick="checkListErrors('teien','P',this.checked)"/> <label for="teienProhibit6">Purloin Guest List</label><br>
+			<input type="checkbox" name="teienProhibits" id="teienProhibit7" value="Fingerprint" onClick="checkListErrors('teien','P',this.checked)"/> <label for="teienProhibit7">Fingerprint Ambassador</label><br>
 			<b style="color:red"><label id="teienPError"></label></b>
 		</div>
-		<label for="teienRequire">Require missions?</label> <input type="checkbox" name="teienRequire" id="teienRequire" value="Yes" onclick="showHideCheckbox('teienRequires',this)"/></br>
+		<label for="teienRequire">Require missions?</label> <input type="checkbox" name="teienRequire" id="teienRequire" value="Yes" onclick="showHideCheckbox('teienRequires',this)"/><br>
 		<div id="teienRequires" style="display:none">
-			<input type="checkbox" name="teienRequires" id="teienRequire0" value="Bug" onClick="checkListErrors('teien','R',this.checked)"/> <label for="teienRequire0">Bug Ambassador</label></br>
-			<input type="checkbox" name="teienRequires" id="teienRequire1" value="Contact" onClick="checkListErrors('teien','R',this.checked)"/> <label for="teienRequire1">Contact Double Agent</label></br>
-			<input type="checkbox" name="teienRequires" id="teienRequire2" value="Transfer" onClick="checkListErrors('teien','R',this.checked)"/> <label for="teienRequire2">Transfer Microfilm</label></br>
-			<input type="checkbox" name="teienRequires" id="teienRequire3" value="Swap" onClick="checkListErrors('teien','R',this.checked)"/> <label for="teienRequire3">Swap Statue</label></br>
-			<input type="checkbox" name="teienRequires" id="teienRequire4" value="Inspect" onClick="checkListErrors('teien','R',this.checked)"/> <label for="teienRequire4">Inspect Statues</label></br>
-			<input type="checkbox" name="teienRequires" id="teienRequire5" value="Seduce" onClick="checkListErrors('teien','R',this.checked)"/> <label for="teienRequire5">Seduce Target</label></br>
-			<input type="checkbox" name="teienRequires" id="teienRequire6" value="Purloin" onClick="checkListErrors('teien','R',this.checked)"/> <label for="teienRequire6">Purloin Guest List</label></br>
-			<input type="checkbox" name="teienRequires" id="teienRequire7" value="Fingerprint" onClick="checkListErrors('teien','R',this.checked)"/> <label for="teienRequire7">Fingerprint Ambassador</label></br>
+			<input type="checkbox" name="teienRequires" id="teienRequire0" value="Bug" onClick="checkListErrors('teien','R',this.checked)"/> <label for="teienRequire0">Bug Ambassador</label><br>
+			<input type="checkbox" name="teienRequires" id="teienRequire1" value="Contact" onClick="checkListErrors('teien','R',this.checked)"/> <label for="teienRequire1">Contact Double Agent</label><br>
+			<input type="checkbox" name="teienRequires" id="teienRequire2" value="Transfer" onClick="checkListErrors('teien','R',this.checked)"/> <label for="teienRequire2">Transfer Microfilm</label><br>
+			<input type="checkbox" name="teienRequires" id="teienRequire3" value="Swap" onClick="checkListErrors('teien','R',this.checked)"/> <label for="teienRequire3">Swap Statue</label><br>
+			<input type="checkbox" name="teienRequires" id="teienRequire4" value="Inspect" onClick="checkListErrors('teien','R',this.checked)"/> <label for="teienRequire4">Inspect Statues</label><br>
+			<input type="checkbox" name="teienRequires" id="teienRequire5" value="Seduce" onClick="checkListErrors('teien','R',this.checked)"/> <label for="teienRequire5">Seduce Target</label><br>
+			<input type="checkbox" name="teienRequires" id="teienRequire6" value="Purloin" onClick="checkListErrors('teien','R',this.checked)"/> <label for="teienRequire6">Purloin Guest List</label><br>
+			<input type="checkbox" name="teienRequires" id="teienRequire7" value="Fingerprint" onClick="checkListErrors('teien','R',this.checked)"/> <label for="teienRequire7">Fingerprint Ambassador</label><br>
 			<b style="color:red"><label id="teienRError"></label></b>
 		</div>
-	</div></br>
+	</div><br>
 	
 	
 	<h3>Terrace</h3>
-	<label for="terraceAllow">Enable Terrace?</label> <input type="checkbox" name="terraceAllow" id="terraceAllow" value="Yes" checked="checked" onclick="showHideCheckbox('terrace',this)"/></br>
+	<label for="terraceAllow">Enable Terrace?</label> <input type="checkbox" name="terraceAllow" id="terraceAllow" value="Yes" checked="checked" onclick="showHideCheckbox('terrace',this)"/><br>
 	<div id="terrace">
-		<label>Quickplay name:</label> <input type="text" id="terraceName" value="Terrace" onChange="onNameChange('terrace')"/><b style="color:red"><label id="terraceNameError"></label></b></br>
-		<label>Duration in seconds:</label> <input type="number" id="terraceDuration" value="210" step="15" min="15" oninput="displayTime('terrace')"/> <label id="terraceTime"></label></br>
-		<label>Number of Guests:</label> <input type="number" id="terraceGuests" value="11" step="1" max="21" min="4"/></br>
-		Gametype:</br>
-		<input type="radio" name="terraceGametype" id="terraceGametype0" value="Known" onclick="showHideE('terraceSelectedDiv',false)"/> <label for="terraceGametype0">Known</label></br>
-		<input type="radio" name="terraceGametype" id="terraceGametype1" value="Pick" onclick="showHideE('terraceSelectedDiv',true)"/> <label for="terraceGametype1">Pick</label></br>
-		<input type="radio" name="terraceGametype" id="terraceGametype2" value="Any" checked="checked" onclick="showHideE('terraceSelectedDiv',true)"/> <label for="terraceGametype2">Any</label></br>
-		<div id="terraceSelectedDiv"><label># of needed Missions to win:</label> <input type="number" id="terraceNeeded" value="3" step="1" max="6" min="1" oninput="missionsUpdated('terrace')"/></br></div>
-		<label># of selected Missions:</label> <input type="number" id="terraceSelected" value="6" step="1" max="7" min="2" oninput="missionsUpdated('terrace')"/> <b style="color:red"><label id="terraceError"></label></b></br>
-		<label for="terraceSimplified">Simplified Mode?</label> <input type="checkbox" name="terraceSimplified" id="terraceSimplified" value="Yes"/></br>
-		<label for="terracePreselect">Pre-select missions?</label> <input type="checkbox" name="terracePreselect" id="terracePreselect" value="Yes" onclick="showHideCheckbox('terraceDefaults',this)"/></br>
+		<label>Quickplay name:</label> <input type="text" id="terraceName" value="Terrace" onChange="onNameChange('terrace')"/><b style="color:red"><label id="terraceNameError"></label></b><br>
+		<label>Duration in seconds:</label> <input type="number" id="terraceDuration" value="210" step="15" min="15" oninput="displayTime('terrace')"/> <label id="terraceTime"></label><br>
+		<label>Number of Guests:</label> <input type="number" id="terraceGuests" value="11" step="1" max="21" min="4"/><br>
+		Gametype:<br>
+		<input type="radio" name="terraceGametype" id="terraceGametype0" value="Known" onclick="showHideE('terraceSelectedDiv',false)"/> <label for="terraceGametype0">Known</label><br>
+		<input type="radio" name="terraceGametype" id="terraceGametype1" value="Pick" onclick="showHideE('terraceSelectedDiv',true)"/> <label for="terraceGametype1">Pick</label><br>
+		<input type="radio" name="terraceGametype" id="terraceGametype2" value="Any" checked="checked" onclick="showHideE('terraceSelectedDiv',true)"/> <label for="terraceGametype2">Any</label><br>
+		<div id="terraceSelectedDiv"><label># of needed Missions to win:</label> <input type="number" id="terraceNeeded" value="3" step="1" max="6" min="1" oninput="missionsUpdated('terrace')"/><br></div>
+		<label># of selected Missions:</label> <input type="number" id="terraceSelected" value="6" step="1" max="7" min="2" oninput="missionsUpdated('terrace')"/> <b style="color:red"><label id="terraceError"></label></b><br>
+		<label for="terraceSimplified">Simplified Mode?</label> <input type="checkbox" name="terraceSimplified" id="terraceSimplified" value="Yes"/><br>
+		<label for="terracePreselect">Pre-select missions?</label> <input type="checkbox" name="terracePreselect" id="terracePreselect" value="Yes" onclick="showHideCheckbox('terraceDefaults',this)"/><br>
 		<div id="terraceDefaults" style="display:none">
-			<input type="checkbox" name="terraceDefaults" id="terraceDefault0" value="Bug" onClick="checkListErrors('terrace','D',this.checked)"/> <label for="terraceDefault0">Bug Ambassador</label></br>
-			<input type="checkbox" name="terraceDefaults" id="terraceDefault1" value="Contact" onClick="checkListErrors('terrace','D',this.checked)"/> <label for="terraceDefault1">Contact Double Agent</label></br>
-			<input type="checkbox" name="terraceDefaults" id="terraceDefault3" value="Swap" onClick="checkListErrors('terrace','D',this.checked)"/> <label for="terraceDefault3">Swap Statue</label></br>
-			<input type="checkbox" name="terraceDefaults" id="terraceDefault4" value="Inspect" onClick="checkListErrors('terrace','D',this.checked)"/> <label for="terraceDefault4">Inspect Statues</label></br>
-			<input type="checkbox" name="terraceDefaults" id="terraceDefault5" value="Seduce" onClick="checkListErrors('terrace','D',this.checked)"/> <label for="terraceDefault5">Seduce Target</label></br>
-			<input type="checkbox" name="terraceDefaults" id="terraceDefault6" value="Purloin" onClick="checkListErrors('terrace','D',this.checked)"/> <label for="terraceDefault6">Purloin Guest List</label></br>
-			<input type="checkbox" name="terraceDefaults" id="terraceDefault7" value="Fingerprint" onClick="checkListErrors('terrace','D',this.checked)"/> <label for="terraceDefault7">Fingerprint Ambassador</label></br>
+			<input type="checkbox" name="terraceDefaults" id="terraceDefault0" value="Bug" onClick="checkListErrors('terrace','D',this.checked)"/> <label for="terraceDefault0">Bug Ambassador</label><br>
+			<input type="checkbox" name="terraceDefaults" id="terraceDefault1" value="Contact" onClick="checkListErrors('terrace','D',this.checked)"/> <label for="terraceDefault1">Contact Double Agent</label><br>
+			<input type="checkbox" name="terraceDefaults" id="terraceDefault3" value="Swap" onClick="checkListErrors('terrace','D',this.checked)"/> <label for="terraceDefault3">Swap Statue</label><br>
+			<input type="checkbox" name="terraceDefaults" id="terraceDefault4" value="Inspect" onClick="checkListErrors('terrace','D',this.checked)"/> <label for="terraceDefault4">Inspect Statues</label><br>
+			<input type="checkbox" name="terraceDefaults" id="terraceDefault5" value="Seduce" onClick="checkListErrors('terrace','D',this.checked)"/> <label for="terraceDefault5">Seduce Target</label><br>
+			<input type="checkbox" name="terraceDefaults" id="terraceDefault6" value="Purloin" onClick="checkListErrors('terrace','D',this.checked)"/> <label for="terraceDefault6">Purloin Guest List</label><br>
+			<input type="checkbox" name="terraceDefaults" id="terraceDefault7" value="Fingerprint" onClick="checkListErrors('terrace','D',this.checked)"/> <label for="terraceDefault7">Fingerprint Ambassador</label><br>
 			<b style="color:red"><label id="terraceDError"></label></b>
 		</div>
-		<label for="terraceProhibit">Prohibit missions?</label> <input type="checkbox" name="terraceProhibit" id="terraceProhibit" value="Yes" onclick="showHideCheckbox('terraceProhibits',this)"/></br>
+		<label for="terraceProhibit">Prohibit missions?</label> <input type="checkbox" name="terraceProhibit" id="terraceProhibit" value="Yes" onclick="showHideCheckbox('terraceProhibits',this)"/><br>
 		<div id="terraceProhibits" style="display:none">
-			<input type="checkbox" name="terraceProhibits" id="terraceProhibit0" value="Bug" onClick="checkListErrors('terrace','P',this.checked)"/> <label for="terraceProhibit0">Bug Ambassador</label></br>
-			<input type="checkbox" name="terraceProhibits" id="terraceProhibit1" value="Contact" onClick="checkListErrors('terrace','P',this.checked)"/> <label for="terraceProhibit1">Contact Double Agent</label></br>
-			<input type="checkbox" name="terraceProhibits" id="terraceProhibit3" value="Swap" onClick="checkListErrors('terrace','P',this.checked)"/> <label for="terraceProhibit3">Swap Statue</label></br>
-			<input type="checkbox" name="terraceProhibits" id="terraceProhibit4" value="Inspect" onClick="checkListErrors('terrace','P',this.checked)"/> <label for="terraceProhibit4">Inspect Statues</label></br>
-			<input type="checkbox" name="terraceProhibits" id="terraceProhibit5" value="Seduce" onClick="checkListErrors('terrace','P',this.checked)"/> <label for="terraceProhibit5">Seduce Target</label></br>
-			<input type="checkbox" name="terraceProhibits" id="terraceProhibit6" value="Purloin" onClick="checkListErrors('terrace','P',this.checked)"/> <label for="terraceProhibit6">Purloin Guest List</label></br>
-			<input type="checkbox" name="terraceProhibits" id="terraceProhibit7" value="Fingerprint" onClick="checkListErrors('terrace','P',this.checked)"/> <label for="terraceProhibit7">Fingerprint Ambassador</label></br>
+			<input type="checkbox" name="terraceProhibits" id="terraceProhibit0" value="Bug" onClick="checkListErrors('terrace','P',this.checked)"/> <label for="terraceProhibit0">Bug Ambassador</label><br>
+			<input type="checkbox" name="terraceProhibits" id="terraceProhibit1" value="Contact" onClick="checkListErrors('terrace','P',this.checked)"/> <label for="terraceProhibit1">Contact Double Agent</label><br>
+			<input type="checkbox" name="terraceProhibits" id="terraceProhibit3" value="Swap" onClick="checkListErrors('terrace','P',this.checked)"/> <label for="terraceProhibit3">Swap Statue</label><br>
+			<input type="checkbox" name="terraceProhibits" id="terraceProhibit4" value="Inspect" onClick="checkListErrors('terrace','P',this.checked)"/> <label for="terraceProhibit4">Inspect Statues</label><br>
+			<input type="checkbox" name="terraceProhibits" id="terraceProhibit5" value="Seduce" onClick="checkListErrors('terrace','P',this.checked)"/> <label for="terraceProhibit5">Seduce Target</label><br>
+			<input type="checkbox" name="terraceProhibits" id="terraceProhibit6" value="Purloin" onClick="checkListErrors('terrace','P',this.checked)"/> <label for="terraceProhibit6">Purloin Guest List</label><br>
+			<input type="checkbox" name="terraceProhibits" id="terraceProhibit7" value="Fingerprint" onClick="checkListErrors('terrace','P',this.checked)"/> <label for="terraceProhibit7">Fingerprint Ambassador</label><br>
 			<b style="color:red"><label id="terracePError"></label></b>
 		</div>
-		<label for="terraceRequire">Require missions?</label> <input type="checkbox" name="terraceRequire" id="terraceRequire" value="Yes" onclick="showHideCheckbox('terraceRequires',this)"/></br>
+		<label for="terraceRequire">Require missions?</label> <input type="checkbox" name="terraceRequire" id="terraceRequire" value="Yes" onclick="showHideCheckbox('terraceRequires',this)"/><br>
 		<div id="terraceRequires" style="display:none">
-			<input type="checkbox" name="terraceRequires" id="terraceRequire0" value="Bug" onClick="checkListErrors('terrace','R',this.checked)"/> <label for="terraceRequire0">Bug Ambassador</label></br>
-			<input type="checkbox" name="terraceRequires" id="terraceRequire1" value="Contact" onClick="checkListErrors('terrace','R',this.checked)"/> <label for="terraceRequire1">Contact Double Agent</label></br>
-			<input type="checkbox" name="terraceRequires" id="terraceRequire3" value="Swap" onClick="checkListErrors('terrace','R',this.checked)"/> <label for="terraceRequire3">Swap Statue</label></br>
-			<input type="checkbox" name="terraceRequires" id="terraceRequire4" value="Inspect" onClick="checkListErrors('terrace','R',this.checked)"/> <label for="terraceRequire4">Inspect Statues</label></br>
-			<input type="checkbox" name="terraceRequires" id="terraceRequire5" value="Seduce" onClick="checkListErrors('terrace','R',this.checked)"/> <label for="terraceRequire5">Seduce Target</label></br>
-			<input type="checkbox" name="terraceRequires" id="terraceRequire6" value="Purloin" onClick="checkListErrors('terrace','R',this.checked)"/> <label for="terraceRequire6">Purloin Guest List</label></br>
-			<input type="checkbox" name="terraceRequires" id="terraceRequire7" value="Fingerprint" onClick="checkListErrors('terrace','R',this.checked)"/> <label for="terraceRequire7">Fingerprint Ambassador</label></br>
+			<input type="checkbox" name="terraceRequires" id="terraceRequire0" value="Bug" onClick="checkListErrors('terrace','R',this.checked)"/> <label for="terraceRequire0">Bug Ambassador</label><br>
+			<input type="checkbox" name="terraceRequires" id="terraceRequire1" value="Contact" onClick="checkListErrors('terrace','R',this.checked)"/> <label for="terraceRequire1">Contact Double Agent</label><br>
+			<input type="checkbox" name="terraceRequires" id="terraceRequire3" value="Swap" onClick="checkListErrors('terrace','R',this.checked)"/> <label for="terraceRequire3">Swap Statue</label><br>
+			<input type="checkbox" name="terraceRequires" id="terraceRequire4" value="Inspect" onClick="checkListErrors('terrace','R',this.checked)"/> <label for="terraceRequire4">Inspect Statues</label><br>
+			<input type="checkbox" name="terraceRequires" id="terraceRequire5" value="Seduce" onClick="checkListErrors('terrace','R',this.checked)"/> <label for="terraceRequire5">Seduce Target</label><br>
+			<input type="checkbox" name="terraceRequires" id="terraceRequire6" value="Purloin" onClick="checkListErrors('terrace','R',this.checked)"/> <label for="terraceRequire6">Purloin Guest List</label><br>
+			<input type="checkbox" name="terraceRequires" id="terraceRequire7" value="Fingerprint" onClick="checkListErrors('terrace','R',this.checked)"/> <label for="terraceRequire7">Fingerprint Ambassador</label><br>
 			<b style="color:red"><label id="terraceRError"></label></b>
 		</div>
-	</div></br>
+	</div><br>
 	
 	
 	<h3>Veranda</h3>
-	<label for="verandaAllow">Enable Veranda?</label> <input type="checkbox" name="verandaAllow" id="verandaAllow" value="Yes" checked="checked" onclick="showHideCheckbox('veranda',this)"/></br>
+	<label for="verandaAllow">Enable Veranda?</label> <input type="checkbox" name="verandaAllow" id="verandaAllow" value="Yes" checked="checked" onclick="showHideCheckbox('veranda',this)"/><br>
 	<div id="veranda">
-		<label>Quickplay name:</label> <input type="text" id="verandaName" value="Veranda" onChange="onNameChange('veranda')"/><b style="color:red"><label id="verandaNameError"></label></b></br>
-		<label>Duration in seconds:</label> <input type="number" id="verandaDuration" value="255" step="15" min="15" oninput="displayTime('veranda')"/> <label id="verandaTime"></label></br>
-		<label>Number of Guests:</label> <input type="number" id="verandaGuests" value="21" step="1" max="21" min="4"/></br>
-		Gametype:</br>
-		<input type="radio" name="verandaGametype" id="verandaGametype0" value="Known" onclick="showHideE('verandaSelectedDiv',false)"/> <label for="verandaGametype0">Known</label></br>
-		<input type="radio" name="verandaGametype" id="verandaGametype1" value="Pick" onclick="showHideE('verandaSelectedDiv',true)"/> <label for="verandaGametype1">Pick</label></br>
-		<input type="radio" name="verandaGametype" id="verandaGametype2" value="Any" checked="checked" onclick="showHideE('verandaSelectedDiv',true)"/> <label for="verandaGametype2">Any</label></br>
-		<div id="verandaSelectedDiv"><label># of needed Missions to win:</label> <input type="number" id="verandaNeeded" value="5" step="1" max="7" min="1" oninput="missionsUpdated('veranda')"/></br></div>
-		<label># of selected Missions:</label> <input type="number" id="verandaSelected" value="8" step="1" max="8" min="2" oninput="missionsUpdated('veranda')"/> <b style="color:red"><label id="verandaError"></label></b></br>
-		<label for="verandaSimplified">Simplified Mode?</label> <input type="checkbox" name="verandaSimplified" id="verandaSimplified" value="Yes"/></br>
-		<label for="verandaPreselect">Pre-select missions?</label> <input type="checkbox" name="verandaPreselect" id="verandaPreselect" value="Yes" onclick="showHideCheckbox('verandaDefaults',this)"/></br>
+		<label>Quickplay name:</label> <input type="text" id="verandaName" value="Veranda" onChange="onNameChange('veranda')"/><b style="color:red"><label id="verandaNameError"></label></b><br>
+		<label>Duration in seconds:</label> <input type="number" id="verandaDuration" value="255" step="15" min="15" oninput="displayTime('veranda')"/> <label id="verandaTime"></label><br>
+		<label>Number of Guests:</label> <input type="number" id="verandaGuests" value="21" step="1" max="21" min="4"/><br>
+		Gametype:<br>
+		<input type="radio" name="verandaGametype" id="verandaGametype0" value="Known" onclick="showHideE('verandaSelectedDiv',false)"/> <label for="verandaGametype0">Known</label><br>
+		<input type="radio" name="verandaGametype" id="verandaGametype1" value="Pick" onclick="showHideE('verandaSelectedDiv',true)"/> <label for="verandaGametype1">Pick</label><br>
+		<input type="radio" name="verandaGametype" id="verandaGametype2" value="Any" checked="checked" onclick="showHideE('verandaSelectedDiv',true)"/> <label for="verandaGametype2">Any</label><br>
+		<div id="verandaSelectedDiv"><label># of needed Missions to win:</label> <input type="number" id="verandaNeeded" value="5" step="1" max="7" min="1" oninput="missionsUpdated('veranda')"/><br></div>
+		<label># of selected Missions:</label> <input type="number" id="verandaSelected" value="8" step="1" max="8" min="2" oninput="missionsUpdated('veranda')"/> <b style="color:red"><label id="verandaError"></label></b><br>
+		<label for="verandaSimplified">Simplified Mode?</label> <input type="checkbox" name="verandaSimplified" id="verandaSimplified" value="Yes"/><br>
+		<label for="verandaPreselect">Pre-select missions?</label> <input type="checkbox" name="verandaPreselect" id="verandaPreselect" value="Yes" onclick="showHideCheckbox('verandaDefaults',this)"/><br>
 		<div id="verandaDefaults" style="display:none">
-			<input type="checkbox" name="verandaDefaults" id="verandaDefault0" value="Bug" onClick="checkListErrors('veranda','D',this.checked)"/> <label for="verandaDefault0">Bug Ambassador</label></br>
-			<input type="checkbox" name="verandaDefaults" id="verandaDefault1" value="Contact" onClick="checkListErrors('veranda','D',this.checked)"/> <label for="verandaDefault1">Contact Double Agent</label></br>
-			<input type="checkbox" name="verandaDefaults" id="verandaDefault2" value="Transfer" onClick="checkListErrors('veranda','D',this.checked)"/> <label for="verandaDefault2">Transfer Microfilm</label></br>
-			<input type="checkbox" name="verandaDefaults" id="verandaDefault3" value="Swap" onClick="checkListErrors('veranda','D',this.checked)"/> <label for="verandaDefault3">Swap Statue</label></br>
-			<input type="checkbox" name="verandaDefaults" id="verandaDefault4" value="Inspect" onClick="checkListErrors('veranda','D',this.checked)"/> <label for="verandaDefault4">Inspect Statues</label></br>
-			<input type="checkbox" name="verandaDefaults" id="verandaDefault5" value="Seduce" onClick="checkListErrors('veranda','D',this.checked)"/> <label for="verandaDefault5">Seduce Target</label></br>
-			<input type="checkbox" name="verandaDefaults" id="verandaDefault6" value="Purloin" onClick="checkListErrors('veranda','D',this.checked)"/> <label for="verandaDefault6">Purloin Guest List</label></br>
-			<input type="checkbox" name="verandaDefaults" id="verandaDefault7" value="Fingerprint" onClick="checkListErrors('veranda','D',this.checked)"/> <label for="verandaDefault7">Fingerprint Ambassador</label></br>
+			<input type="checkbox" name="verandaDefaults" id="verandaDefault0" value="Bug" onClick="checkListErrors('veranda','D',this.checked)"/> <label for="verandaDefault0">Bug Ambassador</label><br>
+			<input type="checkbox" name="verandaDefaults" id="verandaDefault1" value="Contact" onClick="checkListErrors('veranda','D',this.checked)"/> <label for="verandaDefault1">Contact Double Agent</label><br>
+			<input type="checkbox" name="verandaDefaults" id="verandaDefault2" value="Transfer" onClick="checkListErrors('veranda','D',this.checked)"/> <label for="verandaDefault2">Transfer Microfilm</label><br>
+			<input type="checkbox" name="verandaDefaults" id="verandaDefault3" value="Swap" onClick="checkListErrors('veranda','D',this.checked)"/> <label for="verandaDefault3">Swap Statue</label><br>
+			<input type="checkbox" name="verandaDefaults" id="verandaDefault4" value="Inspect" onClick="checkListErrors('veranda','D',this.checked)"/> <label for="verandaDefault4">Inspect Statues</label><br>
+			<input type="checkbox" name="verandaDefaults" id="verandaDefault5" value="Seduce" onClick="checkListErrors('veranda','D',this.checked)"/> <label for="verandaDefault5">Seduce Target</label><br>
+			<input type="checkbox" name="verandaDefaults" id="verandaDefault6" value="Purloin" onClick="checkListErrors('veranda','D',this.checked)"/> <label for="verandaDefault6">Purloin Guest List</label><br>
+			<input type="checkbox" name="verandaDefaults" id="verandaDefault7" value="Fingerprint" onClick="checkListErrors('veranda','D',this.checked)"/> <label for="verandaDefault7">Fingerprint Ambassador</label><br>
 			<b style="color:red"><label id="verandaDError"></label></b>
 		</div>
-		<label for="verandaProhibit">Prohibit missions?</label> <input type="checkbox" name="verandaProhibit" id="verandaProhibit" value="Yes" onclick="showHideCheckbox('verandaProhibits',this)"/></br>
+		<label for="verandaProhibit">Prohibit missions?</label> <input type="checkbox" name="verandaProhibit" id="verandaProhibit" value="Yes" onclick="showHideCheckbox('verandaProhibits',this)"/><br>
 		<div id="verandaProhibits" style="display:none">
-			<input type="checkbox" name="verandaProhibits" id="verandaProhibit0" value="Bug" onClick="checkListErrors('veranda','P',this.checked)"/> <label for="verandaProhibit0">Bug Ambassador</label></br>
-			<input type="checkbox" name="verandaProhibits" id="verandaProhibit1" value="Contact" onClick="checkListErrors('veranda','P',this.checked)"/> <label for="verandaProhibit1">Contact Double Agent</label></br>
-			<input type="checkbox" name="verandaProhibits" id="verandaProhibit2" value="Transfer" onClick="checkListErrors('veranda','P',this.checked)"/> <label for="verandaProhibit2">Transfer Microfilm</label></br>
-			<input type="checkbox" name="verandaProhibits" id="verandaProhibit3" value="Swap" onClick="checkListErrors('veranda','P',this.checked)"/> <label for="verandaProhibit3">Swap Statue</label></br>
-			<input type="checkbox" name="verandaProhibits" id="verandaProhibit4" value="Inspect" onClick="checkListErrors('veranda','P',this.checked)"/> <label for="verandaProhibit4">Inspect Statues</label></br>
-			<input type="checkbox" name="verandaProhibits" id="verandaProhibit5" value="Seduce" onClick="checkListErrors('veranda','P',this.checked)"/> <label for="verandaProhibit5">Seduce Target</label></br>
-			<input type="checkbox" name="verandaProhibits" id="verandaProhibit6" value="Purloin" onClick="checkListErrors('veranda','P',this.checked)"/> <label for="verandaProhibit6">Purloin Guest List</label></br>
-			<input type="checkbox" name="verandaProhibits" id="verandaProhibit7" value="Fingerprint" onClick="checkListErrors('veranda','P',this.checked)"/> <label for="verandaProhibit7">Fingerprint Ambassador</label></br>
+			<input type="checkbox" name="verandaProhibits" id="verandaProhibit0" value="Bug" onClick="checkListErrors('veranda','P',this.checked)"/> <label for="verandaProhibit0">Bug Ambassador</label><br>
+			<input type="checkbox" name="verandaProhibits" id="verandaProhibit1" value="Contact" onClick="checkListErrors('veranda','P',this.checked)"/> <label for="verandaProhibit1">Contact Double Agent</label><br>
+			<input type="checkbox" name="verandaProhibits" id="verandaProhibit2" value="Transfer" onClick="checkListErrors('veranda','P',this.checked)"/> <label for="verandaProhibit2">Transfer Microfilm</label><br>
+			<input type="checkbox" name="verandaProhibits" id="verandaProhibit3" value="Swap" onClick="checkListErrors('veranda','P',this.checked)"/> <label for="verandaProhibit3">Swap Statue</label><br>
+			<input type="checkbox" name="verandaProhibits" id="verandaProhibit4" value="Inspect" onClick="checkListErrors('veranda','P',this.checked)"/> <label for="verandaProhibit4">Inspect Statues</label><br>
+			<input type="checkbox" name="verandaProhibits" id="verandaProhibit5" value="Seduce" onClick="checkListErrors('veranda','P',this.checked)"/> <label for="verandaProhibit5">Seduce Target</label><br>
+			<input type="checkbox" name="verandaProhibits" id="verandaProhibit6" value="Purloin" onClick="checkListErrors('veranda','P',this.checked)"/> <label for="verandaProhibit6">Purloin Guest List</label><br>
+			<input type="checkbox" name="verandaProhibits" id="verandaProhibit7" value="Fingerprint" onClick="checkListErrors('veranda','P',this.checked)"/> <label for="verandaProhibit7">Fingerprint Ambassador</label><br>
 			<b style="color:red"><label id="verandaPError"></label></b>
 		</div>
-		<label for="verandaRequire">Require missions?</label> <input type="checkbox" name="verandaRequire" id="verandaRequire" value="Yes" onclick="showHideCheckbox('verandaRequires',this)"/></br>
+		<label for="verandaRequire">Require missions?</label> <input type="checkbox" name="verandaRequire" id="verandaRequire" value="Yes" onclick="showHideCheckbox('verandaRequires',this)"/><br>
 		<div id="verandaRequires" style="display:none">
-			<input type="checkbox" name="verandaRequires" id="verandaRequire0" value="Bug" onClick="checkListErrors('veranda','R',this.checked)"/> <label for="verandaRequire0">Bug Ambassador</label></br>
-			<input type="checkbox" name="verandaRequires" id="verandaRequire1" value="Contact" onClick="checkListErrors('veranda','R',this.checked)"/> <label for="verandaRequire1">Contact Double Agent</label></br>
-			<input type="checkbox" name="verandaRequires" id="verandaRequire2" value="Transfer" onClick="checkListErrors('veranda','R',this.checked)"/> <label for="verandaRequire2">Transfer Microfilm</label></br>
-			<input type="checkbox" name="verandaRequires" id="verandaRequire3" value="Swap" onClick="checkListErrors('veranda','R',this.checked)"/> <label for="verandaRequire3">Swap Statue</label></br>
-			<input type="checkbox" name="verandaRequires" id="verandaRequire4" value="Inspect" onClick="checkListErrors('veranda','R',this.checked)"/> <label for="verandaRequire4">Inspect Statues</label></br>
-			<input type="checkbox" name="verandaRequires" id="verandaRequire5" value="Seduce" onClick="checkListErrors('veranda','R',this.checked)"/> <label for="verandaRequire5">Seduce Target</label></br>
-			<input type="checkbox" name="verandaRequires" id="verandaRequire6" value="Purloin" onClick="checkListErrors('veranda','R',this.checked)"/> <label for="verandaRequire6">Purloin Guest List</label></br>
-			<input type="checkbox" name="verandaRequires" id="verandaRequire7" value="Fingerprint" onClick="checkListErrors('veranda','R',this.checked)"/> <label for="verandaRequire7">Fingerprint Ambassador</label></br>
+			<input type="checkbox" name="verandaRequires" id="verandaRequire0" value="Bug" onClick="checkListErrors('veranda','R',this.checked)"/> <label for="verandaRequire0">Bug Ambassador</label><br>
+			<input type="checkbox" name="verandaRequires" id="verandaRequire1" value="Contact" onClick="checkListErrors('veranda','R',this.checked)"/> <label for="verandaRequire1">Contact Double Agent</label><br>
+			<input type="checkbox" name="verandaRequires" id="verandaRequire2" value="Transfer" onClick="checkListErrors('veranda','R',this.checked)"/> <label for="verandaRequire2">Transfer Microfilm</label><br>
+			<input type="checkbox" name="verandaRequires" id="verandaRequire3" value="Swap" onClick="checkListErrors('veranda','R',this.checked)"/> <label for="verandaRequire3">Swap Statue</label><br>
+			<input type="checkbox" name="verandaRequires" id="verandaRequire4" value="Inspect" onClick="checkListErrors('veranda','R',this.checked)"/> <label for="verandaRequire4">Inspect Statues</label><br>
+			<input type="checkbox" name="verandaRequires" id="verandaRequire5" value="Seduce" onClick="checkListErrors('veranda','R',this.checked)"/> <label for="verandaRequire5">Seduce Target</label><br>
+			<input type="checkbox" name="verandaRequires" id="verandaRequire6" value="Purloin" onClick="checkListErrors('veranda','R',this.checked)"/> <label for="verandaRequire6">Purloin Guest List</label><br>
+			<input type="checkbox" name="verandaRequires" id="verandaRequire7" value="Fingerprint" onClick="checkListErrors('veranda','R',this.checked)"/> <label for="verandaRequire7">Fingerprint Ambassador</label><br>
 			<b style="color:red"><label id="verandaRError"></label></b>
 		</div>
-	</div></br>
+	</div><br>
 	
 	
-	All done? whew...</br>
-	<button id="save" onclick="onClickSave()">Save to file</button></br></br></br>
+	All done? whew...<br>
+	<button id="save" onclick="onClickSave()">Save to file</button><br><br><br>
 	 
 	<script type="text/javascript" src="PropMaster.js"></script>
 </body>

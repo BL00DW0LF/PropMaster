@@ -34,6 +34,60 @@ const VerandaMissionsMax=8;
 var retryError=false;//for not forcing retries
 
 
+//counters for error handling
+var aquariumD=0;
+var aquariumP=0;
+var aquariumR=0;
+
+var balconyD=0;
+var balconyP=0;
+var balconyR=0;
+
+var ballroomD=0;
+var ballroomP=0;
+var ballroomR=0;
+
+var courtyardD=0;
+var courtyardP=0;
+var courtyardR=0;
+
+var galleryD=0;
+var galleryP=0;
+var galleryR=0;
+
+var highriseD=0;
+var highriseP=0;
+var highriseR=0;
+
+var libraryD=0;
+var libraryP=0;
+var libraryR=0;
+
+var moderneD=0;
+var moderneP=0;
+var moderneR=0;
+
+var pubD=0;
+var pubP=0;
+var pubR=0;
+
+var redwoodsD=0;
+var redwoodsP=0;
+var redwoodsR=0;
+
+var teienD=0;
+var teienP=0;
+var teienR=0;
+
+var terraceD=0;
+var terraceP=0;
+var terraceR=0;
+
+var verandaD=0;
+var verandaP=0;
+var verandaR=0;
+
+
 function onClickSave(){//build the prop string, and prompt for download
 	var anErrorExists=finalCheckForErrors();
 	
@@ -823,58 +877,7 @@ function missionsUpdated(venueName){//when one of the Selected Missions counter 
 		
 }
 
-//counters for error handling
-var aquariumD=0;
-var aquariumP=0;
-var aquariumR=0;
 
-var balconyD=0;
-var balconyP=0;
-var balconyR=0;
-
-var ballroomD=0;
-var ballroomP=0;
-var ballroomR=0;
-
-var courtyardD=0;
-var courtyardP=0;
-var courtyardR=0;
-
-var galleryD=0;
-var galleryP=0;
-var galleryR=0;
-
-var highriseD=0;
-var highriseP=0;
-var highriseR=0;
-
-var libraryD=0;
-var libraryP=0;
-var libraryR=0;
-
-var moderneD=0;
-var moderneP=0;
-var moderneR=0;
-
-var pubD=0;
-var pubP=0;
-var pubR=0;
-
-var redwoodsD=0;
-var redwoodsP=0;
-var redwoodsR=0;
-
-var teienD=0;
-var teienP=0;
-var teienR=0;
-
-var terraceD=0;
-var terraceP=0;
-var terraceR=0;
-
-var verandaD=0;
-var verandaP=0;
-var verandaR=0;
 
 
 
@@ -2198,23 +2201,7 @@ function finalCheckForErrors(){
 
 
 
-function onLoad(){
-	//set display time for each venue
-	displayTime("aquarium");
-	displayTime("balcony");
-	displayTime("ballroom");
-	displayTime("courtyard");
-	displayTime("gallery");
-	displayTime("highrise");
-	displayTime("library");
-	displayTime("moderne");
-	displayTime("pub");
-	displayTime("redwoods");
-	displayTime("teien");
-	displayTime("terrace");
-	displayTime("veranda");
-	
-}
+
 
 
 function displayTime(venueName){
@@ -2256,7 +2243,23 @@ function onNameChange(fieldName){
 }
 
 
-
+function onLoad(){
+	//set display time for each venue
+	displayTime("aquarium");
+	displayTime("balcony");
+	displayTime("ballroom");
+	displayTime("courtyard");
+	displayTime("gallery");
+	displayTime("highrise");
+	displayTime("library");
+	displayTime("moderne");
+	displayTime("pub");
+	displayTime("redwoods");
+	displayTime("teien");
+	displayTime("terrace");
+	displayTime("veranda");
+	
+}
 
 
 
