@@ -8,7 +8,7 @@
   <meta name="description" content="Kaleb's .prop Maker Tool for SpyParty">
   <meta name="author" content="Kaleb Fowler">
 
-  <!--<link rel="stylesheet" href="css/styles.css?v=1.0">-->
+  <link rel="stylesheet" href="style.css">
 
 </head>
 
@@ -25,8 +25,8 @@
 	<label for="minimal">Hide Unused Venues (in-game)?</label> <input type="checkbox" name="minimal" id="minimal" value="Yes" checked="checked"/><br>
 	<button id="save" onclick="onClickSave()">Save to file</button>
 
-	<hr>	
-	
+	<hr>
+	<div class="altVenue1">
 	<h3>Aquarium</h3>
 	<label for="aquariumAllow">Enable Aquarium?</label> <input type="checkbox" name="aquariumAllow" id="aquariumAllow" value="Yes" checked="checked" onclick="showHideCheckbox('aquarium',this)"/><br>
 	<div id="aquarium">
@@ -78,9 +78,10 @@
 		</div>
 		<button onclick="addExtraVenue('aquarium')">Add extra QP for Aquarium</button>
 	</div>
+	</div>	
 	
 	<hr>
-	
+	<div class="altVenue2">
 	<h3>Balcony</h3>
 	<label for="balconyAllow">Enable Balcony?</label> <input type="checkbox" name="balconyAllow" id="balconyAllow" value="Yes" checked="checked" onclick="showHideCheckbox('balcony',this)"/><br>
 	<div id="balcony">
@@ -123,9 +124,9 @@
 		</div>
 		<button onclick="addExtraVenue('balcony')">Add extra QP for Balcony</button>
 	</div>
-	
+	</div>
 	<hr>
-	
+	<div class="altVenue1">
 	<h3>Ballroom</h3>
 	<label for="ballroomAllow">Enable Ballroom?</label> <input type="checkbox" name="ballroomAllow" id="ballroomAllow" value="Yes" checked="checked" onclick="showHideCheckbox('ballroom',this)"/><br>
 	<div id="ballroom">
@@ -177,9 +178,9 @@
 		</div>
 		<button onclick="addExtraVenue('ballroom')">Add extra QP for Ballroom</button>
 	</div>
-
+	</div>
 	<hr>
-		
+	<div class="altVenue2">
 	<h3>Courtyard</h3>
 	<label for="courtyardAllow">Enable Courtyard?</label> <input type="checkbox" name="courtyardAllow" id="courtyardAllow" value="Yes" checked="checked" onclick="showHideCheckbox('courtyard',this)"/><br>
 	<div id="courtyard">
@@ -228,9 +229,9 @@
 		</div>
 		<button onclick="addExtraVenue('courtyard')">Add extra QP for Courtyard</button>
 	</div>
-	
+	</div>
 	<hr>
-	
+	<div class="altVenue1">
 	<h3>Gallery</h3>
 	<label for="galleryAllow">Enable Gallery?</label> <input type="checkbox" name="galleryAllow" id="galleryAllow" value="Yes" checked="checked" onclick="showHideCheckbox('gallery',this)"/><br>
 	<div id="gallery">
@@ -282,9 +283,9 @@
 		</div>
 		<button onclick="addExtraVenue('gallery')">Add extra QP for Gallery</button>
 	</div>
-	
+	</div>
 	<hr>
-	
+	<div class="altVenue2">
 	<h3>High-rise</h3>
 	<label for="highriseAllow">Enable High-rise?</label> <input type="checkbox" name="highriseAllow" id="highriseAllow" value="Yes" checked="checked" onclick="showHideCheckbox('highrise',this)"/><br>
 	<div id="highrise">
@@ -336,9 +337,9 @@
 		</div>
 		<button onclick="addExtraVenue('highrise')">Add extra QP for High-rise</button>
 	</div>
-	
+	</div>
 	<hr>
-	
+	<div class="altVenue1">
 	<h3>Library</h3>
 	<label for="libraryAllow">Enable Library?</label> <input type="checkbox" name="libraryAllow" id="libraryAllow" value="Yes" checked="checked" onclick="showHideCheckbox('library',this)"/><br>
 	<div id="library">
@@ -390,9 +391,9 @@
 		</div>
 		<button onclick="addExtraVenue('library')">Add extra QP for Library</button>
 	</div>
-	
+	</div>
 	<hr>	
-	
+	<div class="altVenue2">
 	<h3>Moderne</h3>
 	<label for="moderneAllow">Enable Moderne?</label> <input type="checkbox" name="moderneAllow" id="moderneAllow" value="Yes" checked="checked" onclick="showHideCheckbox('moderne',this)"/><br>
 	<div id="moderne">
@@ -444,9 +445,9 @@
 		</div>
 		<button onclick="addExtraVenue('Moderne')">Add extra QP for Moderne</button>
 	</div>
-	
+	</div>
 	<hr>
-		
+	<div class="altVenue1">
 	<h3>Pub</h3>
 	<label for="pubAllow">Enable Pub?</label> <input type="checkbox" name="pubAllow" id="pubAllow" value="Yes" checked="checked" onclick="showHideCheckbox('pub',this)"/><br>
 	<div id="pub">
@@ -495,9 +496,9 @@
 		</div>
 		<button onclick="addExtraVenue('pub')">Add extra QP for Pub</button>
 	</div>
-	
+	</div>
 	<hr>
-	
+	<div class="altVenue2">
 	<h3>Redwoods</h3>
 	<label for="redwoodsAllow">Enable Redwoods?</label> <input type="checkbox" name="redwoodsAllow" id="redwoodsAllow" value="Yes" checked="checked" onclick="showHideCheckbox('redwoods',this)"/><br>
 	<div id="redwoods">
@@ -549,9 +550,9 @@
 		</div>
 		<button onclick="addExtraVenue('redwoods')">Add extra QP for Redwoods</button>
 	</div>	
-	
+	</div>
 	<hr>
-	
+	<div class="altVenue1">
 	<h3>Teien</h3>
 	<label for="teienAllow">Enable Teien?</label> <input type="checkbox" name="teienAllow" id="teienAllow" value="Yes" checked="checked" onclick="showHideCheckbox('teien',this)"/><br>
 	<div id="teien">
@@ -603,9 +604,9 @@
 		</div>
 		<button onclick="addExtraVenue('teien')">Add extra QP for Teien</button>
 	</div>	
-	
+	</div>
 	<hr>
-	
+	<div class="altVenue2">
 	<h3>Terrace</h3>
 	<label for="terraceAllow">Enable Terrace?</label> <input type="checkbox" name="terraceAllow" id="terraceAllow" value="Yes" checked="checked" onclick="showHideCheckbox('terrace',this)"/><br>
 	<div id="terrace">
@@ -654,9 +655,9 @@
 		</div>
 		<button onclick="addExtraVenue('terrace')">Add extra QP for Terrace</button>
 	</div>
-	
+	</div>
 	<hr>	
-	
+	<div class="altVenue1">
 	<h3>Veranda</h3>
 	<label for="verandaAllow">Enable Veranda?</label> <input type="checkbox" name="verandaAllow" id="verandaAllow" value="Yes" checked="checked" onclick="showHideCheckbox('veranda',this)"/><br>
 	<div id="veranda">
@@ -708,7 +709,7 @@
 		</div>
 		<button onclick="addExtraVenue('veranda')">Add extra QP for Veranda</button>
 	</div>
-	
+	</div>
 	<hr>
 	
 	<br>

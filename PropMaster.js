@@ -3,6 +3,10 @@
 dynamically adjust minimum guests based on max missions? selected/default missions? probably per venue
 
 check all text values against max and min on error checking.  should be future proof since I mostly dynamically set those maxes/mins
+//see how adding extra venue copies messes up error checking.  
+	//include new results in output
+	//consider if there's value in tracking a list of added venue# ?
+
 
 */
 
@@ -388,7 +392,7 @@ function addExtraVenue(venueName){
 			currentExtra=++numExtraVeranda;//increment numExtraVenue, then assign.
 			break;
 		default:
-			console.log("Venue name doesn't match in addExtraVenue");
+			console.log("Venue name doesn't match in addExtraVenue1");
 	}
 
 
@@ -404,94 +408,210 @@ function addExtraVenue(venueName){
 	htmlToAdd+="<input type='radio' name='"+venueName+currentExtra+"Gametype' id='"+venueName+currentExtra+"Gametype0' value='Known' onclick='showHideE(\""+venueName+currentExtra+"SelectedDiv\",false)'/> <label for='"+venueName+currentExtra+"Gametype0'>Known</label><br>";
 	htmlToAdd+="<input type='radio' name='"+venueName+currentExtra+"Gametype' id='"+venueName+currentExtra+"Gametype1' value='Pick' onclick='showHideE(\""+venueName+currentExtra+"SelectedDiv\",true)'/> <label for='"+venueName+currentExtra+"Gametype1'>Pick</label><br>";
 	htmlToAdd+="<input type='radio' name='"+venueName+currentExtra+"Gametype' id='"+venueName+currentExtra+"Gametype2' value='Any' checked='checked' onclick='showHideE(\""+venueName+currentExtra+"SelectedDiv\",true)'/> <label for='"+venueName+currentExtra+"Gametype2'>Any</label><br>";
-	htmlToAdd+="<div id='"+venueName+currentExtra+"SelectedDiv'><label for='"+venueName+currentExtra+"Needed'># of needed Missions to win:</label> <input type='number' id='"+venueName+currentExtra+"Needed' value='"+document.getElementById(""+venueName+"Needed")+"' step='1' max='7' min='1'  oninput='missionsUpdated(\""+venueName+currentExtra+"\")'/><br></div>";
-	htmlToAdd+="<label for='"+venueName+currentExtra+"Selected'># of selected Missions:</label> <input type='number' id='"+venueName+currentExtra+"Selected' value='"+document.getElementById(""+venueName+"Selected")+"' step='1' max='8' min='2' oninput='missionsUpdated(\""+venueName+currentExtra+"\")'/> <b style='color:red'><span id='"+venueName+currentExtra+"Error'></span></b><br>";
+	htmlToAdd+="<div id='"+venueName+currentExtra+"SelectedDiv'><label for='"+venueName+currentExtra+"Needed'># of needed Missions to win:</label> <input type='number' id='"+venueName+currentExtra+"Needed' value='"+document.getElementById(""+venueName+"Needed").value+"' step='1' max='998' min='1'  oninput='missionsUpdated(\""+venueName+currentExtra+"\")'/><br></div>";
+	htmlToAdd+="<label for='"+venueName+currentExtra+"Selected'># of selected Missions:</label> <input type='number' id='"+venueName+currentExtra+"Selected' value='"+document.getElementById(""+venueName+"Selected").value+"' step='1' max='999' min='2' oninput='missionsUpdated(\""+venueName+currentExtra+"\")'/> <b style='color:red'><span id='"+venueName+currentExtra+"Error'></span></b><br>";
 	htmlToAdd+="<label for='"+venueName+currentExtra+"Simplified'>Simplified Mode?</label> <input type='checkbox' name='"+venueName+currentExtra+"Simplified' id='"+venueName+currentExtra+"Simplified' value='Yes'/><br>";
 	htmlToAdd+="<label for='"+venueName+currentExtra+"Preselect'>Pre-select missions?</label> <input type='checkbox' name='"+venueName+currentExtra+"Preselect' id='"+venueName+currentExtra+"Preselect' value='Yes' onclick='showHideCheckbox(\""+venueName+currentExtra+"Defaults\",this)'/><br>";
 	htmlToAdd+="<div id='"+venueName+currentExtra+"Defaults' style='display:none'>";
 	if (venueHasMission(venueName,"Bug"))
-		htmlToAdd+="<input type='checkbox' name='"+venueName+currentExtra+"Defaults' id='"+venueName+currentExtra+"Default0' value='Bug' onClick='checkListErrors(\""+venueName+currentExtra+"\",'D',this.checked)'/> <label for='"+venueName+currentExtra+"Default0'>Bug Ambassador</label><br>";
+		htmlToAdd+="<input type='checkbox' name='"+venueName+currentExtra+"Defaults' id='"+venueName+currentExtra+"Default0' value='Bug' onClick='checkListErrors(\""+venueName+currentExtra+"\",\"D\",this.checked)'/> <label for='"+venueName+currentExtra+"Default0'>Bug Ambassador</label><br>";
 	if (venueHasMission(venueName,"Contact"))
-		htmlToAdd+="<input type='checkbox' name='"+venueName+currentExtra+"Defaults' id='"+venueName+currentExtra+"Default1' value='Contact' onClick='checkListErrors(\""+venueName+currentExtra+"\",'D',this.checked)'/> <label for='"+venueName+currentExtra+"Default1'>Contact Double Agent</label><br>";
+		htmlToAdd+="<input type='checkbox' name='"+venueName+currentExtra+"Defaults' id='"+venueName+currentExtra+"Default1' value='Contact' onClick='checkListErrors(\""+venueName+currentExtra+"\",\"D\",this.checked)'/> <label for='"+venueName+currentExtra+"Default1'>Contact Double Agent</label><br>";
 	if (venueHasMission(venueName,"Transfer"))
-		htmlToAdd+="<input type='checkbox' name='"+venueName+currentExtra+"Defaults' id='"+venueName+currentExtra+"Default2' value='Transfer' onClick='checkListErrors(\""+venueName+currentExtra+"\",'D',this.checked)'/> <label for='"+venueName+currentExtra+"Default2'>Transfer Microfilm</label><br>";
+		htmlToAdd+="<input type='checkbox' name='"+venueName+currentExtra+"Defaults' id='"+venueName+currentExtra+"Default2' value='Transfer' onClick='checkListErrors(\""+venueName+currentExtra+"\",\"D\",this.checked)'/> <label for='"+venueName+currentExtra+"Default2'>Transfer Microfilm</label><br>";
 	if (venueHasMission(venueName,"Swap"))
-		htmlToAdd+="<input type='checkbox' name='"+venueName+currentExtra+"Defaults' id='"+venueName+currentExtra+"Default3' value='Swap' onClick='checkListErrors(\""+venueName+currentExtra+"\",'D',this.checked)'/> <label for='"+venueName+currentExtra+"Default3'>Swap Statue</label><br>";
+		htmlToAdd+="<input type='checkbox' name='"+venueName+currentExtra+"Defaults' id='"+venueName+currentExtra+"Default3' value='Swap' onClick='checkListErrors(\""+venueName+currentExtra+"\",\"D\",this.checked)'/> <label for='"+venueName+currentExtra+"Default3'>Swap Statue</label><br>";
 	if (venueHasMission(venueName,"Inspect"))
-		htmlToAdd+="<input type='checkbox' name='"+venueName+currentExtra+"Defaults' id='"+venueName+currentExtra+"Default4' value='Inspect' onClick='checkListErrors(\""+venueName+currentExtra+"\",'D',this.checked)'/> <label for='"+venueName+currentExtra+"Default4'>Inspect Statues</label><br>";
+		htmlToAdd+="<input type='checkbox' name='"+venueName+currentExtra+"Defaults' id='"+venueName+currentExtra+"Default4' value='Inspect' onClick='checkListErrors(\""+venueName+currentExtra+"\",\"D\",this.checked)'/> <label for='"+venueName+currentExtra+"Default4'>Inspect Statues</label><br>";
 	if (venueHasMission(venueName,"Seduce"))
-		htmlToAdd+="<input type='checkbox' name='"+venueName+currentExtra+"Defaults' id='"+venueName+currentExtra+"Default5' value='Seduce' onClick='checkListErrors(\""+venueName+currentExtra+"\",'D',this.checked)'/> <label for='"+venueName+currentExtra+"Default5'>Seduce Target</label><br>";
+		htmlToAdd+="<input type='checkbox' name='"+venueName+currentExtra+"Defaults' id='"+venueName+currentExtra+"Default5' value='Seduce' onClick='checkListErrors(\""+venueName+currentExtra+"\",\"D\",this.checked)'/> <label for='"+venueName+currentExtra+"Default5'>Seduce Target</label><br>";
 	if (venueHasMission(venueName,"Purloin"))
-		htmlToAdd+="<input type='checkbox' name='"+venueName+currentExtra+"Defaults' id='"+venueName+currentExtra+"Default6' value='Purloin' onClick='checkListErrors(\""+venueName+currentExtra+"\",'D',this.checked)'/> <label for='"+venueName+currentExtra+"Default6'>Purloin Guest List</label><br>";
+		htmlToAdd+="<input type='checkbox' name='"+venueName+currentExtra+"Defaults' id='"+venueName+currentExtra+"Default6' value='Purloin' onClick='checkListErrors(\""+venueName+currentExtra+"\",\"D\",this.checked)'/> <label for='"+venueName+currentExtra+"Default6'>Purloin Guest List</label><br>";
 	if (venueHasMission(venueName,"Fingerprint"))
-		htmlToAdd+="<input type='checkbox' name='"+venueName+currentExtra+"Defaults' id='"+venueName+currentExtra+"Default7' value='Fingerprint' onClick='checkListErrors(\""+venueName+currentExtra+"\",'D',this.checked)'/> <label for='"+venueName+currentExtra+"Default7'>Fingerprint Ambassador</label><br>";
+		htmlToAdd+="<input type='checkbox' name='"+venueName+currentExtra+"Defaults' id='"+venueName+currentExtra+"Default7' value='Fingerprint' onClick='checkListErrors(\""+venueName+currentExtra+"\",\"D\",this.checked)'/> <label for='"+venueName+currentExtra+"Default7'>Fingerprint Ambassador</label><br>";
 	htmlToAdd+="<b style='color:red'><span id='"+venueName+currentExtra+"DError'></span></b>";
 	htmlToAdd+="</div>";
 	htmlToAdd+="<label for='"+venueName+currentExtra+"Prohibit'>Prohibit missions?</label> <input type='checkbox' name='"+venueName+currentExtra+"Prohibit' id='"+venueName+currentExtra+"Prohibit' value='Yes' onclick='showHideCheckbox(\""+venueName+currentExtra+"Prohibits\",this)'/><br>";
 	htmlToAdd+="<div id='"+venueName+currentExtra+"Prohibits' style='display:none'>";	
 	if (venueHasMission(venueName,"Bug"))
-		htmlToAdd+="<input type='checkbox' name='"+venueName+currentExtra+"Prohibits' id='"+venueName+currentExtra+"Prohibit0' value='Bug' onClick='checkListErrors(\""+venueName+currentExtra+"\",'P',this.checked)'/> <label for='"+venueName+currentExtra+"Prohibit0'>Bug Ambassador</label><br>";
+		htmlToAdd+="<input type='checkbox' name='"+venueName+currentExtra+"Prohibits' id='"+venueName+currentExtra+"Prohibit0' value='Bug' onClick='checkListErrors(\""+venueName+currentExtra+"\",\"P\",this.checked)'/> <label for='"+venueName+currentExtra+"Prohibit0'>Bug Ambassador</label><br>";
 	if (venueHasMission(venueName,"Contact"))
-		htmlToAdd+="<input type='checkbox' name='"+venueName+currentExtra+"Prohibits' id='"+venueName+currentExtra+"Prohibit1' value='Contact' onClick='checkListErrors(\""+venueName+currentExtra+"\",'P',this.checked)'/> <label for='"+venueName+currentExtra+"Prohibit1'>Contact Double Agent</label><br>";
+		htmlToAdd+="<input type='checkbox' name='"+venueName+currentExtra+"Prohibits' id='"+venueName+currentExtra+"Prohibit1' value='Contact' onClick='checkListErrors(\""+venueName+currentExtra+"\",\"P\",this.checked)'/> <label for='"+venueName+currentExtra+"Prohibit1'>Contact Double Agent</label><br>";
 	if (venueHasMission(venueName,"Transfer"))
-		htmlToAdd+="<input type='checkbox' name='"+venueName+currentExtra+"Prohibits' id='"+venueName+currentExtra+"Prohibit2' value='Transfer' onClick='checkListErrors(\""+venueName+currentExtra+"\",'P',this.checked)'/> <label for='"+venueName+currentExtra+"Prohibit2'>Transfer Microfilm</label><br>";
+		htmlToAdd+="<input type='checkbox' name='"+venueName+currentExtra+"Prohibits' id='"+venueName+currentExtra+"Prohibit2' value='Transfer' onClick='checkListErrors(\""+venueName+currentExtra+"\",\"P\",this.checked)'/> <label for='"+venueName+currentExtra+"Prohibit2'>Transfer Microfilm</label><br>";
 	if (venueHasMission(venueName,"Swap"))
-		htmlToAdd+="<input type='checkbox' name='"+venueName+currentExtra+"Prohibits' id='"+venueName+currentExtra+"Prohibit3' value='Swap' onClick='checkListErrors(\""+venueName+currentExtra+"\",'P',this.checked)'/> <label for='"+venueName+currentExtra+"Prohibit3'>Swap Statue</label><br>";
+		htmlToAdd+="<input type='checkbox' name='"+venueName+currentExtra+"Prohibits' id='"+venueName+currentExtra+"Prohibit3' value='Swap' onClick='checkListErrors(\""+venueName+currentExtra+"\",\"P\",this.checked)'/> <label for='"+venueName+currentExtra+"Prohibit3'>Swap Statue</label><br>";
 	if (venueHasMission(venueName,"Inspect"))
-		htmlToAdd+="<input type='checkbox' name='"+venueName+currentExtra+"Prohibits' id='"+venueName+currentExtra+"Prohibit4' value='Inspect' onClick='checkListErrors(\""+venueName+currentExtra+"\",'P',this.checked)'/> <label for='"+venueName+currentExtra+"Prohibit4'>Inspect Statues</label><br>";
+		htmlToAdd+="<input type='checkbox' name='"+venueName+currentExtra+"Prohibits' id='"+venueName+currentExtra+"Prohibit4' value='Inspect' onClick='checkListErrors(\""+venueName+currentExtra+"\",\"P\",this.checked)'/> <label for='"+venueName+currentExtra+"Prohibit4'>Inspect Statues</label><br>";
 	if (venueHasMission(venueName,"Seduce"))
-		htmlToAdd+="<input type='checkbox' name='"+venueName+currentExtra+"Prohibits' id='"+venueName+currentExtra+"Prohibit5' value='Seduce' onClick='checkListErrors(\""+venueName+currentExtra+"\",'P',this.checked)'/> <label for='"+venueName+currentExtra+"Prohibit5'>Seduce Target</label><br>";
+		htmlToAdd+="<input type='checkbox' name='"+venueName+currentExtra+"Prohibits' id='"+venueName+currentExtra+"Prohibit5' value='Seduce' onClick='checkListErrors(\""+venueName+currentExtra+"\",\"P\",this.checked)'/> <label for='"+venueName+currentExtra+"Prohibit5'>Seduce Target</label><br>";
 	if (venueHasMission(venueName,"Purloin"))
-		htmlToAdd+="<input type='checkbox' name='"+venueName+currentExtra+"Prohibits' id='"+venueName+currentExtra+"Prohibit6' value='Purloin' onClick='checkListErrors(\""+venueName+currentExtra+"\",'P',this.checked)'/> <label for='"+venueName+currentExtra+"Prohibit6'>Purloin Guest List</label><br>";
+		htmlToAdd+="<input type='checkbox' name='"+venueName+currentExtra+"Prohibits' id='"+venueName+currentExtra+"Prohibit6' value='Purloin' onClick='checkListErrors(\""+venueName+currentExtra+"\",\"P\",this.checked)'/> <label for='"+venueName+currentExtra+"Prohibit6'>Purloin Guest List</label><br>";
 	if (venueHasMission(venueName,"Fingerprint"))
-		htmlToAdd+="<input type='checkbox' name='"+venueName+currentExtra+"Prohibits' id='"+venueName+currentExtra+"Prohibit7' value='Fingerprint' onClick='checkListErrors(\""+venueName+currentExtra+"\",'P',this.checked)'/> <label for='"+venueName+currentExtra+"Prohibit7'>Fingerprint Ambassador</label><br>";
+		htmlToAdd+="<input type='checkbox' name='"+venueName+currentExtra+"Prohibits' id='"+venueName+currentExtra+"Prohibit7' value='Fingerprint' onClick='checkListErrors(\""+venueName+currentExtra+"\",\"P\",this.checked)'/> <label for='"+venueName+currentExtra+"Prohibit7'>Fingerprint Ambassador</label><br>";
 	htmlToAdd+="<b style='color:red'><span id='"+venueName+currentExtra+"PError'></span></b>";
 	htmlToAdd+="</div>";
 	htmlToAdd+="<label for='"+venueName+currentExtra+"Require'>Require missions?</label> <input type='checkbox' name='"+venueName+currentExtra+"Require' id='"+venueName+currentExtra+"Require' value='Yes' onclick='showHideCheckbox(\""+venueName+currentExtra+"Requires\",this)'/><br>";
 	htmlToAdd+="<div id='"+venueName+currentExtra+"Requires' style='display:none'>";
 	if (venueHasMission(venueName,"Bug"))
-		htmlToAdd+="<input type='checkbox' name='"+venueName+currentExtra+"Requires' id='"+venueName+currentExtra+"Require0' value='Bug' onClick='checkListErrors(\""+venueName+currentExtra+"\",'R',this.checked)'/> <label for='"+venueName+currentExtra+"Require0'>Bug Ambassador</label><br>";
+		htmlToAdd+="<input type='checkbox' name='"+venueName+currentExtra+"Requires' id='"+venueName+currentExtra+"Require0' value='Bug' onClick='checkListErrors(\""+venueName+currentExtra+"\",\"R\",this.checked)'/> <label for='"+venueName+currentExtra+"Require0'>Bug Ambassador</label><br>";
 	if (venueHasMission(venueName,"Contact"))
-		htmlToAdd+="<input type='checkbox' name='"+venueName+currentExtra+"Requires' id='"+venueName+currentExtra+"Require1' value='Contact' onClick='checkListErrors(\""+venueName+currentExtra+"\",'R',this.checked)'/> <label for='"+venueName+currentExtra+"Require1'>Contact Double Agent</label><br>";
+		htmlToAdd+="<input type='checkbox' name='"+venueName+currentExtra+"Requires' id='"+venueName+currentExtra+"Require1' value='Contact' onClick='checkListErrors(\""+venueName+currentExtra+"\",\"R\",this.checked)'/> <label for='"+venueName+currentExtra+"Require1'>Contact Double Agent</label><br>";
 	if (venueHasMission(venueName,"Transfer"))
-		htmlToAdd+="<input type='checkbox' name='"+venueName+currentExtra+"Requires' id='"+venueName+currentExtra+"Require2' value='Transfer' onClick='checkListErrors(\""+venueName+currentExtra+"\",'R',this.checked)'/> <label for='"+venueName+currentExtra+"Require2'>Transfer Microfilm</label><br>";
+		htmlToAdd+="<input type='checkbox' name='"+venueName+currentExtra+"Requires' id='"+venueName+currentExtra+"Require2' value='Transfer' onClick='checkListErrors(\""+venueName+currentExtra+"\",\"R\",this.checked)'/> <label for='"+venueName+currentExtra+"Require2'>Transfer Microfilm</label><br>";
 	if (venueHasMission(venueName,"Swap"))
-		htmlToAdd+="<input type='checkbox' name='"+venueName+currentExtra+"Requires' id='"+venueName+currentExtra+"Require3' value='Swap' onClick='checkListErrors(\""+venueName+currentExtra+"\",'R',this.checked)'/> <label for='"+venueName+currentExtra+"Require3'>Swap Statue</label><br>";
+		htmlToAdd+="<input type='checkbox' name='"+venueName+currentExtra+"Requires' id='"+venueName+currentExtra+"Require3' value='Swap' onClick='checkListErrors(\""+venueName+currentExtra+"\",\"R\",this.checked)'/> <label for='"+venueName+currentExtra+"Require3'>Swap Statue</label><br>";
 	if (venueHasMission(venueName,"Inspect"))
-		htmlToAdd+="<input type='checkbox' name='"+venueName+currentExtra+"Requires' id='"+venueName+currentExtra+"Require4' value='Inspect' onClick='checkListErrors(\""+venueName+currentExtra+"\",'R',this.checked)'/> <label for='"+venueName+currentExtra+"Require4'>Inspect Statues</label><br>";
+		htmlToAdd+="<input type='checkbox' name='"+venueName+currentExtra+"Requires' id='"+venueName+currentExtra+"Require4' value='Inspect' onClick='checkListErrors(\""+venueName+currentExtra+"\",\"R\",this.checked)'/> <label for='"+venueName+currentExtra+"Require4'>Inspect Statues</label><br>";
 	if (venueHasMission(venueName,"Seduce"))
-		htmlToAdd+="<input type='checkbox' name='"+venueName+currentExtra+"Requires' id='"+venueName+currentExtra+"Require5' value='Seduce' onClick='checkListErrors(\""+venueName+currentExtra+"\",'R',this.checked)'/> <label for='"+venueName+currentExtra+"Require5'>Seduce Target</label><br>";
+		htmlToAdd+="<input type='checkbox' name='"+venueName+currentExtra+"Requires' id='"+venueName+currentExtra+"Require5' value='Seduce' onClick='checkListErrors(\""+venueName+currentExtra+"\",\"R\",this.checked)'/> <label for='"+venueName+currentExtra+"Require5'>Seduce Target</label><br>";
 	if (venueHasMission(venueName,"Purloin"))
-		htmlToAdd+="<input type='checkbox' name='"+venueName+currentExtra+"Requires' id='"+venueName+currentExtra+"Require6' value='Purloin' onClick='checkListErrors(\""+venueName+currentExtra+"\",'R',this.checked)'/> <label for='"+venueName+currentExtra+"Require6'>Purloin Guest List</label><br>";
+		htmlToAdd+="<input type='checkbox' name='"+venueName+currentExtra+"Requires' id='"+venueName+currentExtra+"Require6' value='Purloin' onClick='checkListErrors(\""+venueName+currentExtra+"\",\"R\",this.checked)'/> <label for='"+venueName+currentExtra+"Require6'>Purloin Guest List</label><br>";
 	if (venueHasMission(venueName,"Fingerprint"))
-		htmlToAdd+="<input type='checkbox' name='"+venueName+currentExtra+"Requires' id='"+venueName+currentExtra+"Require7' value='Fingerprint' onClick='checkListErrors(\""+venueName+currentExtra+"\",'R',this.checked)'/> <label for='"+venueName+currentExtra+"Require7'>Fingerprint Ambassador</label><br>";
+		htmlToAdd+="<input type='checkbox' name='"+venueName+currentExtra+"Requires' id='"+venueName+currentExtra+"Require7' value='Fingerprint' onClick='checkListErrors(\""+venueName+currentExtra+"\",\"R\",this.checked)'/> <label for='"+venueName+currentExtra+"Require7'>Fingerprint Ambassador</label><br>";
 	htmlToAdd+="<b style='color:red'><span id='"+venueName+currentExtra+"RError'></span></b>";
 	htmlToAdd+="</div>";
 	
-
-	thisDiv.innerHTML=thisDiv.innerHTML+htmlToAdd;
-	//then switch venueName and 
-	// set max missions
-	// display time
-	//also set gametype based on original gametype. does this trigger onInput?
-	//test if simplified was enabled.  does changing it trigger onclick?
-	//test if preselect/default was enabled.  does changing it trigger onclick?
-	//test if prohibit was enabled.  does changing it trigger onclick?
-	//test if require was enabled.  does changing it trigger onclick?
+	thisDiv.insertAdjacentHTML('beforeend', htmlToAdd);//adds without refreshing everything
 
 
-
-	//then, todolist
-	//warning in console
-	//for some reason adding the new innerHTML resets stuff to default value kinda
-	//but also the Time sometimes goes to a random value on it's own.  display time first
-	//in missionsUpdated, need to strip number from venueName before switching
-	//likely in checkListErrors too
-	//see how it messes up error checking.  
-	//include new results in output
-	//consider if there's value in tracking a list of added venue# ?
+	//then switch venueName and...
 	
+	//take care of things that don't require accessing named globals
+	displayTime(""+venueName+currentExtra);
+	
+	//get value of base venue game mode, then click the new gametype with that value
+	document.querySelector('input[name="'+venueName+currentExtra+'Gametype"][value="'+document.querySelector('input[name="'+venueName+'Gametype"]:checked')?.value+'"]').click();
+	
+	//simplified doesn't have any onclick methods.  seems slightly more elegant than declaring checked in html
+	document.getElementById(""+venueName+currentExtra+"Simplified").checked=Boolean(document.getElementById(""+venueName+"Simplified").checked);
+	
+	//preselected missions
+	if (Boolean(document.getElementById(""+venueName+"Preselect").checked)){
+		//trigger the onclick effects to show the sub div
+		document.getElementById(""+venueName+currentExtra+"Preselect").click();
+		if (venueHasMission(venueName,"Bug") && Boolean(document.getElementById(""+venueName+"Default0").checked))
+			document.getElementById(""+venueName+currentExtra+"Default0").click();
+		if (venueHasMission(venueName,"Contact") && Boolean(document.getElementById(""+venueName+"Default1").checked))
+			document.getElementById(""+venueName+currentExtra+"Default1").click();
+		if (venueHasMission(venueName,"Transfer") && Boolean(document.getElementById(""+venueName+"Default2").checked))
+			document.getElementById(""+venueName+currentExtra+"Default2").click();
+		if (venueHasMission(venueName,"Swap") && Boolean(document.getElementById(""+venueName+"Default3").checked))
+			document.getElementById(""+venueName+currentExtra+"Default3").click();
+		if (venueHasMission(venueName,"Inspect") && Boolean(document.getElementById(""+venueName+"Default4").checked))
+			document.getElementById(""+venueName+currentExtra+"Default4").click();
+		if (venueHasMission(venueName,"Seduce") && Boolean(document.getElementById(""+venueName+"Default5").checked))
+			document.getElementById(""+venueName+currentExtra+"Default5").click();
+		if (venueHasMission(venueName,"Purloin") && Boolean(document.getElementById(""+venueName+"Default6").checked))
+			document.getElementById(""+venueName+currentExtra+"Default6").click();
+		if (venueHasMission(venueName,"Fingerprint") && Boolean(document.getElementById(""+venueName+"Default7").checked))
+			document.getElementById(""+venueName+currentExtra+"Default7").click();
+	}
 
+	//prohibited missions
+	if (Boolean(document.getElementById(""+venueName+"Prohibit").checked)){
+		//trigger the onclick effects to show the sub div
+		document.getElementById(""+venueName+currentExtra+"Prohibit").click();
+		if (venueHasMission(venueName,"Bug") && Boolean(document.getElementById(""+venueName+"Prohibit0").checked))
+			document.getElementById(""+venueName+currentExtra+"Prohibit0").click();
+		if (venueHasMission(venueName,"Contact") && Boolean(document.getElementById(""+venueName+"Prohibit1").checked))
+			document.getElementById(""+venueName+currentExtra+"Prohibit1").click();
+		if (venueHasMission(venueName,"Transfer") && Boolean(document.getElementById(""+venueName+"Prohibit2").checked))
+			document.getElementById(""+venueName+currentExtra+"Prohibit2").click();
+		if (venueHasMission(venueName,"Swap") && Boolean(document.getElementById(""+venueName+"Prohibit3").checked))
+			document.getElementById(""+venueName+currentExtra+"Prohibit3").click();
+		if (venueHasMission(venueName,"Inspect") && Boolean(document.getElementById(""+venueName+"Prohibit4").checked))
+			document.getElementById(""+venueName+currentExtra+"Prohibit4").click();
+		if (venueHasMission(venueName,"Seduce") && Boolean(document.getElementById(""+venueName+"Prohibit5").checked))
+			document.getElementById(""+venueName+currentExtra+"Prohibit5").click();
+		if (venueHasMission(venueName,"Purloin") && Boolean(document.getElementById(""+venueName+"Prohibit6").checked))
+			document.getElementById(""+venueName+currentExtra+"Prohibit6").click();
+		if (venueHasMission(venueName,"Fingerprint") && Boolean(document.getElementById(""+venueName+"Prohibit7").checked))
+			document.getElementById(""+venueName+currentExtra+"Prohibit7").click();
+	}
+
+	//prohibited missions
+	if (Boolean(document.getElementById(""+venueName+"Require").checked)){
+		//trigger the onclick effects to show the sub div
+		document.getElementById(""+venueName+currentExtra+"Require").click();
+		if (venueHasMission(venueName,"Bug") && Boolean(document.getElementById(""+venueName+"Require0").checked))
+			document.getElementById(""+venueName+currentExtra+"Require0").click();
+		if (venueHasMission(venueName,"Contact") && Boolean(document.getElementById(""+venueName+"Require1").checked))
+			document.getElementById(""+venueName+currentExtra+"Require1").click();
+		if (venueHasMission(venueName,"Transfer") && Boolean(document.getElementById(""+venueName+"Require2").checked))
+			document.getElementById(""+venueName+currentExtra+"Require2").click();
+		if (venueHasMission(venueName,"Swap") && Boolean(document.getElementById(""+venueName+"Require3").checked))
+			document.getElementById(""+venueName+currentExtra+"Require3").click();
+		if (venueHasMission(venueName,"Inspect") && Boolean(document.getElementById(""+venueName+"Require4").checked))
+			document.getElementById(""+venueName+currentExtra+"Require4").click();
+		if (venueHasMission(venueName,"Seduce") && Boolean(document.getElementById(""+venueName+"Require5").checked))
+			document.getElementById(""+venueName+currentExtra+"Require5").click();
+		if (venueHasMission(venueName,"Purloin") && Boolean(document.getElementById(""+venueName+"Require6").checked))
+			document.getElementById(""+venueName+currentExtra+"Require6").click();
+		if (venueHasMission(venueName,"Fingerprint") && Boolean(document.getElementById(""+venueName+"Require7").checked))
+			document.getElementById(""+venueName+currentExtra+"Require7").click();
+	}
+
+	//some stuff that references venue-named globals
+	switch (venueName) {
+		case 'aquarium':
+			document.getElementById(""+venueName+currentExtra+"Selected").max=AquariumMissionsMax;
+			document.getElementById(""+venueName+currentExtra+"Needed").max=AquariumMissionsMax-1;
+			break;
+		case 'balcony':
+			document.getElementById(""+venueName+currentExtra+"Selected").max=BalconyMissionsMax;
+			document.getElementById(""+venueName+currentExtra+"Needed").max=BalconyMissionsMax-1;
+			break;
+		case 'ballroom':
+			document.getElementById(""+venueName+currentExtra+"Selected").max=BallroomMissionsMax;
+			document.getElementById(""+venueName+currentExtra+"Needed").max=BallroomMissionsMax-1;
+			break;
+		case 'courtyard':
+			document.getElementById(""+venueName+currentExtra+"Selected").max=CourtyardMissionsMax;
+			document.getElementById(""+venueName+currentExtra+"Needed").max=CourtyardMissionsMax-1;
+			break;
+		case 'gallery':
+			document.getElementById(""+venueName+currentExtra+"Selected").max=GalleryMissionsMax;
+			document.getElementById(""+venueName+currentExtra+"Needed").max=GalleryMissionsMax-1;
+			break;
+		case 'highrise':
+			document.getElementById(""+venueName+currentExtra+"Selected").max=HighriseMissionsMax;
+			document.getElementById(""+venueName+currentExtra+"Needed").max=HighriseMissionsMax-1;
+			break;
+		case 'library':
+			document.getElementById(""+venueName+currentExtra+"Selected").max=LibraryMissionsMax;
+			document.getElementById(""+venueName+currentExtra+"Needed").max=LibraryMissionsMax-1;
+			break;
+		case 'modderne':
+			document.getElementById(""+venueName+currentExtra+"Selected").max=ModerneMissionsMax;
+			document.getElementById(""+venueName+currentExtra+"Needed").max=ModerneMissionsMax-1;
+			break;
+		case 'pub':
+			document.getElementById(""+venueName+currentExtra+"Selected").max=PubMissionsMax;
+			document.getElementById(""+venueName+currentExtra+"Needed").max=PubMissionsMax-1;
+			break;
+		case 'redwoods':
+			document.getElementById(""+venueName+currentExtra+"Selected").max=RedwoodsMissionsMax;
+			document.getElementById(""+venueName+currentExtra+"Needed").max=RedwoodsMissionsMax-1;
+			break;
+		case 'teien':
+			document.getElementById(""+venueName+currentExtra+"Selected").max=TeienMissionsMax;
+			document.getElementById(""+venueName+currentExtra+"Needed").max=TeienMissionsMax-1;
+			break;
+		case 'terrace':
+			document.getElementById(""+venueName+currentExtra+"Selected").max=TerraceMissionsMax;
+			document.getElementById(""+venueName+currentExtra+"Needed").max=TerraceMissionsMax-1;
+			break;
+		case 'veranda':
+			document.getElementById(""+venueName+currentExtra+"Selected").max=VerandaMissionsMax;
+			document.getElementById(""+venueName+currentExtra+"Needed").max=VerandaMissionsMax-1;
+			break;
+		default:
+			console.log("Venue name doesn't match in addExtraVenue2");
+	}
+
+	
+	
 }
 
 function venueHasMission(venueName,missionName){
@@ -968,8 +1088,10 @@ function missionsUpdated(venueName){//when one of the Selected Missions counter 
 		//anErrorExists=false;
 	}
 	
+	//strip numbers in case we're calling a dupe.  this might mess up error checking
+	var numberlessString=venueName.replace(/\d+/g, '');
 	//re-test all 3 checklists on this venue.
-	switch(venueName){//strip numbers in case we're calling a dupe.  this might mess up error checking
+	switch(numberlessString){
 		case "aquarium":
 			if(aquariumD > currentlySelected)
 				document.getElementById(venueName+'D'+"Error").innerHTML="Over selected.  It works, but randomly(?) selects the correct number of missions.";
@@ -1423,7 +1545,9 @@ function checkListErrors(venueName,checklistKey, isChecked){
 	var currentlySelected=Number(document.getElementById(venueName+"Selected").value);
 	
 	//gross code, have fun future people
-	switch(venueName){
+	//strip numbers in case we're calling a dupe.  this might mess up error checking
+	var numberlessString=venueName.replace(/\d+/g, '');
+	switch(numberlessString){
 		case "aquarium":
 			//aquarium
 			switch(checklistKey){//get last character as key
