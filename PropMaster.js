@@ -85,7 +85,6 @@ var verandaR=0;
 function onClickSave(){//build the prop string, and prompt for download
 	var anErrorExists=finalCheckForErrors();
 	
-
 	if(retryError || !anErrorExists){//if no errors
 		var propName = document.getElementById("filename").value + ".prop";
 	
@@ -100,9 +99,6 @@ function onClickSave(){//build the prop string, and prompt for download
 			propText= propText+"int Minimal = 1\n\t}\n";
 		else
 			propText= propText+"int Minimal = 0\n\t}\n";
-		
-		
-		
 		
 		if(document.getElementById("aquariumAllow").checked)//if we are using aquarium?
 			propText = propText+getQuickplayGroupFromVenue("aquarium")+"\n\n";
@@ -391,13 +387,10 @@ function showHideE(whatToHide, isCheckedTF) {
 				document.getElementById(venueName+"Selected").value=2;
 		}
 		
-		
 		missionsUpdated(venueName);//update mission input box maxes for this venue
 	}
 	
 }
-
-
 
 function missionsUpdated(venueName){//when one of the Selected Missions counter is changed
 	//this is also called when Needed missions is changed (because need to update for Required checklist), but should be okay
@@ -419,7 +412,6 @@ function missionsUpdated(venueName){//when one of the Selected Missions counter 
 		retryError=false;//an error was fixed.
 		//anErrorExists=false;
 	}
-	
 	
 	//re-test all 3 checklists on this venue.
 	switch(venueName){
@@ -870,10 +862,6 @@ function missionsUpdated(venueName){//when one of the Selected Missions counter 
 	}
 		
 }
-
-
-
-
 
 function checkListErrors(venueName,checklistKey, isChecked){
 	//console.log(""+venueName);
@@ -1874,16 +1862,9 @@ function checkListErrors(venueName,checklistKey, isChecked){
 		default:
 			alert("Unknown venueName in checkListErrors() ["+venueName+"]");
 	}//end venue switch
-	
-	
-
 }//end checkListErrors
 
-
-
-
 function finalCheckForErrors(){
-	
 	
 	//test all checklists, and test guest minimum
 	//should I also test needed < selected? suuure
@@ -2186,16 +2167,8 @@ function finalCheckForErrors(){
 	if (!document.getElementById(venueName+"Gametype0").checked && (Number(document.getElementById(venueName+"Needed").value) >= currentlySelected))
 		return true;
 	
-	
-	
-	
-	
 	return false;
 }
-
-
-
-
 
 
 function displayTime(venueName){
@@ -2221,9 +2194,6 @@ function onNameChange(fieldName){
 		var currentName = document.getElementById(fieldName).value;
 	else//use venueName combo
 		var currentName = document.getElementById(fieldName+"Name").value;
-	
-	
-	
 	
 	//if the name contains a quotation mark
 	if (currentName.indexOf('"')>=0){
@@ -2287,15 +2257,4 @@ function onLoad(){
 	});
 
 	
-
-
-
-
-
-
-
 }
-
-
-
-
