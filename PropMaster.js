@@ -1,20 +1,11 @@
 /*bad todo
 
-
-need to backfill maxes in venue input boxes using consts.  do it when a new venue or mission comes out
-can also set consts for max guests per venue and backfill
-already have an onLoad method
-
-
 dynamically adjust minimum guests based on max missions? selected/default missions? probably per venue
 
 check all text values against max and min on error checking.  should be future proof since I mostly dynamically set those maxes/mins
 
 */
 
-
-
-//not using these everywhere yet.  need to backfill maxes in venue input boxes.  later
 const AquariumMissionsMax=8;
 const BalconyMissionsMax=5;
 const BallroomMissionsMax=8;
@@ -29,6 +20,9 @@ const TeienMissionsMax=8;
 const TerraceMissionsMax=7;
 const VerandaMissionsMax=8;
 
+const GlobalMaxGuests=21;
+
+const listOfVenuesLowercase=["aquarium","balcony","ballroom","courtyard","gallery","highrise","library","moderne","pub","redwoods","teien","terrace","veranda"];
 
 
 var retryError=false;//for not forcing retries
@@ -393,7 +387,7 @@ function showHideE(whatToHide, isCheckedTF) {
 		}
 		else{//not known
 			document.getElementById(venueName+"Selected").min=2;
-			if (document.getElementById(venueName+"Selected").value == 1)
+			if (Number(document.getElementById(venueName+"Selected").value) == 1)
 				document.getElementById(venueName+"Selected").value=2;
 		}
 		
@@ -407,16 +401,16 @@ function showHideE(whatToHide, isCheckedTF) {
 
 function missionsUpdated(venueName){//when one of the Selected Missions counter is changed
 	//this is also called when Needed missions is changed (because need to update for Required checklist), but should be okay
-	var currentlySelected = document.getElementById(venueName+"Selected").value;
+	var currentlySelected = Number(document.getElementById(venueName+"Selected").value);
 	
 	document.getElementById(venueName+"Needed").max=Math.max(currentlySelected-1,1);//set max missions needed to data or 1, whichever is higher
-	if (document.getElementById(venueName+"Needed").value >= currentlySelected){//if we need to adjust current value of neededElement
+	if (Number(document.getElementById(venueName+"Needed").value)>= currentlySelected){//if we need to adjust current value of neededElement
 		//if it's Known gametype, neededElement isn't used, so just bump down to currentlySelected-1
 		document.getElementById(venueName+"Needed").value=Math.max(currentlySelected-1,1);
 	}
 	
 	//if not the known game type, and selected=needed
-	if (!document.getElementById(venueName+"Gametype0").checked && (document.getElementById(venueName+"Needed").value == document.getElementById(venueName+"Selected").value)){
+	if (!document.getElementById(venueName+"Gametype0").checked && (Number(document.getElementById(venueName+"Needed").value) == Number(document.getElementById(venueName+"Selected").value))){
 		document.getElementById(venueName+"Error").innerHTML="Missions Selected needs to be greater than Needed";
 		//anErrorExists=true;
 	}
@@ -444,7 +438,7 @@ function missionsUpdated(venueName){//when one of the Selected Missions counter 
 			}
 			if(!document.getElementById(venueName+"Gametype0").checked){//if not known mode
 				//then test on needed to win value
-				if(aquariumR > document.getElementById(venueName+"Needed").value){
+				if(aquariumR > Number(document.getElementById(venueName+"Needed").value)){
 					document.getElementById(venueName+'R'+"Error").innerHTML="Over required.  This 'works' but will forcefully enable more missions in weird ways.";
 				}
 				else{
@@ -478,7 +472,7 @@ function missionsUpdated(venueName){//when one of the Selected Missions counter 
 			}
 			if(!document.getElementById(venueName+"Gametype0").checked){//if not known mode
 				//then test on needed to win value
-				if(balconyR > document.getElementById(venueName+"Needed").value){
+				if(balconyR > Number(document.getElementById(venueName+"Needed").value)){
 					document.getElementById(venueName+'R'+"Error").innerHTML="Over required.  This 'works' but will forcefully enable more missions in weird ways.";
 				}
 				else{
@@ -512,7 +506,7 @@ function missionsUpdated(venueName){//when one of the Selected Missions counter 
 			}
 			if(!document.getElementById(venueName+"Gametype0").checked){//if not known mode
 				//then test on needed to win value
-				if(ballroomR > document.getElementById(venueName+"Needed").value){
+				if(ballroomR > Number(document.getElementById(venueName+"Needed").value)){
 					document.getElementById(venueName+'R'+"Error").innerHTML="Over required.  This 'works' but will forcefully enable more missions in weird ways.";
 				}
 				else{
@@ -546,7 +540,7 @@ function missionsUpdated(venueName){//when one of the Selected Missions counter 
 			}
 			if(!document.getElementById(venueName+"Gametype0").checked){//if not known mode
 				//then test on needed to win value
-				if(courtyardR > document.getElementById(venueName+"Needed").value){
+				if(courtyardR > Number(document.getElementById(venueName+"Needed").value)){
 					document.getElementById(venueName+'R'+"Error").innerHTML="Over required.  This 'works' but will forcefully enable more missions in weird ways.";
 				}
 				else{
@@ -580,7 +574,7 @@ function missionsUpdated(venueName){//when one of the Selected Missions counter 
 			}
 			if(!document.getElementById(venueName+"Gametype0").checked){//if not known mode
 				//then test on needed to win value
-				if(galleryR > document.getElementById(venueName+"Needed").value){
+				if(galleryR > Number(document.getElementById(venueName+"Needed").value)){
 					document.getElementById(venueName+'R'+"Error").innerHTML="Over required.  This 'works' but will forcefully enable more missions in weird ways.";
 				}
 				else{
@@ -614,7 +608,7 @@ function missionsUpdated(venueName){//when one of the Selected Missions counter 
 			}
 			if(!document.getElementById(venueName+"Gametype0").checked){//if not known mode
 				//then test on needed to win value
-				if(highriseR > document.getElementById(venueName+"Needed").value){
+				if(highriseR > Number(document.getElementById(venueName+"Needed").value)){
 					document.getElementById(venueName+'R'+"Error").innerHTML="Over required.  This 'works' but will forcefully enable more missions in weird ways.";
 				}
 				else{
@@ -648,7 +642,7 @@ function missionsUpdated(venueName){//when one of the Selected Missions counter 
 			}
 			if(!document.getElementById(venueName+"Gametype0").checked){//if not known mode
 				//then test on needed to win value
-				if(libraryR > document.getElementById(venueName+"Needed").value){
+				if(libraryR > Number(document.getElementById(venueName+"Needed").value)){
 					document.getElementById(venueName+'R'+"Error").innerHTML="Over required.  This 'works' but will forcefully enable more missions in weird ways.";
 				}
 				else{
@@ -682,7 +676,7 @@ function missionsUpdated(venueName){//when one of the Selected Missions counter 
 			}
 			if(!document.getElementById(venueName+"Gametype0").checked){//if not known mode
 				//then test on needed to win value
-				if(moderneR > document.getElementById(venueName+"Needed").value){
+				if(moderneR > Number(document.getElementById(venueName+"Needed").value)){
 					document.getElementById(venueName+'R'+"Error").innerHTML="Over required.  This 'works' but will forcefully enable more missions in weird ways.";
 				}
 				else{
@@ -716,7 +710,7 @@ function missionsUpdated(venueName){//when one of the Selected Missions counter 
 			}
 			if(!document.getElementById(venueName+"Gametype0").checked){//if not known mode
 				//then test on needed to win value
-				if(pubR > document.getElementById(venueName+"Needed").value){
+				if(pubR > Number(document.getElementById(venueName+"Needed").value)){
 					document.getElementById(venueName+'R'+"Error").innerHTML="Over required.  This 'works' but will forcefully enable more missions in weird ways.";
 				}
 				else{
@@ -750,7 +744,7 @@ function missionsUpdated(venueName){//when one of the Selected Missions counter 
 			}
 			if(!document.getElementById(venueName+"Gametype0").checked){//if not known mode
 				//then test on needed to win value
-				if(redwoodsR > document.getElementById(venueName+"Needed").value){
+				if(redwoodsR > Number(document.getElementById(venueName+"Needed").value)){
 					document.getElementById(venueName+'R'+"Error").innerHTML="Over required.  This 'works' but will forcefully enable more missions in weird ways.";
 				}
 				else{
@@ -784,7 +778,7 @@ function missionsUpdated(venueName){//when one of the Selected Missions counter 
 			}
 			if(!document.getElementById(venueName+"Gametype0").checked){//if not known mode
 				//then test on needed to win value
-				if(teienR > document.getElementById(venueName+"Needed").value){
+				if(teienR > Number(document.getElementById(venueName+"Needed").value)){
 					document.getElementById(venueName+'R'+"Error").innerHTML="Over required.  This 'works' but will forcefully enable more missions in weird ways.";
 				}
 				else{
@@ -818,7 +812,7 @@ function missionsUpdated(venueName){//when one of the Selected Missions counter 
 			}
 			if(!document.getElementById(venueName+"Gametype0").checked){//if not known mode
 				//then test on needed to win value
-				if(terraceR > document.getElementById(venueName+"Needed").value){
+				if(terraceR > Number(document.getElementById(venueName+"Needed").value)){
 					document.getElementById(venueName+'R'+"Error").innerHTML="Over required.  This 'works' but will forcefully enable more missions in weird ways.";
 				}
 				else{
@@ -852,7 +846,7 @@ function missionsUpdated(venueName){//when one of the Selected Missions counter 
 			}
 			if(!document.getElementById(venueName+"Gametype0").checked){//if not known mode
 				//then test on needed to win value
-				if(verandaR > document.getElementById(venueName+"Needed").value){
+				if(verandaR > Number(document.getElementById(venueName+"Needed").value)){
 					document.getElementById(venueName+'R'+"Error").innerHTML="Over required.  This 'works' but will forcefully enable more missions in weird ways.";
 				}
 				else{
@@ -883,7 +877,7 @@ function missionsUpdated(venueName){//when one of the Selected Missions counter 
 
 function checkListErrors(venueName,checklistKey, isChecked){
 	//console.log(""+venueName);
-	var currentlySelected=document.getElementById(venueName+"Selected").value;
+	var currentlySelected=Number(document.getElementById(venueName+"Selected").value);
 	
 	//gross code, have fun future people
 	switch(venueName){
@@ -927,7 +921,7 @@ function checkListErrors(venueName,checklistKey, isChecked){
 						aquariumR++;
 						if(!document.getElementById(venueName+"Gametype0").checked){//if not known mode
 							//then test on needed to win value
-							if(aquariumR > document.getElementById(venueName+"Needed").value){
+							if(aquariumR > Number(document.getElementById(venueName+"Needed").value)){
 								document.getElementById(venueName+checklistKey+"Error").innerHTML="Over required.  This 'works' but will forcefully enable more missions in weird ways.";
 								//anErrorExists=true;
 							}
@@ -945,7 +939,7 @@ function checkListErrors(venueName,checklistKey, isChecked){
 						aquariumR--;
 						if(!document.getElementById(venueName+"Gametype0").checked){//if not known mode
 								//test on needed to win
-								if(aquariumR<=document.getElementById(venueName+"Needed").value){//if less or equal required than need to win
+								if(aquariumR<=Number(document.getElementById(venueName+"Needed").value)){//if less or equal required than need to win
 								document.getElementById(venueName+checklistKey+"Error").innerHTML="";
 								retryError=false;//an error was fixed.
 							}
@@ -1004,7 +998,7 @@ function checkListErrors(venueName,checklistKey, isChecked){
 						balconyR++;
 						if(!document.getElementById(venueName+"Gametype0").checked){//if not known mode
 							//then test on needed to win value
-							if(balconyR > document.getElementById(venueName+"Needed").value){
+							if(balconyR > Number(document.getElementById(venueName+"Needed").value)){
 								document.getElementById(venueName+checklistKey+"Error").innerHTML="Over required.  This 'works' but will forcefully enable more missions in weird ways.";
 								//anErrorExists=true;
 							}
@@ -1022,7 +1016,7 @@ function checkListErrors(venueName,checklistKey, isChecked){
 						balconyR--;
 						if(!document.getElementById(venueName+"Gametype0").checked){//if not known mode
 								//test on needed to win
-								if(balconyR<=document.getElementById(venueName+"Needed").value){//if less or equal required than need to win
+								if(balconyR<=Number(document.getElementById(venueName+"Needed").value)){//if less or equal required than need to win
 								document.getElementById(venueName+checklistKey+"Error").innerHTML="";
 								retryError=false;//an error was fixed.
 							}
@@ -1080,7 +1074,7 @@ function checkListErrors(venueName,checklistKey, isChecked){
 						ballroomR++;
 						if(!document.getElementById(venueName+"Gametype0").checked){//if not known mode
 							//then test on needed to win value
-							if(ballroomR > document.getElementById(venueName+"Needed").value){
+							if(ballroomR > Number(document.getElementById(venueName+"Needed").value)){
 								document.getElementById(venueName+checklistKey+"Error").innerHTML="Over required.  This 'works' but will forcefully enable more missions in weird ways.";
 								//anErrorExists=true;
 							}
@@ -1098,7 +1092,7 @@ function checkListErrors(venueName,checklistKey, isChecked){
 						ballroomR--;
 						if(!document.getElementById(venueName+"Gametype0").checked){//if not known mode
 								//test on needed to win
-								if(ballroomR<=document.getElementById(venueName+"Needed").value){//if less or equal required than need to win
+								if(ballroomR<=Number(document.getElementById(venueName+"Needed").value)){//if less or equal required than need to win
 								document.getElementById(venueName+checklistKey+"Error").innerHTML="";
 								retryError=false;//an error was fixed.
 							}
@@ -1156,7 +1150,7 @@ function checkListErrors(venueName,checklistKey, isChecked){
 						courtyardR++;
 						if(!document.getElementById(venueName+"Gametype0").checked){//if not known mode
 							//then test on needed to win value
-							if(courtyardR > document.getElementById(venueName+"Needed").value){
+							if(courtyardR > Number(document.getElementById(venueName+"Needed").value)){
 								document.getElementById(venueName+checklistKey+"Error").innerHTML="Over required.  This 'works' but will forcefully enable more missions in weird ways.";
 								//anErrorExists=true;
 							}
@@ -1174,7 +1168,7 @@ function checkListErrors(venueName,checklistKey, isChecked){
 						courtyardR--;
 						if(!document.getElementById(venueName+"Gametype0").checked){//if not known mode
 								//test on needed to win
-								if(courtyardR<=document.getElementById(venueName+"Needed").value){//if less or equal required than need to win
+								if(courtyardR<=Number(document.getElementById(venueName+"Needed").value)){//if less or equal required than need to win
 								document.getElementById(venueName+checklistKey+"Error").innerHTML="";
 								retryError=false;//an error was fixed.
 							}
@@ -1232,7 +1226,7 @@ function checkListErrors(venueName,checklistKey, isChecked){
 						galleryR++;
 						if(!document.getElementById(venueName+"Gametype0").checked){//if not known mode
 							//then test on needed to win value
-							if(galleryR > document.getElementById(venueName+"Needed").value){
+							if(galleryR > Number(document.getElementById(venueName+"Needed").value)){
 								document.getElementById(venueName+checklistKey+"Error").innerHTML="Over required.  This 'works' but will forcefully enable more missions in weird ways.";
 								//anErrorExists=true;
 							}
@@ -1250,7 +1244,7 @@ function checkListErrors(venueName,checklistKey, isChecked){
 						galleryR--;
 						if(!document.getElementById(venueName+"Gametype0").checked){//if not known mode
 								//test on needed to win
-								if(galleryR<=document.getElementById(venueName+"Needed").value){//if less or equal required than need to win
+								if(galleryR<=Number(document.getElementById(venueName+"Needed").value)){//if less or equal required than need to win
 								document.getElementById(venueName+checklistKey+"Error").innerHTML="";
 								retryError=false;//an error was fixed.
 							}
@@ -1308,7 +1302,7 @@ function checkListErrors(venueName,checklistKey, isChecked){
 						highriseR++;
 						if(!document.getElementById(venueName+"Gametype0").checked){//if not known mode
 							//then test on needed to win value
-							if(highriseR > document.getElementById(venueName+"Needed").value){
+							if(highriseR > Number(document.getElementById(venueName+"Needed").value)){
 								document.getElementById(venueName+checklistKey+"Error").innerHTML="Over required.  This 'works' but will forcefully enable more missions in weird ways.";
 								//anErrorExists=true;
 							}
@@ -1326,7 +1320,7 @@ function checkListErrors(venueName,checklistKey, isChecked){
 						highriseR--;
 						if(!document.getElementById(venueName+"Gametype0").checked){//if not known mode
 								//test on needed to win
-								if(highriseR<=document.getElementById(venueName+"Needed").value){//if less or equal required than need to win
+								if(highriseR<=Number(document.getElementById(venueName+"Needed").value)){//if less or equal required than need to win
 								document.getElementById(venueName+checklistKey+"Error").innerHTML="";
 								retryError=false;//an error was fixed.
 							}
@@ -1384,7 +1378,7 @@ function checkListErrors(venueName,checklistKey, isChecked){
 						libraryR++;
 						if(!document.getElementById(venueName+"Gametype0").checked){//if not known mode
 							//then test on needed to win value
-							if(libraryR > document.getElementById(venueName+"Needed").value){
+							if(libraryR > Number(document.getElementById(venueName+"Needed").value)){
 								document.getElementById(venueName+checklistKey+"Error").innerHTML="Over required.  This 'works' but will forcefully enable more missions in weird ways.";
 								//anErrorExists=true;
 							}
@@ -1402,7 +1396,7 @@ function checkListErrors(venueName,checklistKey, isChecked){
 						libraryR--;
 						if(!document.getElementById(venueName+"Gametype0").checked){//if not known mode
 								//test on needed to win
-								if(libraryR<=document.getElementById(venueName+"Needed").value){//if less or equal required than need to win
+								if(libraryR<=Number(document.getElementById(venueName+"Needed").value)){//if less or equal required than need to win
 								document.getElementById(venueName+checklistKey+"Error").innerHTML="";
 								retryError=false;//an error was fixed.
 							}
@@ -1460,7 +1454,7 @@ function checkListErrors(venueName,checklistKey, isChecked){
 						moderneR++;
 						if(!document.getElementById(venueName+"Gametype0").checked){//if not known mode
 							//then test on needed to win value
-							if(moderneR > document.getElementById(venueName+"Needed").value){
+							if(moderneR > Number(document.getElementById(venueName+"Needed").value)){
 								document.getElementById(venueName+checklistKey+"Error").innerHTML="Over required.  This 'works' but will forcefully enable more missions in weird ways.";
 								//anErrorExists=true;
 							}
@@ -1478,7 +1472,7 @@ function checkListErrors(venueName,checklistKey, isChecked){
 						moderneR--;
 						if(!document.getElementById(venueName+"Gametype0").checked){//if not known mode
 								//test on needed to win
-								if(moderneR<=document.getElementById(venueName+"Needed").value){//if less or equal required than need to win
+								if(moderneR<=Number(document.getElementById(venueName+"Needed").value)){//if less or equal required than need to win
 								document.getElementById(venueName+checklistKey+"Error").innerHTML="";
 								retryError=false;//an error was fixed.
 							}
@@ -1536,7 +1530,7 @@ function checkListErrors(venueName,checklistKey, isChecked){
 						pubR++;
 						if(!document.getElementById(venueName+"Gametype0").checked){//if not known mode
 							//then test on needed to win value
-							if(pubR > document.getElementById(venueName+"Needed").value){
+							if(pubR > Number(document.getElementById(venueName+"Needed").value)){
 								document.getElementById(venueName+checklistKey+"Error").innerHTML="Over required.  This 'works' but will forcefully enable more missions in weird ways.";
 								//anErrorExists=true;
 							}
@@ -1554,7 +1548,7 @@ function checkListErrors(venueName,checklistKey, isChecked){
 						pubR--;
 						if(!document.getElementById(venueName+"Gametype0").checked){//if not known mode
 								//test on needed to win
-								if(pubR<=document.getElementById(venueName+"Needed").value){//if less or equal required than need to win
+								if(pubR<=Number(document.getElementById(venueName+"Needed").value)){//if less or equal required than need to win
 								document.getElementById(venueName+checklistKey+"Error").innerHTML="";
 								retryError=false;//an error was fixed.
 							}
@@ -1612,7 +1606,7 @@ function checkListErrors(venueName,checklistKey, isChecked){
 						redwoodsR++;
 						if(!document.getElementById(venueName+"Gametype0").checked){//if not known mode
 							//then test on needed to win value
-							if(redwoodsR > document.getElementById(venueName+"Needed").value){
+							if(redwoodsR > Number(document.getElementById(venueName+"Needed").value)){
 								document.getElementById(venueName+checklistKey+"Error").innerHTML="Over required.  This 'works' but will forcefully enable more missions in weird ways.";
 								//anErrorExists=true;
 							}
@@ -1630,7 +1624,7 @@ function checkListErrors(venueName,checklistKey, isChecked){
 						redwoodsR--;
 						if(!document.getElementById(venueName+"Gametype0").checked){//if not known mode
 								//test on needed to win
-								if(redwoodsR<=document.getElementById(venueName+"Needed").value){//if less or equal required than need to win
+								if(redwoodsR<=Number(document.getElementById(venueName+"Needed").value)){//if less or equal required than need to win
 								document.getElementById(venueName+checklistKey+"Error").innerHTML="";
 								retryError=false;//an error was fixed.
 							}
@@ -1688,7 +1682,7 @@ function checkListErrors(venueName,checklistKey, isChecked){
 						teienR++;
 						if(!document.getElementById(venueName+"Gametype0").checked){//if not known mode
 							//then test on needed to win value
-							if(teienR > document.getElementById(venueName+"Needed").value){
+							if(teienR > Number(document.getElementById(venueName+"Needed").value)){
 								document.getElementById(venueName+checklistKey+"Error").innerHTML="Over required.  This 'works' but will forcefully enable more missions in weird ways.";
 								//anErrorExists=true;
 							}
@@ -1706,7 +1700,7 @@ function checkListErrors(venueName,checklistKey, isChecked){
 						teienR--;
 						if(!document.getElementById(venueName+"Gametype0").checked){//if not known mode
 								//test on needed to win
-								if(teienR<=document.getElementById(venueName+"Needed").value){//if less or equal required than need to win
+								if(teienR<=Number(document.getElementById(venueName+"Needed").value)){//if less or equal required than need to win
 								document.getElementById(venueName+checklistKey+"Error").innerHTML="";
 								retryError=false;//an error was fixed.
 							}
@@ -1764,7 +1758,7 @@ function checkListErrors(venueName,checklistKey, isChecked){
 						terraceR++;
 						if(!document.getElementById(venueName+"Gametype0").checked){//if not known mode
 							//then test on needed to win value
-							if(terraceR > document.getElementById(venueName+"Needed").value){
+							if(terraceR > Number(document.getElementById(venueName+"Needed").value)){
 								document.getElementById(venueName+checklistKey+"Error").innerHTML="Over required.  This 'works' but will forcefully enable more missions in weird ways.";
 								//anErrorExists=true;
 							}
@@ -1782,7 +1776,7 @@ function checkListErrors(venueName,checklistKey, isChecked){
 						terraceR--;
 						if(!document.getElementById(venueName+"Gametype0").checked){//if not known mode
 								//test on needed to win
-								if(terraceR<=document.getElementById(venueName+"Needed").value){//if less or equal required than need to win
+								if(terraceR<=Number(document.getElementById(venueName+"Needed").value)){//if less or equal required than need to win
 								document.getElementById(venueName+checklistKey+"Error").innerHTML="";
 								retryError=false;//an error was fixed.
 							}
@@ -1840,7 +1834,7 @@ function checkListErrors(venueName,checklistKey, isChecked){
 						verandaR++;
 						if(!document.getElementById(venueName+"Gametype0").checked){//if not known mode
 							//then test on needed to win value
-							if(verandaR > document.getElementById(venueName+"Needed").value){
+							if(verandaR > Number(document.getElementById(venueName+"Needed").value)){
 								document.getElementById(venueName+checklistKey+"Error").innerHTML="Over required.  This 'works' but will forcefully enable more missions in weird ways.";
 								//anErrorExists=true;
 							}
@@ -1858,7 +1852,7 @@ function checkListErrors(venueName,checklistKey, isChecked){
 						verandaR--;
 						if(!document.getElementById(venueName+"Gametype0").checked){//if not known mode
 								//test on needed to win
-								if(verandaR<=document.getElementById(venueName+"Needed").value){//if less or equal required than need to win
+								if(verandaR<=Number(document.getElementById(venueName+"Needed").value)){//if less or equal required than need to win
 								document.getElementById(venueName+checklistKey+"Error").innerHTML="";
 								retryError=false;//an error was fixed.
 							}
@@ -1894,14 +1888,14 @@ function finalCheckForErrors(){
 	//test all checklists, and test guest minimum
 	//should I also test needed < selected? suuure
 	var venueName= "aquarium";
-	var currentlySelected=document.getElementById(venueName+"Selected").value;
+	var currentlySelected=Number(document.getElementById(venueName+"Selected").value);
 	if(aquariumD > currentlySelected)
 		return true;
 	if(aquariumP > AquariumMissionsMax-currentlySelected)
 		return true;
 	if(!document.getElementById(venueName+"Gametype0").checked){//if not known mode
 		//then test on needed to win value
-		if(aquariumR > document.getElementById(venueName+"Needed").value){
+		if(aquariumR > Number(document.getElementById(venueName+"Needed").value)){
 			return true;
 		}
 	}
@@ -1911,20 +1905,20 @@ function finalCheckForErrors(){
 			return true;
 		}
 	}
-	if (document.getElementById(venueName+"Guests").value<4)
+	if (Number(document.getElementById(venueName+"Guests").value)<4)
 		return true;
-	if (!document.getElementById(venueName+"Gametype0").checked && (document.getElementById(venueName+"Needed").value >= currentlySelected))
+	if (!document.getElementById(venueName+"Gametype0").checked && (Number(document.getElementById(venueName+"Needed").value) >= currentlySelected))
 		return true;
 	
 	venueName= "balcony";
-	currentlySelected=document.getElementById(venueName+"Selected").value;
+	currentlySelected=Number(document.getElementById(venueName+"Selected").value);
 	if(balconyD > currentlySelected)
 		return true;
 	if(balconyP > BalconyMissionsMax-currentlySelected)
 		return true;
 	if(!document.getElementById(venueName+"Gametype0").checked){//if not known mode
 		//then test on needed to win value
-		if(balconyR > document.getElementById(venueName+"Needed").value){
+		if(balconyR > Number(document.getElementById(venueName+"Needed").value)){
 			return true;
 		}
 	}
@@ -1934,20 +1928,20 @@ function finalCheckForErrors(){
 			return true;
 		}
 	}
-	if (document.getElementById(venueName+"Guests").value<4)
+	if (Number(document.getElementById(venueName+"Guests").value)<4)
 		return true;
-	if (!document.getElementById(venueName+"Gametype0").checked && (document.getElementById(venueName+"Needed").value >= currentlySelected))
+	if (!document.getElementById(venueName+"Gametype0").checked && (Number(document.getElementById(venueName+"Needed").value) >= currentlySelected))
 		return true;
 	
 	venueName= "ballroom";
-	currentlySelected=document.getElementById(venueName+"Selected").value;
+	currentlySelected=Number(document.getElementById(venueName+"Selected").value);
 	if(ballroomD > currentlySelected)
 		return true;
 	if(ballroomP > BallroomMissionsMax-currentlySelected)
 		return true;
 	if(!document.getElementById(venueName+"Gametype0").checked){//if not known mode
 		//then test on needed to win value
-		if(ballroomR > document.getElementById(venueName+"Needed").value){
+		if(ballroomR > Number(document.getElementById(venueName+"Needed").value)){
 			return true;
 		}
 	}
@@ -1957,20 +1951,20 @@ function finalCheckForErrors(){
 			return true;
 		}
 	}
-	if (document.getElementById(venueName+"Guests").value<4)
+	if (Number(document.getElementById(venueName+"Guests").value)<4)
 		return true;
-	if (!document.getElementById(venueName+"Gametype0").checked && (document.getElementById(venueName+"Needed").value >= currentlySelected))
+	if (!document.getElementById(venueName+"Gametype0").checked && (Number(document.getElementById(venueName+"Needed").value) >= currentlySelected))
 		return true;
 	
 	venueName= "courtyard";
-	currentlySelected=document.getElementById(venueName+"Selected").value;
+	currentlySelected=Number(document.getElementById(venueName+"Selected").value);
 	if(courtyardD > currentlySelected)
 		return true;
 	if(courtyardP > CourtyardMissionsMax-currentlySelected)
 		return true;
 	if(!document.getElementById(venueName+"Gametype0").checked){//if not known mode
 		//then test on needed to win value
-		if(courtyardR > document.getElementById(venueName+"Needed").value){
+		if(courtyardR > Number(document.getElementById(venueName+"Needed").value)){
 			return true;
 		}
 	}
@@ -1980,20 +1974,20 @@ function finalCheckForErrors(){
 			return true;
 		}
 	}
-	if (document.getElementById(venueName+"Guests").value<4)
+	if (Number(document.getElementById(venueName+"Guests").value)<4)
 		return true;
-	if (!document.getElementById(venueName+"Gametype0").checked && (document.getElementById(venueName+"Needed").value >= currentlySelected))
+	if (!document.getElementById(venueName+"Gametype0").checked && (Number(document.getElementById(venueName+"Needed").value) >= currentlySelected))
 		return true;
 	
 	venueName= "gallery";
-	currentlySelected=document.getElementById(venueName+"Selected").value;
+	currentlySelected=Number(document.getElementById(venueName+"Selected").value);
 	if(galleryD > currentlySelected)
 		return true;
 	if(galleryP > GalleryMissionsMax-currentlySelected)
 		return true;
 	if(!document.getElementById(venueName+"Gametype0").checked){//if not known mode
 		//then test on needed to win value
-		if(galleryR > document.getElementById(venueName+"Needed").value){
+		if(galleryR > Number(document.getElementById(venueName+"Needed").value)){
 			return true;
 		}
 	}
@@ -2003,20 +1997,20 @@ function finalCheckForErrors(){
 			return true;
 		}
 	}
-	if (document.getElementById(venueName+"Guests").value<4)
+	if (Number(document.getElementById(venueName+"Guests").value)<4)
 		return true;
-	if (!document.getElementById(venueName+"Gametype0").checked && (document.getElementById(venueName+"Needed").value >= currentlySelected))
+	if (!document.getElementById(venueName+"Gametype0").checked && (Number(document.getElementById(venueName+"Needed").value) >= currentlySelected))
 		return true;
 	
 	venueName= "highrise";
-	currentlySelected=document.getElementById(venueName+"Selected").value;
+	currentlySelected=Number(document.getElementById(venueName+"Selected").value);
 	if(highriseD > currentlySelected)
 		return true;
 	if(highriseP > HighriseMissionsMax-currentlySelected)
 		return true;
 	if(!document.getElementById(venueName+"Gametype0").checked){//if not known mode
 		//then test on needed to win value
-		if(highriseR > document.getElementById(venueName+"Needed").value){
+		if(highriseR > Number(document.getElementById(venueName+"Needed").value)){
 			return true;
 		}
 	}
@@ -2026,20 +2020,20 @@ function finalCheckForErrors(){
 			return true;
 		}
 	}
-	if (document.getElementById(venueName+"Guests").value<4)
+	if (Number(document.getElementById(venueName+"Guests").value)<4)
 		return true;
-	if (!document.getElementById(venueName+"Gametype0").checked && (document.getElementById(venueName+"Needed").value >= currentlySelected))
+	if (!document.getElementById(venueName+"Gametype0").checked && (Number(document.getElementById(venueName+"Needed").value) >= currentlySelected))
 		return true;
 	
 	venueName= "library";
-	currentlySelected=document.getElementById(venueName+"Selected").value;
+	currentlySelected=Number(document.getElementById(venueName+"Selected").value);
 	if(libraryD > currentlySelected)
 		return true;
 	if(libraryP > LibraryMissionsMax-currentlySelected)
 		return true;
 	if(!document.getElementById(venueName+"Gametype0").checked){//if not known mode
 		//then test on needed to win value
-		if(libraryR > document.getElementById(venueName+"Needed").value){
+		if(libraryR > Number(document.getElementById(venueName+"Needed").value)){
 			return true;
 		}
 	}
@@ -2049,20 +2043,20 @@ function finalCheckForErrors(){
 			return true;
 		}
 	}
-	if (document.getElementById(venueName+"Guests").value<4)
+	if (Number(document.getElementById(venueName+"Guests").value)<4)
 		return true;
-	if (!document.getElementById(venueName+"Gametype0").checked && (document.getElementById(venueName+"Needed").value >= currentlySelected))
+	if (!document.getElementById(venueName+"Gametype0").checked && (Number(document.getElementById(venueName+"Needed").value) >= currentlySelected))
 		return true;
 	
 	venueName= "moderne";
-	currentlySelected=document.getElementById(venueName+"Selected").value;
+	currentlySelected=Number(document.getElementById(venueName+"Selected").value);
 	if(moderneD > currentlySelected)
 		return true;
 	if(moderneP > ModerneMissionsMax-currentlySelected)
 		return true;
 	if(!document.getElementById(venueName+"Gametype0").checked){//if not known mode
 		//then test on needed to win value
-		if(moderneR > document.getElementById(venueName+"Needed").value){
+		if(moderneR > Number(document.getElementById(venueName+"Needed").value)){
 			return true;
 		}
 	}
@@ -2072,20 +2066,20 @@ function finalCheckForErrors(){
 			return true;
 		}
 	}
-	if (document.getElementById(venueName+"Guests").value<4)
+	if (Number(document.getElementById(venueName+"Guests").value)<4)
 		return true;
-	if (!document.getElementById(venueName+"Gametype0").checked && (document.getElementById(venueName+"Needed").value >= currentlySelected))
+	if (!document.getElementById(venueName+"Gametype0").checked && (Number(document.getElementById(venueName+"Needed").value) >= currentlySelected))
 		return true;
 	
 	venueName= "pub";
-	currentlySelected=document.getElementById(venueName+"Selected").value;
+	currentlySelected=Number(document.getElementById(venueName+"Selected").value);
 	if(pubD > currentlySelected)
 		return true;
 	if(pubP > PubMissionsMax-currentlySelected)
 		return true;
 	if(!document.getElementById(venueName+"Gametype0").checked){//if not known mode
 		//then test on needed to win value
-		if(pubR > document.getElementById(venueName+"Needed").value){
+		if(pubR > Number(document.getElementById(venueName+"Needed").value)){
 			return true;
 		}
 	}
@@ -2095,20 +2089,20 @@ function finalCheckForErrors(){
 			return true;
 		}
 	}
-	if (document.getElementById(venueName+"Guests").value<4)
+	if (Number(document.getElementById(venueName+"Guests").value)<4)
 		return true;
-	if (!document.getElementById(venueName+"Gametype0").checked && (document.getElementById(venueName+"Needed").value >= currentlySelected))
+	if (!document.getElementById(venueName+"Gametype0").checked && (Number(document.getElementById(venueName+"Needed").value) >= currentlySelected))
 		return true;
 	
 	venueName= "redwoods";
-	currentlySelected=document.getElementById(venueName+"Selected").value;
+	currentlySelected=Number(document.getElementById(venueName+"Selected").value);
 	if(redwoodsD > currentlySelected)
 		return true;
 	if(redwoodsP > RedwoodsMissionsMax-currentlySelected)
 		return true;
 	if(!document.getElementById(venueName+"Gametype0").checked){//if not known mode
 		//then test on needed to win value
-		if(redwoodsR > document.getElementById(venueName+"Needed").value){
+		if(redwoodsR > Number(document.getElementById(venueName+"Needed").value)){
 			return true;
 		}
 	}
@@ -2118,20 +2112,20 @@ function finalCheckForErrors(){
 			return true;
 		}
 	}
-	if (document.getElementById(venueName+"Guests").value<4)
+	if (Number(document.getElementById(venueName+"Guests").value)<4)
 		return true;
-	if (!document.getElementById(venueName+"Gametype0").checked && (document.getElementById(venueName+"Needed").value >= currentlySelected))
+	if (!document.getElementById(venueName+"Gametype0").checked && (Number(document.getElementById(venueName+"Needed").value) >= currentlySelected))
 		return true;
 	
 	venueName= "teien";
-	currentlySelected=document.getElementById(venueName+"Selected").value;
+	currentlySelected=Number(document.getElementById(venueName+"Selected").value);
 	if(teienD > currentlySelected)
 		return true;
 	if(teienP > TeienMissionsMax-currentlySelected)
 		return true;
 	if(!document.getElementById(venueName+"Gametype0").checked){//if not known mode
 		//then test on needed to win value
-		if(teienR > document.getElementById(venueName+"Needed").value){
+		if(teienR > Number(document.getElementById(venueName+"Needed").value)){
 			return true;
 		}
 	}
@@ -2141,20 +2135,20 @@ function finalCheckForErrors(){
 			return true;
 		}
 	}
-	if (document.getElementById(venueName+"Guests").value<4)
+	if (Number(document.getElementById(venueName+"Guests").value)<4)
 		return true;
-	if (!document.getElementById(venueName+"Gametype0").checked && (document.getElementById(venueName+"Needed").value >= currentlySelected))
+	if (!document.getElementById(venueName+"Gametype0").checked && (Number(document.getElementById(venueName+"Needed").value) >= currentlySelected))
 		return true;
 	
 	venueName= "terrace";
-	currentlySelected=document.getElementById(venueName+"Selected").value;
+	currentlySelected=Number(document.getElementById(venueName+"Selected").value);
 	if(terraceD > currentlySelected)
 		return true;
 	if(terraceP > TerraceMissionsMax-currentlySelected)
 		return true;
 	if(!document.getElementById(venueName+"Gametype0").checked){//if not known mode
 		//then test on needed to win value
-		if(terraceR > document.getElementById(venueName+"Needed").value){
+		if(terraceR > Number(document.getElementById(venueName+"Needed").value)){
 			return true;
 		}
 	}
@@ -2164,20 +2158,20 @@ function finalCheckForErrors(){
 			return true;
 		}
 	}
-	if (document.getElementById(venueName+"Guests").value<4)
+	if (Number(document.getElementById(venueName+"Guests").value)<4)
 		return true;
-	if (!document.getElementById(venueName+"Gametype0").checked && (document.getElementById(venueName+"Needed").value >= currentlySelected))
+	if (!document.getElementById(venueName+"Gametype0").checked && (Number(document.getElementById(venueName+"Needed").value) >= currentlySelected))
 		return true;
 	
 	venueName= "veranda";
-	currentlySelected=document.getElementById(venueName+"Selected").value;
+	currentlySelected=Number(document.getElementById(venueName+"Selected").value);
 	if(verandaD > currentlySelected)
 		return true;
 	if(verandaP > VerandaMissionsMax-currentlySelected)
 		return true;
 	if(!document.getElementById(venueName+"Gametype0").checked){//if not known mode
 		//then test on needed to win value
-		if(verandaR > document.getElementById(venueName+"Needed").value){
+		if(verandaR > Number(document.getElementById(venueName+"Needed").value)){
 			return true;
 		}
 	}
@@ -2187,9 +2181,9 @@ function finalCheckForErrors(){
 			return true;
 		}
 	}
-	if (document.getElementById(venueName+"Guests").value<4)
+	if (Number(document.getElementById(venueName+"Guests").value)<4)
 		return true;
-	if (!document.getElementById(venueName+"Gametype0").checked && (document.getElementById(venueName+"Needed").value >= currentlySelected))
+	if (!document.getElementById(venueName+"Gametype0").checked && (Number(document.getElementById(venueName+"Needed").value) >= currentlySelected))
 		return true;
 	
 	
@@ -2205,7 +2199,7 @@ function finalCheckForErrors(){
 
 
 function displayTime(venueName){
-	var seconds=document.getElementById(venueName+"Duration").value;
+	var seconds=Number(document.getElementById(venueName+"Duration").value);
 	var stringBuilder="(";
 	var minutes = Math.floor(seconds/60);
 	if (minutes<10)
@@ -2259,6 +2253,47 @@ function onLoad(){
 	displayTime("terrace");
 	displayTime("veranda");
 	
+
+	document.getElementById("aquariumSelected").max=AquariumMissionsMax;
+	document.getElementById("aquariumNeeded").max=AquariumMissionsMax-1;
+	document.getElementById("balconySelected").max=BalconyMissionsMax;
+	document.getElementById("balconyNeeded").max=BalconyMissionsMax-1;
+	document.getElementById("ballroomSelected").max=BallroomMissionsMax;
+	document.getElementById("ballroomNeeded").max=BallroomMissionsMax-1;
+	document.getElementById("courtyardSelected").max=CourtyardMissionsMax;
+	document.getElementById("courtyardNeeded").max=CourtyardMissionsMax-1;
+	document.getElementById("gallerySelected").max=GalleryMissionsMax;
+	document.getElementById("galleryNeeded").max=GalleryMissionsMax-1;
+	document.getElementById("highriseSelected").max=HighriseMissionsMax;
+	document.getElementById("highriseNeeded").max=HighriseMissionsMax-1;
+	document.getElementById("librarySelected").max=LibraryMissionsMax;
+	document.getElementById("libraryNeeded").max=LibraryMissionsMax-1;
+	document.getElementById("moderneSelected").max=ModerneMissionsMax;
+	document.getElementById("moderneNeeded").max=ModerneMissionsMax-1;
+	document.getElementById("pubSelected").max=PubMissionsMax;
+	document.getElementById("pubNeeded").max=PubMissionsMax-1;
+	document.getElementById("redwoodsSelected").max=RedwoodsMissionsMax;
+	document.getElementById("redwoodsNeeded").max=RedwoodsMissionsMax-1;
+	document.getElementById("teienSelected").max=TeienMissionsMax;
+	document.getElementById("teienNeeded").max=TeienMissionsMax-1;
+	document.getElementById("terraceSelected").max=TerraceMissionsMax;
+	document.getElementById("terraceNeeded").max=TerraceMissionsMax-1;
+	document.getElementById("verandaSelected").max=VerandaMissionsMax;
+	document.getElementById("verandaNeeded").max=VerandaMissionsMax-1;
+
+
+	listOfVenuesLowercase.forEach( venue => {
+		document.getElementById(""+venue+"Guests").max=GlobalMaxGuests;
+	});
+
+	
+
+
+
+
+
+
+
 }
 
 
