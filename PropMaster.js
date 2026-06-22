@@ -50,7 +50,7 @@ var retryError=false;//for not forcing retries
 function onClickSave(){//build the prop string, and prompt for download
 	var anErrorExists=finalCheckForErrors();
 	
-	console.log("error status: retryError="+retryError+" | and error check="+anErrorExists);
+	//console.log("error status: retryError="+retryError+" | and error check="+anErrorExists);
 
 	if(retryError || !anErrorExists){//if no errors
 		var propName = document.getElementById("filename").value + ".prop";
@@ -424,7 +424,7 @@ function addExtraVenue(venueName){
 			currentExtra=++numExtraVeranda;//increment numExtraVenue, then assign.
 			break;
 		default:
-			console.log("Venue name doesn't match in addExtraVenue1");
+			console.log("Venue name doesn't match in addExtraVenue1: "+venueName);
 	}
 
 
