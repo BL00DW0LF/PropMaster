@@ -16,12 +16,13 @@
      
   <h1>SpyParty .prop making tool for event organizers.</h1> <br>
 	Notes: Test your .prop file before you release it! This tool does not account for all possible errors. Prop files should be installed in the <b>%LOCALAPPDATA%\SpyParty\quickplays\</b> folder, which you may need to create.<br>
-	Hints: For Pick or Any gamemodes, make sure the # of missions needed to win is less than the # of selected missions, or the prop file will not load.  Ensure each venue has at least the minimum amount of guests required for all missions (4-6 depending on enabled missions).<br>
-	It IS possible to include multiple variants of a single venue, you just have to duplicate the venue in the .prop file. Pre-filled data is primarily based on SCL6 (without default selections like on balcony).<br><br>
-	<label for="filename">File name: <input type="text" id="filename" value="The Next Big Thing"/>.prop</label><br>
+	Hints: For Pick or Any gamemodes, make sure the # of missions needed to win is less than the # of selected missions, or the prop file will not load.  Ensure each venue has at least the minimum amount of guests required for all missions (4-6 depending on enabled missions. <b>This isn't error checked yet.</b>).<br>
+	Pre-filled data is primarily based on SCL6 (without default selections like on balcony).<br><br>
+	<label for="filename">File name: <input type="text" id="filename" value="The Next Big Thing"/>.prop</label>  (File names for the server auto-grab can't include apostrophes)<br>
     <label for="group">Group name:</label> <input type="text" id="group" value="My Group" onChange="onNameChange('group')"/>  (how your prop appears in-game)<b style="color:red"><span id="groupNameError"></span></b><br>
 	<label for="description">Description:</label> <input type="text" id="description" value="What is existence?" onChange="onNameChange('description')"/><b style="color:red"><span id="descriptionNameError"></span></b><br>
     <b>Prop makers - If this is for a main series event that you might want to get pulled into the game automatically, please include a detailed description including the year and T.O.  See currently live QPs as examples. Use \n for new line.</b><br>
+	<br>
 	<label for="minimal">Hide Unused Venues (in-game)?</label> <input type="checkbox" name="minimal" id="minimal" value="Yes" checked="checked"/><br>
 	<button id="save" onclick="onClickSave()">Save to file</button>
 

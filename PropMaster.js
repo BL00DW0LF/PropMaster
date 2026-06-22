@@ -2,11 +2,6 @@
 
 dynamically adjust minimum guests based on max missions? selected/default missions? probably per venue
 
-check all text values against max and min on error checking.  should be future proof since I mostly dynamically set those maxes/mins
-//see how adding extra venue copies messes up error checking.  
-	//include new results in output
-	//consider if there's value in tracking a list of added venue# ?
-
 	
 */
 const AquariumMissionsMax=8;
