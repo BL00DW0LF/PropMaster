@@ -2,6 +2,8 @@
 
 dynamically adjust minimum guests based on max missions? selected/default missions? probably per venue
 
+dynamically force max guests in text boxes? It's accounted for in error checking now, but there are some ways to write bigger numbers in
+
 	
 */
 const AquariumMissionsMax=8;
@@ -583,65 +585,8 @@ function addExtraVenue(venueName){
 			document.getElementById(""+venueName+currentExtra+"Require7").click();
 	}
 
-	//some stuff that references venue-named globals
-	switch (venueName) {
-		case 'aquarium':
-			document.getElementById(""+venueName+currentExtra+"Selected").max=AquariumMissionsMax;
-			document.getElementById(""+venueName+currentExtra+"Needed").max=AquariumMissionsMax-1;
-			break;
-		case 'balcony':
-			document.getElementById(""+venueName+currentExtra+"Selected").max=BalconyMissionsMax;
-			document.getElementById(""+venueName+currentExtra+"Needed").max=BalconyMissionsMax-1;
-			break;
-		case 'ballroom':
-			document.getElementById(""+venueName+currentExtra+"Selected").max=BallroomMissionsMax;
-			document.getElementById(""+venueName+currentExtra+"Needed").max=BallroomMissionsMax-1;
-			break;
-		case 'courtyard':
-			document.getElementById(""+venueName+currentExtra+"Selected").max=CourtyardMissionsMax;
-			document.getElementById(""+venueName+currentExtra+"Needed").max=CourtyardMissionsMax-1;
-			break;
-		case 'gallery':
-			document.getElementById(""+venueName+currentExtra+"Selected").max=GalleryMissionsMax;
-			document.getElementById(""+venueName+currentExtra+"Needed").max=GalleryMissionsMax-1;
-			break;
-		case 'highrise':
-			document.getElementById(""+venueName+currentExtra+"Selected").max=HighriseMissionsMax;
-			document.getElementById(""+venueName+currentExtra+"Needed").max=HighriseMissionsMax-1;
-			break;
-		case 'library':
-			document.getElementById(""+venueName+currentExtra+"Selected").max=LibraryMissionsMax;
-			document.getElementById(""+venueName+currentExtra+"Needed").max=LibraryMissionsMax-1;
-			break;
-		case 'modderne':
-			document.getElementById(""+venueName+currentExtra+"Selected").max=ModerneMissionsMax;
-			document.getElementById(""+venueName+currentExtra+"Needed").max=ModerneMissionsMax-1;
-			break;
-		case 'pub':
-			document.getElementById(""+venueName+currentExtra+"Selected").max=PubMissionsMax;
-			document.getElementById(""+venueName+currentExtra+"Needed").max=PubMissionsMax-1;
-			break;
-		case 'redwoods':
-			document.getElementById(""+venueName+currentExtra+"Selected").max=RedwoodsMissionsMax;
-			document.getElementById(""+venueName+currentExtra+"Needed").max=RedwoodsMissionsMax-1;
-			break;
-		case 'teien':
-			document.getElementById(""+venueName+currentExtra+"Selected").max=TeienMissionsMax;
-			document.getElementById(""+venueName+currentExtra+"Needed").max=TeienMissionsMax-1;
-			break;
-		case 'terrace':
-			document.getElementById(""+venueName+currentExtra+"Selected").max=TerraceMissionsMax;
-			document.getElementById(""+venueName+currentExtra+"Needed").max=TerraceMissionsMax-1;
-			break;
-		case 'veranda':
-			document.getElementById(""+venueName+currentExtra+"Selected").max=VerandaMissionsMax;
-			document.getElementById(""+venueName+currentExtra+"Needed").max=VerandaMissionsMax-1;
-			break;
-		default:
-			console.log("Venue name doesn't match in addExtraVenue2");
-	}
-
-	
+	document.getElementById(""+venueName+currentExtra+"Selected").max=venueMissionCount(venueName);
+	document.getElementById(""+venueName+currentExtra+"Needed").max=venueMissionCount(venueName)-1;
 	
 }
 
@@ -1048,49 +993,49 @@ function venueHasMission(venueName,missionName){
 	return false;//just in case
 }
 
-function venueMissionCount(venueName){
+function venueMissionCount(venueName){//for dynamically grabbing without needing a switch for the hard-coded values
 	//this is needed
 	var numberlessString=venueName.replace(/\d+/g, '');
 
 	switch (numberlessString) {
 		case 'aquarium':
-			return 8;
+			return AquariumMissionsMax;
 			break;
 		case 'balcony':
-			return 5;
+			return BalconyMissionsMax;
 			break;
 		case 'ballroom':
-			return 8;
+			return BallroomMissionsMax;
 			break;
 		case 'courtyard':
-			return 7;
+			return CourtyardMissionsMax;
 			break;
 		case 'gallery':
-			return 8;
+			return GalleryMissionsMax;
 			break;
 		case 'highrise':
-			return 8;
+			return HighriseMissionsMax;
 			break;
 		case 'library':
-			return 8;
+			return LibraryMissionsMax;
 			break;
 		case 'moderne':
-			return 8;
+			return ModerneMissionsMax;
 			break;
 		case 'pub':
-			return 7;
+			return PubMissionsMax;
 			break;
 		case 'redwoods':
-			return 8;
+			return RedwoodsMissionsMax;
 			break;
 		case 'teien':
-			return 8;
+			return TeienMissionsMax;
 			break;
 		case 'terrace':
-			return 7;
+			return TerraceMissionsMax;
 			break;
 		case 'veranda':
-			return 8;
+			return VerandaMissionsMax;
 			break;
 		default:
 			console.log("Venue name doesn't match in venueMissionCount: "+numberlessString);
@@ -1287,7 +1232,7 @@ function checkListErrors(venueName,checklistKey,isChecked){
 		case "P":
 			count = countPsForVenue(venueName);
 
-			if (count>AquariumMissionsMax-currentlySelected){
+			if (count>venueMissionCount(venueName)-currentlySelected){
 				document.getElementById(venueName+checklistKey+"Error").innerHTML="Over prohibited.  This quickplay prop will not validate.";
 				return true;
 			}
@@ -1463,7 +1408,8 @@ function onLoad(){
 	listOfVenuesLowercase.forEach(element => {
 		displayTime(""+element);
 		document.getElementById(""+element+"Guests").max=GlobalMaxGuests;
-
+		document.getElementById(""+element+"Selected").max=venueMissionCount(element);
+		document.getElementById(""+element+"Needed").max=venueMissionCount(element)-1;
 		/*
 		//set blur detectors for mission count text boxes, and call missionsUpdated on blur
 		document.getElementById(""+element+"Needed").addEventListener('blur', (event) => {
@@ -1475,31 +1421,5 @@ function onLoad(){
 	});
 	
 
-	document.getElementById("aquariumSelected").max=AquariumMissionsMax;
-	document.getElementById("aquariumNeeded").max=AquariumMissionsMax-1;
-	document.getElementById("balconySelected").max=BalconyMissionsMax;
-	document.getElementById("balconyNeeded").max=BalconyMissionsMax-1;
-	document.getElementById("ballroomSelected").max=BallroomMissionsMax;
-	document.getElementById("ballroomNeeded").max=BallroomMissionsMax-1;
-	document.getElementById("courtyardSelected").max=CourtyardMissionsMax;
-	document.getElementById("courtyardNeeded").max=CourtyardMissionsMax-1;
-	document.getElementById("gallerySelected").max=GalleryMissionsMax;
-	document.getElementById("galleryNeeded").max=GalleryMissionsMax-1;
-	document.getElementById("highriseSelected").max=HighriseMissionsMax;
-	document.getElementById("highriseNeeded").max=HighriseMissionsMax-1;
-	document.getElementById("librarySelected").max=LibraryMissionsMax;
-	document.getElementById("libraryNeeded").max=LibraryMissionsMax-1;
-	document.getElementById("moderneSelected").max=ModerneMissionsMax;
-	document.getElementById("moderneNeeded").max=ModerneMissionsMax-1;
-	document.getElementById("pubSelected").max=PubMissionsMax;
-	document.getElementById("pubNeeded").max=PubMissionsMax-1;
-	document.getElementById("redwoodsSelected").max=RedwoodsMissionsMax;
-	document.getElementById("redwoodsNeeded").max=RedwoodsMissionsMax-1;
-	document.getElementById("teienSelected").max=TeienMissionsMax;
-	document.getElementById("teienNeeded").max=TeienMissionsMax-1;
-	document.getElementById("terraceSelected").max=TerraceMissionsMax;
-	document.getElementById("terraceNeeded").max=TerraceMissionsMax-1;
-	document.getElementById("verandaSelected").max=VerandaMissionsMax;
-	document.getElementById("verandaNeeded").max=VerandaMissionsMax-1;
 
 }
