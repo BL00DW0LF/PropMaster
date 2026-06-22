@@ -67,91 +67,104 @@ function onClickSave(){//build the prop string, and prompt for download
 		if(Boolean(document.getElementById("aquariumAllow").checked)){//if we are using aquarium?
 			propText = propText+getQuickplayGroupFromVenue("aquarium")+"\n";
 			for(let i=1;i<=numExtraAquarium;i++){
-				propText+=getQuickplayGroupFromVenue("aquarium"+i)+"\n";
+				if(listOfDupeVenues.indexOf("aquarium"+i)>-1)//if the dupe is still in the list
+					propText+=getQuickplayGroupFromVenue("aquarium"+i)+"\n";
 			}
 			propText+="\n";
 		}
 		if(Boolean(document.getElementById("balconyAllow").checked)){//if we are using balcony?
 			propText = propText+getQuickplayGroupFromVenue("balcony")+"\n";
 			for(let i=1;i<=numExtraBalcony;i++){
-				propText+=getQuickplayGroupFromVenue("balcony"+i)+"\n";
+				if(listOfDupeVenues.indexOf("balcony"+i)>-1)//if the dupe is still in the list
+					propText+=getQuickplayGroupFromVenue("balcony"+i)+"\n";
 			}
 			propText+="\n";
 		}
 		if(Boolean(document.getElementById("ballroomAllow").checked)){//if we are using ballroom?
 			propText = propText+getQuickplayGroupFromVenue("ballroom")+"\n";
 			for(let i=1;i<=numExtraBallroom;i++){
-				propText+=getQuickplayGroupFromVenue("ballroom"+i)+"\n";
+				if(listOfDupeVenues.indexOf("ballroom"+i)>-1)//if the dupe is still in the list
+					propText+=getQuickplayGroupFromVenue("ballroom"+i)+"\n";
 			}
 			propText+="\n";
 		}
 		if(Boolean(document.getElementById("courtyardAllow").checked)){//if we are using courtyard?
 			propText = propText+getQuickplayGroupFromVenue("courtyard")+"\n";
 			for(let i=1;i<=numExtraCourtyard;i++){
-				propText+=getQuickplayGroupFromVenue("courtyard"+i)+"\n";
+				if(listOfDupeVenues.indexOf("courtyard"+i)>-1)//if the dupe is still in the list
+					propText+=getQuickplayGroupFromVenue("courtyard"+i)+"\n";
 			}
 			propText+="\n";
 		}
 		if(Boolean(document.getElementById("galleryAllow").checked)){//if we are using gallery?
 			propText = propText+getQuickplayGroupFromVenue("gallery")+"\n";
 			for(let i=1;i<=numExtraGallery;i++){
-				propText+=getQuickplayGroupFromVenue("gallery"+i)+"\n";
+				if(listOfDupeVenues.indexOf("gallery"+i)>-1)//if the dupe is still in the list
+					propText+=getQuickplayGroupFromVenue("gallery"+i)+"\n";
 			}
 			propText+="\n";
 		}
 		if(Boolean(document.getElementById("highriseAllow").checked)){//if we are using highrise?
 			propText = propText+getQuickplayGroupFromVenue("highrise")+"\n";
 			for(let i=1;i<=numExtraHighrise;i++){
-				propText+=getQuickplayGroupFromVenue("highrise"+i)+"\n";
+				if(listOfDupeVenues.indexOf("highrise"+i)>-1)//if the dupe is still in the list
+					propText+=getQuickplayGroupFromVenue("highrise"+i)+"\n";
 			}
 			propText+="\n";
 		}
 		if(Boolean(document.getElementById("libraryAllow").checked)){//if we are using library?
 			propText = propText+getQuickplayGroupFromVenue("library")+"\n";
 			for(let i=1;i<=numExtraLibrary;i++){
-				propText+=getQuickplayGroupFromVenue("library"+i)+"\n";
+				if(listOfDupeVenues.indexOf("library"+i)>-1)//if the dupe is still in the list
+					propText+=getQuickplayGroupFromVenue("library"+i)+"\n";
 			}
 			propText+="\n";
 		}
 		if(Boolean(document.getElementById("moderneAllow").checked)){//if we are using moderne?
 			propText = propText+getQuickplayGroupFromVenue("moderne")+"\n";	
 			for(let i=1;i<=numExtraModerne;i++){
-				propText+=getQuickplayGroupFromVenue("moderne"+i)+"\n";
+				if(listOfDupeVenues.indexOf("moderne"+i)>-1)//if the dupe is still in the list
+					propText+=getQuickplayGroupFromVenue("moderne"+i)+"\n";
 			}
 			propText+="\n";
 		}
 		if(Boolean(document.getElementById("pubAllow").checked)){//if we are using pub?
 			propText = propText+getQuickplayGroupFromVenue("pub")+"\n";	
 			for(let i=1;i<=numExtraPub;i++){
-				propText+=getQuickplayGroupFromVenue("pub"+i)+"\n";
+				if(listOfDupeVenues.indexOf("pub"+i)>-1)//if the dupe is still in the list
+					propText+=getQuickplayGroupFromVenue("pub"+i)+"\n";
 			}
 			propText+="\n";
 		}
 		if(Boolean(document.getElementById("redwoodsAllow").checked)){//if we are using redwoods?
 			propText = propText+getQuickplayGroupFromVenue("redwoods")+"\n";
 			for(let i=1;i<=numExtraRedwoods;i++){
-				propText+=getQuickplayGroupFromVenue("redwoods"+i)+"\n";
+				if(listOfDupeVenues.indexOf("redwoods"+i)>-1)//if the dupe is still in the list
+					propText+=getQuickplayGroupFromVenue("redwoods"+i)+"\n";
 			}
 			propText+="\n";
 		}
 		if(Boolean(document.getElementById("teienAllow").checked)){//if we are using teien?
 			propText = propText+getQuickplayGroupFromVenue("teien")+"\n";	
 			for(let i=1;i<=numExtraTeien;i++){
-				propText+=getQuickplayGroupFromVenue("teien"+i)+"\n";
+				if(listOfDupeVenues.indexOf("teien"+i)>-1)//if the dupe is still in the list
+					propText+=getQuickplayGroupFromVenue("teien"+i)+"\n";
 			}
 			propText+="\n";
 		}
 		if(Boolean(document.getElementById("terraceAllow").checked)){//if we are using terrace?
 			propText = propText+getQuickplayGroupFromVenue("terrace")+"\n";	
 			for(let i=1;i<=numExtraTerrace;i++){
-				propText+=getQuickplayGroupFromVenue("terrace"+i)+"\n";
+				if(listOfDupeVenues.indexOf("terrace"+i)>-1)//if the dupe is still in the list
+					propText+=getQuickplayGroupFromVenue("terrace"+i)+"\n";
 			}
 			propText+="\n";
 		}
 		if(Boolean(document.getElementById("verandaAllow").checked)){//if we are using veranda?
 			propText = propText+getQuickplayGroupFromVenue("veranda")+"\n";	
 			for(let i=1;i<=numExtraVeranda;i++){
-				propText+=getQuickplayGroupFromVenue("veranda"+i)+"\n";
+				if(listOfDupeVenues.indexOf("veranda"+i)>-1)//if the dupe is still in the list
+					propText+=getQuickplayGroupFromVenue("veranda"+i)+"\n";
 			}
 			propText+="\n";
 		}
@@ -422,7 +435,7 @@ function addExtraVenue(venueName){
 
 	//build extra HTML
 	var thisDiv=document.getElementById(""+venueName);
-	var htmlToAdd="";
+	var htmlToAdd="<span id='"+venueName+currentExtra+"'>";//outer span that includes the hr
 	//add hr?
 	htmlToAdd+="<hr>";
 	htmlToAdd+="<label for='"+venueName+currentExtra+"Name'>Quickplay name:</label> <input type='text' id='"+venueName+currentExtra+"Name' value='"+document.getElementById(""+venueName+"Name").value+(currentExtra+1)+"' onChange='onNameChange(\""+venueName+currentExtra+"\")'/><b style='color:red'><span id='"+venueName+currentExtra+"NameError'></span></b><br>";
@@ -494,7 +507,9 @@ function addExtraVenue(venueName){
 	if (venueHasMission(venueName,"Fingerprint"))
 		htmlToAdd+="<input type='checkbox' name='"+venueName+currentExtra+"Requires' id='"+venueName+currentExtra+"Require7' value='Fingerprint' onClick='checkListErrors(\""+venueName+currentExtra+"\",\"R\",this.checked)'/> <label for='"+venueName+currentExtra+"Require7'>Fingerprint Ambassador</label><br>";
 	htmlToAdd+="<b style='color:red'><span id='"+venueName+currentExtra+"RError'></span></b>";
-	htmlToAdd+="</div>";
+	htmlToAdd+="</div>";//end Require div
+	htmlToAdd+="<button type='button' onClick='removeAndHide(\""+venueName+currentExtra+"\")'>Permanently remove this duplicate</button>";
+	htmlToAdd+="</span>";
 	
 	thisDiv.insertAdjacentHTML('beforeend', htmlToAdd);//adds without refreshing everything
 
@@ -580,6 +595,20 @@ function addExtraVenue(venueName){
 	document.getElementById(""+venueName+currentExtra+"Needed").max=venueMissionCount(venueName)-1;
 	
 }
+
+function removeAndHide(venueName){
+	//remove the name from list, which removes it from output
+	let index = listOfDupeVenues.indexOf(venueName);
+	if (index > -1) {
+ 		listOfDupeVenues.splice(index, 1);
+		//console.log("Successfully removed item: "+venueName);
+	}
+
+	//hide the element
+	document.getElementById(""+venueName).style.display = "none";
+
+}
+
 
 function venueHasMission(venueName,missionName){
 	//I don't think this is needed, but just in case
