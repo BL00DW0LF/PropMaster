@@ -27,7 +27,6 @@ let listOfDupeVenues=[];
 // if new venue or mission is added, also update venueHasMission function
 //that should not be hardcoded like it is, but it's probably prettier than declaring 13*8 global booleans?
 
-
 var numExtraAquarium=0;
 var numExtraBalcony=0;
 var numExtraBallroom=0;
@@ -42,9 +41,7 @@ var numExtraTeien=0;
 var numExtraTerrace=0;
 var numExtraVeranda=0;
 
-
 var retryError=false;//for not forcing retries
-
 
 
 function onClickSave(){//build the prop string, and prompt for download
@@ -159,7 +156,6 @@ function onClickSave(){//build the prop string, and prompt for download
 			propText+="\n";
 		}
 			
-			
 		//close prop
 		propText = propText+"\n}";
 		
@@ -185,10 +181,7 @@ function onClickSave(){//build the prop string, and prompt for download
 	else{//there is an error
 		retryError=true;
 		alert("An error exists?  At least I think one does.  Double check all data.  Retry without changes to force it to save, maybe I'm wrong.\nSee browser console for hints");
-		
-		
-	}
-	
+	}	
 }
 
 function getQuickplayGroupFromVenue(venueName){
@@ -427,7 +420,6 @@ function addExtraVenue(venueName){
 			console.log("Venue name doesn't match in addExtraVenue1: "+venueName);
 	}
 
-
 	//build extra HTML
 	var thisDiv=document.getElementById(""+venueName);
 	var htmlToAdd="";
@@ -505,7 +497,6 @@ function addExtraVenue(venueName){
 	htmlToAdd+="</div>";
 	
 	thisDiv.insertAdjacentHTML('beforeend', htmlToAdd);//adds without refreshing everything
-
 
 	//then switch venueName and...
 	//track extra venues for error checking
@@ -1402,7 +1393,6 @@ function onNameChange(fieldName){
 	
 }
 
-
 function onLoad(){
 	
 	listOfVenuesLowercase.forEach(element => {
@@ -1419,7 +1409,4 @@ function onLoad(){
 			missionsUpdated(element);
 		});*/
 	});
-	
-
-
 }
