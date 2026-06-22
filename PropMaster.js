@@ -1,9 +1,12 @@
 /*bad todo
 
+change description to multi-line textarea (test if new lines work on export and ingame)
+
 dynamically adjust minimum guests based on max missions? selected/default missions? probably per venue
 
 dynamically force max guests in text boxes? It's accounted for in error checking now, but there are some ways to write bigger numbers in
 
+allow loading/prefilling data from an existing prop 
 	
 */
 const AquariumMissionsMax=8;
@@ -57,7 +60,10 @@ function onClickSave(){//build the prop string, and prompt for download
 		//get group name
 		propText= propText+document.getElementById("group").value+"\"\n\t\tint Locked=1\n\t\tstring Description = \"";
 		//get description
-		propText= propText+document.getElementById("description").value+"\"\n\t\t"
+		var description=document.getElementById("description").value;
+
+		
+		propText= propText+description.replace(/\r?\n/g, '\\n')+"\"\n\t\t";//replace new lines with new line char so it looks nice in-file, all on one line
 		//get hide levels?
 		if(document.getElementById("minimal").checked)
 			propText= propText+"int Minimal = 1\n\t}\n";
