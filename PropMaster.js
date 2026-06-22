@@ -7,13 +7,8 @@ check all text values against max and min on error checking.  should be future p
 	//include new results in output
 	//consider if there's value in tracking a list of added venue# ?
 
-	finalcheckforerrors currently doesn't hit any extra venues
-
-
-	error check doesn't know if a mission is both required and prohibited.  what happens? test in game, and detect
-	fails to validate.  preselected plus prohibit is fine
+	
 */
-
 const AquariumMissionsMax=8;
 const BalconyMissionsMax=5;
 const BallroomMissionsMax=8;
@@ -53,51 +48,13 @@ var numExtraVeranda=0;
 
 var retryError=false;//for not forcing retries
 
-//counters for error handling
-var aquariumD=0;
-var aquariumP=0;
-var aquariumR=0;
-var balconyD=0;
-var balconyP=0;
-var balconyR=0;
-var ballroomD=0;
-var ballroomP=0;
-var ballroomR=0;
-var courtyardD=0;
-var courtyardP=0;
-var courtyardR=0;
-var galleryD=0;
-var galleryP=0;
-var galleryR=0;
-var highriseD=0;
-var highriseP=0;
-var highriseR=0;
-var libraryD=0;
-var libraryP=0;
-var libraryR=0;
-var moderneD=0;
-var moderneP=0;
-var moderneR=0;
-var pubD=0;
-var pubP=0;
-var pubR=0;
-var redwoodsD=0;
-var redwoodsP=0;
-var redwoodsR=0;
-var teienD=0;
-var teienP=0;
-var teienR=0;
-var terraceD=0;
-var terraceP=0;
-var terraceR=0;
-var verandaD=0;
-var verandaP=0;
-var verandaR=0;
 
 
 function onClickSave(){//build the prop string, and prompt for download
 	var anErrorExists=finalCheckForErrors();
 	
+	console.log("error status: retryError="+retryError+" | and error check="+anErrorExists);
+
 	if(retryError || !anErrorExists){//if no errors
 		var propName = document.getElementById("filename").value + ".prop";
 	
@@ -122,84 +79,84 @@ function onClickSave(){//build the prop string, and prompt for download
 		}
 		if(Boolean(document.getElementById("balconyAllow").checked)){//if we are using balcony?
 			propText = propText+getQuickplayGroupFromVenue("balcony")+"\n";
-			for(let i=1;i<=numExtraAquarium;i++){
+			for(let i=1;i<=numExtraBalcony;i++){
 				propText+=getQuickplayGroupFromVenue("balcony"+i)+"\n";
 			}
 			propText+="\n";
 		}
 		if(Boolean(document.getElementById("ballroomAllow").checked)){//if we are using ballroom?
 			propText = propText+getQuickplayGroupFromVenue("ballroom")+"\n";
-			for(let i=1;i<=numExtraAquarium;i++){
+			for(let i=1;i<=numExtraBallroom;i++){
 				propText+=getQuickplayGroupFromVenue("ballroom"+i)+"\n";
 			}
 			propText+="\n";
 		}
 		if(Boolean(document.getElementById("courtyardAllow").checked)){//if we are using courtyard?
 			propText = propText+getQuickplayGroupFromVenue("courtyard")+"\n";
-			for(let i=1;i<=numExtraAquarium;i++){
+			for(let i=1;i<=numExtraCourtyard;i++){
 				propText+=getQuickplayGroupFromVenue("courtyard"+i)+"\n";
 			}
 			propText+="\n";
 		}
 		if(Boolean(document.getElementById("galleryAllow").checked)){//if we are using gallery?
 			propText = propText+getQuickplayGroupFromVenue("gallery")+"\n";
-			for(let i=1;i<=numExtraAquarium;i++){
+			for(let i=1;i<=numExtraGallery;i++){
 				propText+=getQuickplayGroupFromVenue("gallery"+i)+"\n";
 			}
 			propText+="\n";
 		}
 		if(Boolean(document.getElementById("highriseAllow").checked)){//if we are using highrise?
 			propText = propText+getQuickplayGroupFromVenue("highrise")+"\n";
-			for(let i=1;i<=numExtraAquarium;i++){
+			for(let i=1;i<=numExtraHighrise;i++){
 				propText+=getQuickplayGroupFromVenue("highrise"+i)+"\n";
 			}
 			propText+="\n";
 		}
 		if(Boolean(document.getElementById("libraryAllow").checked)){//if we are using library?
 			propText = propText+getQuickplayGroupFromVenue("library")+"\n";
-			for(let i=1;i<=numExtraAquarium;i++){
+			for(let i=1;i<=numExtraLibrary;i++){
 				propText+=getQuickplayGroupFromVenue("library"+i)+"\n";
 			}
 			propText+="\n";
 		}
 		if(Boolean(document.getElementById("moderneAllow").checked)){//if we are using moderne?
 			propText = propText+getQuickplayGroupFromVenue("moderne")+"\n";	
-			for(let i=1;i<=numExtraAquarium;i++){
+			for(let i=1;i<=numExtraModerne;i++){
 				propText+=getQuickplayGroupFromVenue("moderne"+i)+"\n";
 			}
 			propText+="\n";
 		}
 		if(Boolean(document.getElementById("pubAllow").checked)){//if we are using pub?
 			propText = propText+getQuickplayGroupFromVenue("pub")+"\n";	
-			for(let i=1;i<=numExtraAquarium;i++){
+			for(let i=1;i<=numExtraPub;i++){
 				propText+=getQuickplayGroupFromVenue("pub"+i)+"\n";
 			}
 			propText+="\n";
 		}
 		if(Boolean(document.getElementById("redwoodsAllow").checked)){//if we are using redwoods?
 			propText = propText+getQuickplayGroupFromVenue("redwoods")+"\n";
-			for(let i=1;i<=numExtraAquarium;i++){
+			for(let i=1;i<=numExtraRedwoods;i++){
 				propText+=getQuickplayGroupFromVenue("redwoods"+i)+"\n";
 			}
 			propText+="\n";
 		}
 		if(Boolean(document.getElementById("teienAllow").checked)){//if we are using teien?
 			propText = propText+getQuickplayGroupFromVenue("teien")+"\n";	
-			for(let i=1;i<=numExtraAquarium;i++){
+			for(let i=1;i<=numExtraTeien;i++){
 				propText+=getQuickplayGroupFromVenue("teien"+i)+"\n";
 			}
 			propText+="\n";
 		}
 		if(Boolean(document.getElementById("terraceAllow").checked)){//if we are using terrace?
 			propText = propText+getQuickplayGroupFromVenue("terrace")+"\n";	
-			for(let i=1;i<=numExtraAquarium;i++){
+			for(let i=1;i<=numExtraTerrace;i++){
 				propText+=getQuickplayGroupFromVenue("terrace"+i)+"\n";
 			}
 			propText+="\n";
 		}
 		if(Boolean(document.getElementById("verandaAllow").checked)){//if we are using veranda?
 			propText = propText+getQuickplayGroupFromVenue("veranda")+"\n";	
-			for(let i=1;i<=numExtraAquarium;i++){
+			for(let i=1;i<=numExtraVeranda;i++){
 				propText+=getQuickplayGroupFromVenue("veranda"+i)+"\n";
 			}
 			propText+="\n";
@@ -230,7 +187,7 @@ function onClickSave(){//build the prop string, and prompt for download
 	}
 	else{//there is an error
 		retryError=true;
-		alert("An error exists?  At least I think one does.  Double check all data.  Retry without changes to force it to save, maybe I'm wrong.");
+		alert("An error exists?  At least I think one does.  Double check all data.  Retry without changes to force it to save, maybe I'm wrong.\nSee browser console for hints");
 		
 		
 	}
@@ -248,8 +205,10 @@ function getQuickplayGroupFromVenue(venueName){
 
 	propText+="\n\tgroup quickplay =\n\t{\n\t\tint Version=1\n\t\tstring CustomGroup=\""+document.getElementById("group").value+"\"\n\t\tstring Name=\"";
 	
+	//console.log("test: venueName="+venueName);
+
 	//quickplay name
-	propText=propText+document.getElementById(venueName+"Name").value+"\"\n\t\tint LevelHash = "
+	propText=propText+document.getElementById(venueName+"Name").value+"\"\n\t\tint LevelHash = ";
 	
 	//get level hash
 	switch(numberlessString)
@@ -1094,6 +1053,55 @@ function venueHasMission(venueName,missionName){
 	return false;//just in case
 }
 
+function venueMissionCount(venueName){
+	//this is needed
+	var numberlessString=venueName.replace(/\d+/g, '');
+
+	switch (numberlessString) {
+		case 'aquarium':
+			return 8;
+			break;
+		case 'balcony':
+			return 5;
+			break;
+		case 'ballroom':
+			return 8;
+			break;
+		case 'courtyard':
+			return 7;
+			break;
+		case 'gallery':
+			return 8;
+			break;
+		case 'highrise':
+			return 8;
+			break;
+		case 'library':
+			return 8;
+			break;
+		case 'moderne':
+			return 8;
+			break;
+		case 'pub':
+			return 7;
+			break;
+		case 'redwoods':
+			return 8;
+			break;
+		case 'teien':
+			return 8;
+			break;
+		case 'terrace':
+			return 7;
+			break;
+		case 'veranda':
+			return 8;
+			break;
+		default:
+			console.log("Venue name doesn't match in venueMissionCount: "+numberlessString);
+			return -99;//just in case
+	}
+}
 
 // Function to download data to a file
 function download(data, filename, type) {
@@ -1148,13 +1156,21 @@ function showHideE(whatToHide, isCheckedTF) {
 }
 
 function missionsUpdated(venueName){//when one of the Selected Missions counter is changed
+
 	//this is also called when Needed missions is changed (because need to update for Required checklist), but should be okay
 	var currentlySelected = Number(document.getElementById(venueName+"Selected").value);
+	var maxOnThisVenue=venueMissionCount(venueName);
+	if (currentlySelected>maxOnThisVenue){//prevent numbers too big
+		currentlySelected=maxOnThisVenue;
+		document.getElementById(venueName+"Selected").value=currentlySelected;
+	}
 	
 	document.getElementById(venueName+"Needed").max=Math.max(currentlySelected-1,1);//set max missions needed to data or 1, whichever is higher
 	if (Number(document.getElementById(venueName+"Needed").value)>= currentlySelected){//if we need to adjust current value of neededElement
 		//if it's Known gametype, neededElement isn't used, so just bump down to currentlySelected-1
 		document.getElementById(venueName+"Needed").value=Math.max(currentlySelected-1,1);
+		missionsUpdated(venueName);//if we changed Needed amount, might as well re-run calculations
+		return;//break out, no further calcs required
 	}
 	
 	//if not the known game type, and selected=needed
@@ -1164,467 +1180,22 @@ function missionsUpdated(venueName){//when one of the Selected Missions counter 
 	}
 	else{
 		document.getElementById(venueName+"Error").innerHTML="";
-		retryError=false;//an error was fixed.
 		//anErrorExists=false;
 	}
 	
-	//strip numbers in case we're calling a dupe.  this might mess up error checking
-	var numberlessString=venueName.replace(/\d+/g, '');
+	retryError=false;//assume an error was fixed.  possibly not, but can allow full retry anyway
+
 	//re-test all 3 checklists on this venue.
-	switch(numberlessString){
-		case "aquarium":
-			if(aquariumD > currentlySelected)
-				document.getElementById(venueName+'D'+"Error").innerHTML="Over selected.  It works, but randomly(?) selects the correct number of missions.";
-			else{
-				document.getElementById(venueName+'D'+"Error").innerHTML="";
-				retryError=false;//an error was fixed.
-			}
-			if(aquariumP > AquariumMissionsMax-currentlySelected)
-				document.getElementById(venueName+'P'+"Error").innerHTML="Over prohibited.  This quickplay prop will not validate.";
-			else{
-				document.getElementById(venueName+'P'+"Error").innerHTML="";
-				retryError=false;//an error was fixed.
-			}
-			if(!document.getElementById(venueName+"Gametype0").checked){//if not known mode
-				//then test on needed to win value
-				if(aquariumR > Number(document.getElementById(venueName+"Needed").value)){
-					document.getElementById(venueName+'R'+"Error").innerHTML="Over required.  This 'works' but will forcefully enable more missions in weird ways.";
-				}
-				else{
-					document.getElementById(venueName+'R'+"Error").innerHTML="";
-					retryError=false;//an error was fixed.
-				}
-			}
-			else{//this is known mode
-				//then test on selected value
-				if(aquariumR > currentlySelected){
-					document.getElementById(venueName+'R'+"Error").innerHTML="Over required.  This 'works' but will forcefully enable more missions in weird ways.";
-				}
-				else{
-					document.getElementById(venueName+'R'+"Error").innerHTML="";
-					retryError=false;//an error was fixed.
-				}
-			}
-			break;
-		case "balcony":
-			if(balconyD > currentlySelected)
-				document.getElementById(venueName+'D'+"Error").innerHTML="Over selected.  It works, but randomly(?) selects the correct number of missions.";
-			else{
-				document.getElementById(venueName+'D'+"Error").innerHTML="";
-				retryError=false;//an error was fixed.
-			}
-			if(balconyP > BalconyMissionsMax-currentlySelected)
-				document.getElementById(venueName+'P'+"Error").innerHTML="Over prohibited.  This quickplay prop will not validate.";
-			else{
-				document.getElementById(venueName+'P'+"Error").innerHTML="";
-				retryError=false;//an error was fixed.
-			}
-			if(!document.getElementById(venueName+"Gametype0").checked){//if not known mode
-				//then test on needed to win value
-				if(balconyR > Number(document.getElementById(venueName+"Needed").value)){
-					document.getElementById(venueName+'R'+"Error").innerHTML="Over required.  This 'works' but will forcefully enable more missions in weird ways.";
-				}
-				else{
-					document.getElementById(venueName+'R'+"Error").innerHTML="";
-					retryError=false;//an error was fixed.
-				}
-			}
-			else{
-				//then test on selected value
-				if(balconyR > currentlySelected){
-					document.getElementById(venueName+'R'+"Error").innerHTML="Over required.  This 'works' but will forcefully enable more missions in weird ways.";
-				}
-				else{
-					document.getElementById(venueName+'R'+"Error").innerHTML="";
-					retryError=false;//an error was fixed.
-				}
-			}
-			break;
-		case "ballroom":
-			if(ballroomD > currentlySelected)
-				document.getElementById(venueName+'D'+"Error").innerHTML="Over selected.  It works, but randomly(?) selects the correct number of missions.";
-			else{
-				document.getElementById(venueName+'D'+"Error").innerHTML="";
-				retryError=false;//an error was fixed.
-			}
-			if(ballroomP > BallroomMissionsMax-currentlySelected)
-				document.getElementById(venueName+'P'+"Error").innerHTML="Over prohibited.  This quickplay prop will not validate.";
-			else{
-				document.getElementById(venueName+'P'+"Error").innerHTML="";
-				retryError=false;//an error was fixed.
-			}
-			if(!document.getElementById(venueName+"Gametype0").checked){//if not known mode
-				//then test on needed to win value
-				if(ballroomR > Number(document.getElementById(venueName+"Needed").value)){
-					document.getElementById(venueName+'R'+"Error").innerHTML="Over required.  This 'works' but will forcefully enable more missions in weird ways.";
-				}
-				else{
-					document.getElementById(venueName+'R'+"Error").innerHTML="";
-					retryError=false;//an error was fixed.
-				}
-			}
-			else{
-				//then test on selected value
-				if(ballroomR > currentlySelected){
-					document.getElementById(venueName+'R'+"Error").innerHTML="Over required.  This 'works' but will forcefully enable more missions in weird ways.";
-				}
-				else{
-					document.getElementById(venueName+'R'+"Error").innerHTML="";
-					retryError=false;//an error was fixed.
-				}
-			}
-			break;
-		case "courtyard":
-			if(courtyardD > currentlySelected)
-				document.getElementById(venueName+'D'+"Error").innerHTML="Over selected.  It works, but randomly(?) selects the correct number of missions.";
-			else{
-				document.getElementById(venueName+'D'+"Error").innerHTML="";
-				retryError=false;//an error was fixed.
-			}
-			if(courtyardP > CourtyardMissionsMax-currentlySelected)
-				document.getElementById(venueName+'P'+"Error").innerHTML="Over prohibited.  This quickplay prop will not validate.";
-			else{
-				document.getElementById(venueName+'P'+"Error").innerHTML="";
-				retryError=false;//an error was fixed.
-			}
-			if(!document.getElementById(venueName+"Gametype0").checked){//if not known mode
-				//then test on needed to win value
-				if(courtyardR > Number(document.getElementById(venueName+"Needed").value)){
-					document.getElementById(venueName+'R'+"Error").innerHTML="Over required.  This 'works' but will forcefully enable more missions in weird ways.";
-				}
-				else{
-					document.getElementById(venueName+'R'+"Error").innerHTML="";
-					retryError=false;//an error was fixed.
-				}
-			}
-			else{
-				//then test on selected value
-				if(courtyardR > currentlySelected){
-					document.getElementById(venueName+'R'+"Error").innerHTML="Over required.  This 'works' but will forcefully enable more missions in weird ways.";
-				}
-				else{
-					document.getElementById(venueName+'R'+"Error").innerHTML="";
-					retryError=false;//an error was fixed.
-				}
-			}
-			break;
-		case "gallery":
-			if(galleryD > currentlySelected)
-				document.getElementById(venueName+'D'+"Error").innerHTML="Over selected.  It works, but randomly(?) selects the correct number of missions.";
-			else{
-				document.getElementById(venueName+'D'+"Error").innerHTML="";
-				retryError=false;//an error was fixed.
-			}
-			if(galleryP > GalleryMissionsMax-currentlySelected)
-				document.getElementById(venueName+'P'+"Error").innerHTML="Over prohibited.  This quickplay prop will not validate.";
-			else{
-				document.getElementById(venueName+'P'+"Error").innerHTML="";
-				retryError=false;//an error was fixed.
-			}
-			if(!document.getElementById(venueName+"Gametype0").checked){//if not known mode
-				//then test on needed to win value
-				if(galleryR > Number(document.getElementById(venueName+"Needed").value)){
-					document.getElementById(venueName+'R'+"Error").innerHTML="Over required.  This 'works' but will forcefully enable more missions in weird ways.";
-				}
-				else{
-					document.getElementById(venueName+'R'+"Error").innerHTML="";
-					retryError=false;//an error was fixed.
-				}
-			}
-			else{
-				//then test on selected value
-				if(galleryR > currentlySelected){
-					document.getElementById(venueName+'R'+"Error").innerHTML="Over required.  This 'works' but will forcefully enable more missions in weird ways.";
-				}
-				else{
-					document.getElementById(venueName+'R'+"Error").innerHTML="";
-					retryError=false;//an error was fixed.
-				}
-			}
-			break;
-		case "highrise":
-			if(highriseD > currentlySelected)
-				document.getElementById(venueName+'D'+"Error").innerHTML="Over selected.  It works, but randomly(?) selects the correct number of missions.";
-			else{
-				document.getElementById(venueName+'D'+"Error").innerHTML="";
-				retryError=false;//an error was fixed.
-			}
-			if(highriseP > HighriseMissionsMax-currentlySelected)
-				document.getElementById(venueName+'P'+"Error").innerHTML="Over prohibited.  This quickplay prop will not validate.";
-			else{
-				document.getElementById(venueName+'P'+"Error").innerHTML="";
-				retryError=false;//an error was fixed.
-			}
-			if(!document.getElementById(venueName+"Gametype0").checked){//if not known mode
-				//then test on needed to win value
-				if(highriseR > Number(document.getElementById(venueName+"Needed").value)){
-					document.getElementById(venueName+'R'+"Error").innerHTML="Over required.  This 'works' but will forcefully enable more missions in weird ways.";
-				}
-				else{
-					document.getElementById(venueName+'R'+"Error").innerHTML="";
-					retryError=false;//an error was fixed.
-				}
-			}
-			else{
-				//then test on selected value
-				if(highriseR > currentlySelected){
-					document.getElementById(venueName+'R'+"Error").innerHTML="Over required.  This 'works' but will forcefully enable more missions in weird ways.";
-				}
-				else{
-					document.getElementById(venueName+'R'+"Error").innerHTML="";
-					retryError=false;//an error was fixed.
-				}
-			}
-			break;
-		case "library":
-			if(libraryD > currentlySelected)
-				document.getElementById(venueName+'D'+"Error").innerHTML="Over selected.  It works, but randomly(?) selects the correct number of missions.";
-			else{
-				document.getElementById(venueName+'D'+"Error").innerHTML="";
-				retryError=false;//an error was fixed.
-			}
-			if(libraryP > LibraryMissionsMax-currentlySelected)
-				document.getElementById(venueName+'P'+"Error").innerHTML="Over prohibited.  This quickplay prop will not validate.";
-			else{
-				document.getElementById(venueName+'P'+"Error").innerHTML="";
-				retryError=false;//an error was fixed.
-			}
-			if(!document.getElementById(venueName+"Gametype0").checked){//if not known mode
-				//then test on needed to win value
-				if(libraryR > Number(document.getElementById(venueName+"Needed").value)){
-					document.getElementById(venueName+'R'+"Error").innerHTML="Over required.  This 'works' but will forcefully enable more missions in weird ways.";
-				}
-				else{
-					document.getElementById(venueName+'R'+"Error").innerHTML="";
-					retryError=false;//an error was fixed.
-				}
-			}
-			else{
-				//then test on selected value
-				if(libraryR > currentlySelected){
-					document.getElementById(venueName+'R'+"Error").innerHTML="Over required.  This 'works' but will forcefully enable more missions in weird ways.";
-				}
-				else{
-					document.getElementById(venueName+'R'+"Error").innerHTML="";
-					retryError=false;//an error was fixed.
-				}
-			}
-			break;
-		case "moderne":
-			if(moderneD > currentlySelected)
-				document.getElementById(venueName+'D'+"Error").innerHTML="Over selected.  It works, but randomly(?) selects the correct number of missions.";
-			else{
-				document.getElementById(venueName+'D'+"Error").innerHTML="";
-				retryError=false;//an error was fixed.
-			}
-			if(moderneP > ModerneMissionsMax-currentlySelected)
-				document.getElementById(venueName+'P'+"Error").innerHTML="Over prohibited.  This quickplay prop will not validate.";
-			else{
-				document.getElementById(venueName+'P'+"Error").innerHTML="";
-				retryError=false;//an error was fixed.
-			}
-			if(!document.getElementById(venueName+"Gametype0").checked){//if not known mode
-				//then test on needed to win value
-				if(moderneR > Number(document.getElementById(venueName+"Needed").value)){
-					document.getElementById(venueName+'R'+"Error").innerHTML="Over required.  This 'works' but will forcefully enable more missions in weird ways.";
-				}
-				else{
-					document.getElementById(venueName+'R'+"Error").innerHTML="";
-					retryError=false;//an error was fixed.
-				}
-			}
-			else{
-				//then test on selected value
-				if(moderneR > currentlySelected){
-					document.getElementById(venueName+'R'+"Error").innerHTML="Over required.  This 'works' but will forcefully enable more missions in weird ways.";
-				}
-				else{
-					document.getElementById(venueName+'R'+"Error").innerHTML="";
-					retryError=false;//an error was fixed.
-				}
-			}
-			break;
-		case "pub":
-			if(pubD > currentlySelected)
-				document.getElementById(venueName+'D'+"Error").innerHTML="Over selected.  It works, but randomly(?) selects the correct number of missions.";
-			else{
-				document.getElementById(venueName+'D'+"Error").innerHTML="";
-				retryError=false;//an error was fixed.
-			}
-			if(pubP > PubMissionsMax-currentlySelected)
-				document.getElementById(venueName+'P'+"Error").innerHTML="Over prohibited.  This quickplay prop will not validate.";
-			else{
-				document.getElementById(venueName+'P'+"Error").innerHTML="";
-				retryError=false;//an error was fixed.
-			}
-			if(!document.getElementById(venueName+"Gametype0").checked){//if not known mode
-				//then test on needed to win value
-				if(pubR > Number(document.getElementById(venueName+"Needed").value)){
-					document.getElementById(venueName+'R'+"Error").innerHTML="Over required.  This 'works' but will forcefully enable more missions in weird ways.";
-				}
-				else{
-					document.getElementById(venueName+'R'+"Error").innerHTML="";
-					retryError=false;//an error was fixed.
-				}
-			}
-			else{
-				//then test on selected value
-				if(pubR > currentlySelected){
-					document.getElementById(venueName+'R'+"Error").innerHTML="Over required.  This 'works' but will forcefully enable more missions in weird ways.";
-				}
-				else{
-					document.getElementById(venueName+'R'+"Error").innerHTML="";
-					retryError=false;//an error was fixed.
-				}
-			}
-			break;
-		case "redwoods":
-			if(redwoodsD > currentlySelected)
-				document.getElementById(venueName+'D'+"Error").innerHTML="Over selected.  It works, but randomly(?) selects the correct number of missions.";
-			else{
-				document.getElementById(venueName+'D'+"Error").innerHTML="";
-				retryError=false;//an error was fixed.
-			}
-			if(redwoodsP > RedwoodsMissionsMax-currentlySelected)
-				document.getElementById(venueName+'P'+"Error").innerHTML="Over prohibited.  This quickplay prop will not validate.";
-			else{
-				document.getElementById(venueName+'P'+"Error").innerHTML="";
-				retryError=false;//an error was fixed.
-			}
-			if(!document.getElementById(venueName+"Gametype0").checked){//if not known mode
-				//then test on needed to win value
-				if(redwoodsR > Number(document.getElementById(venueName+"Needed").value)){
-					document.getElementById(venueName+'R'+"Error").innerHTML="Over required.  This 'works' but will forcefully enable more missions in weird ways.";
-				}
-				else{
-					document.getElementById(venueName+'R'+"Error").innerHTML="";
-					retryError=false;//an error was fixed.
-				}
-			}
-			else{
-				//then test on selected value
-				if(redwoodsR > currentlySelected){
-					document.getElementById(venueName+'R'+"Error").innerHTML="Over required.  This 'works' but will forcefully enable more missions in weird ways.";
-				}
-				else{
-					document.getElementById(venueName+'R'+"Error").innerHTML="";
-					retryError=false;//an error was fixed.
-				}
-			}
-			break;
-		case "teien":
-			if(teienD > currentlySelected)
-				document.getElementById(venueName+'D'+"Error").innerHTML="Over selected.  It works, but randomly(?) selects the correct number of missions.";
-			else{
-				document.getElementById(venueName+'D'+"Error").innerHTML="";
-				retryError=false;//an error was fixed.
-			}
-			if(teienP > TeienMissionsMax-currentlySelected)
-				document.getElementById(venueName+'P'+"Error").innerHTML="Over prohibited.  This quickplay prop will not validate.";
-			else{
-				document.getElementById(venueName+'P'+"Error").innerHTML="";
-				retryError=false;//an error was fixed.
-			}
-			if(!document.getElementById(venueName+"Gametype0").checked){//if not known mode
-				//then test on needed to win value
-				if(teienR > Number(document.getElementById(venueName+"Needed").value)){
-					document.getElementById(venueName+'R'+"Error").innerHTML="Over required.  This 'works' but will forcefully enable more missions in weird ways.";
-				}
-				else{
-					document.getElementById(venueName+'R'+"Error").innerHTML="";
-					retryError=false;//an error was fixed.
-				}
-			}
-			else{
-				//then test on selected value
-				if(teienR > currentlySelected){
-					document.getElementById(venueName+'R'+"Error").innerHTML="Over required.  This 'works' but will forcefully enable more missions in weird ways.";
-				}
-				else{
-					document.getElementById(venueName+'R'+"Error").innerHTML="";
-					retryError=false;//an error was fixed.
-				}
-			}
-			break;
-		case "terrace":
-			if(terraceD > currentlySelected)
-				document.getElementById(venueName+'D'+"Error").innerHTML="Over selected.  It works, but randomly(?) selects the correct number of missions.";
-			else{
-				document.getElementById(venueName+'D'+"Error").innerHTML="";
-				retryError=false;//an error was fixed.
-			}
-			if(terraceP > TerraceMissionsMax-currentlySelected)
-				document.getElementById(venueName+'P'+"Error").innerHTML="Over prohibited.  This quickplay prop will not validate.";
-			else{
-				document.getElementById(venueName+'P'+"Error").innerHTML="";
-				retryError=false;//an error was fixed.
-			}
-			if(!document.getElementById(venueName+"Gametype0").checked){//if not known mode
-				//then test on needed to win value
-				if(terraceR > Number(document.getElementById(venueName+"Needed").value)){
-					document.getElementById(venueName+'R'+"Error").innerHTML="Over required.  This 'works' but will forcefully enable more missions in weird ways.";
-				}
-				else{
-					document.getElementById(venueName+'R'+"Error").innerHTML="";
-					retryError=false;//an error was fixed.
-				}
-			}
-			else{
-				//then test on selected value
-				if(terraceR > currentlySelected){
-					document.getElementById(venueName+'R'+"Error").innerHTML="Over required.  This 'works' but will forcefully enable more missions in weird ways.";
-				}
-				else{
-					document.getElementById(venueName+'R'+"Error").innerHTML="";
-					retryError=false;//an error was fixed.
-				}
-			}
-			break;
-		case "veranda":
-			if(verandaD > currentlySelected)
-				document.getElementById(venueName+'D'+"Error").innerHTML="Over selected.  It works, but randomly(?) selects the correct number of missions.";
-			else{
-				document.getElementById(venueName+'D'+"Error").innerHTML="";
-				retryError=false;//an error was fixed.
-			}
-			if(verandaP > VerandaMissionsMax-currentlySelected)
-				document.getElementById(venueName+'P'+"Error").innerHTML="Over prohibited.  This quickplay prop will not validate.";
-			else{
-				document.getElementById(venueName+'P'+"Error").innerHTML="";
-				retryError=false;//an error was fixed.
-			}
-			if(!document.getElementById(venueName+"Gametype0").checked){//if not known mode
-				//then test on needed to win value
-				if(verandaR > Number(document.getElementById(venueName+"Needed").value)){
-					document.getElementById(venueName+'R'+"Error").innerHTML="Over required.  This 'works' but will forcefully enable more missions in weird ways.";
-				}
-				else{
-					document.getElementById(venueName+'R'+"Error").innerHTML="";
-					retryError=false;//an error was fixed.
-				}
-			}
-			else{
-				//then test on selected value
-				if(verandaR > currentlySelected){
-					document.getElementById(venueName+'R'+"Error").innerHTML="Over required.  This 'works' but will forcefully enable more missions in weird ways.";
-				}
-				else{
-					document.getElementById(venueName+'R'+"Error").innerHTML="";
-					retryError=false;//an error was fixed.
-				}
-			}
-			break;
-		default:
-			alert("unexpected venue in list check in missionsUpdated: "+venueName);
-	}
-		
+	checkListErrors(venueName,"D",true);
+	checkListErrors(venueName,"P",true);
+	checkListErrors(venueName,"R",true);
 }
 
 function countDsForVenue(venueName){
 	let count = 0;
 	let numberlessString=venueName.replace(/\d+/g, '');
 
-	console.log("testing: counting Ds for venue: "+venueName+" | numberless = "+numberlessString);
+	//console.log("testing: counting Ds for venue: "+venueName+" | numberless = "+numberlessString);
 
 	if (venueHasMission(numberlessString,"Bug") && Boolean(document.getElementById(""+venueName+"Default0").checked))
 		count++;
@@ -1760,1011 +1331,6 @@ function checkListErrors(venueName,checklistKey,isChecked){
 	}//end switch
 }
 
-
-function checkListErrors2(venueName,checklistKey, isChecked){
-	//console.log(""+venueName);
-	var currentlySelected=Number(document.getElementById(venueName+"Selected").value);
-	
-	//gross code, have fun future people
-	//strip numbers in case we're calling a dupe.  this might mess up error checking
-	var numberlessString=venueName.replace(/\d+/g, '');
-	switch(numberlessString){
-		case "aquarium":
-			//aquarium
-			switch(checklistKey){//get last character as key
-				case "D":
-					if(isChecked){
-						aquariumD++;
-						if(aquariumD > currentlySelected){
-							document.getElementById(venueName+checklistKey+"Error").innerHTML="Over selected.  It works, but randomly(?) selects the correct number of missions.";
-							//anErrorExists=true;
-						}
-					}
-					else{
-						aquariumD--;
-						if(aquariumD<=currentlySelected){
-							document.getElementById(venueName+checklistKey+"Error").innerHTML="";
-							retryError=false;//an error was fixed.
-						}
-					}
-					break;
-				case "P":
-					if(isChecked){
-						aquariumP++;
-						if(aquariumP > AquariumMissionsMax-currentlySelected){
-							document.getElementById(venueName+checklistKey+"Error").innerHTML="Over prohibited.  This quickplay prop will not validate.";
-							//anErrorExists=true;
-						}
-					}
-					else{
-						aquariumP--;
-						if(aquariumP<=AquariumMissionsMax-currentlySelected){
-							document.getElementById(venueName+checklistKey+"Error").innerHTML="";
-							retryError=false;//an error was fixed.
-						}
-					}
-					break;
-				case "R":
-					if(isChecked){
-						aquariumR++;
-						if(!document.getElementById(venueName+"Gametype0").checked){//if not known mode
-							//then test on needed to win value
-							if(aquariumR > Number(document.getElementById(venueName+"Needed").value)){
-								document.getElementById(venueName+checklistKey+"Error").innerHTML="Over required.  This 'works' but will forcefully enable more missions in weird ways.";
-								//anErrorExists=true;
-							}
-						}
-						else{
-							//then test on selected value
-							if(aquariumR > currentlySelected){
-								document.getElementById(venueName+checklistKey+"Error").innerHTML="Over required.  This 'works' but will forcefully enable more missions in weird ways.";
-								//anErrorExists=true;
-							}
-						}
-						
-					}
-					else{
-						aquariumR--;
-						if(!document.getElementById(venueName+"Gametype0").checked){//if not known mode
-								//test on needed to win
-								if(aquariumR<=Number(document.getElementById(venueName+"Needed").value)){//if less or equal required than need to win
-								document.getElementById(venueName+checklistKey+"Error").innerHTML="";
-								retryError=false;//an error was fixed.
-							}
-						}
-						else{
-							//test on needed to win
-							if(aquariumR<=currentlySelected){ //if not known and less or equal required than need to win
-								document.getElementById(venueName+checklistKey+"Error").innerHTML="";
-								retryError=false;//an error was fixed.
-							}
-						}
-					}
-					break;
-				default:
-					alert("Unknown key in checkListErrors() ["+venueName+":"+checklistKey+"]");
-			}
-			break;//end aquarium
-		
-		case "balcony":
-			//balcony
-			switch(checklistKey){//get last character as key
-				case "D":
-					if(isChecked){
-						balconyD++;
-						if(balconyD > currentlySelected){
-							document.getElementById(venueName+checklistKey+"Error").innerHTML="Over selected.  It works, but randomly(?) selects the correct number of missions.";
-							//anErrorExists=true;
-						}
-					}
-					else{
-						balconyD--;
-						if(balconyD<=currentlySelected){
-							document.getElementById(venueName+checklistKey+"Error").innerHTML="";
-							retryError=false;//an error was fixed.
-						}
-					}
-					break;
-				case "P":
-					if(isChecked){
-						balconyP++;
-						if(balconyP > BalconyMissionsMax-currentlySelected){
-							document.getElementById(venueName+checklistKey+"Error").innerHTML="Over prohibited.  This quickplay prop will not validate.";
-							//anErrorExists=true;
-						}
-					}
-					else{
-						balconyP--;
-						if(balconyP<=BalconyMissionsMax-currentlySelected){
-							document.getElementById(venueName+checklistKey+"Error").innerHTML="";
-							retryError=false;//an error was fixed.
-						}
-					}
-					break;
-				case "R":
-					if(isChecked){
-						balconyR++;
-						if(!document.getElementById(venueName+"Gametype0").checked){//if not known mode
-							//then test on needed to win value
-							if(balconyR > Number(document.getElementById(venueName+"Needed").value)){
-								document.getElementById(venueName+checklistKey+"Error").innerHTML="Over required.  This 'works' but will forcefully enable more missions in weird ways.";
-								//anErrorExists=true;
-							}
-						}
-						else{
-							//then test on selected value
-							if(balconyR > currentlySelected){
-								document.getElementById(venueName+checklistKey+"Error").innerHTML="Over required.  This 'works' but will forcefully enable more missions in weird ways.";
-								//anErrorExists=true;
-							}
-						}
-						
-					}
-					else{
-						balconyR--;
-						if(!document.getElementById(venueName+"Gametype0").checked){//if not known mode
-								//test on needed to win
-								if(balconyR<=Number(document.getElementById(venueName+"Needed").value)){//if less or equal required than need to win
-								document.getElementById(venueName+checklistKey+"Error").innerHTML="";
-								retryError=false;//an error was fixed.
-							}
-						}
-						else{
-							//test on needed to win
-							if(balconyR<=currentlySelected){ //if not known and less or equal required than need to win
-								document.getElementById(venueName+checklistKey+"Error").innerHTML="";
-								retryError=false;//an error was fixed.
-							}
-						}
-					}
-					break;
-				default:
-					alert("Unknown key in checkListErrors() ["+venueName+":"+checklistKey+"]");
-			}
-			break;//end balcony
-		case "ballroom":
-			//ballroom
-			switch(checklistKey){//get last character as key
-				case "D":
-					if(isChecked){
-						ballroomD++;
-						if(ballroomD > currentlySelected){
-							document.getElementById(venueName+checklistKey+"Error").innerHTML="Over selected.  It works, but randomly(?) selects the correct number of missions.";
-							//anErrorExists=true;
-						}
-					}
-					else{
-						ballroomD--;
-						if(ballroomD<=currentlySelected){
-							document.getElementById(venueName+checklistKey+"Error").innerHTML="";
-							retryError=false;//an error was fixed.
-						}
-					}
-					break;
-				case "P":
-					if(isChecked){
-						ballroomP++;
-						if(ballroomP > BallroomMissionsMax-currentlySelected){
-							document.getElementById(venueName+checklistKey+"Error").innerHTML="Over prohibited.  This quickplay prop will not validate.";
-							//anErrorExists=true;
-						}
-					}
-					else{
-						ballroomP--;
-						if(ballroomP<=BallroomMissionsMax-currentlySelected){
-							document.getElementById(venueName+checklistKey+"Error").innerHTML="";
-							retryError=false;//an error was fixed.
-						}
-					}
-					break;
-				case "R":
-					if(isChecked){
-						ballroomR++;
-						if(!document.getElementById(venueName+"Gametype0").checked){//if not known mode
-							//then test on needed to win value
-							if(ballroomR > Number(document.getElementById(venueName+"Needed").value)){
-								document.getElementById(venueName+checklistKey+"Error").innerHTML="Over required.  This 'works' but will forcefully enable more missions in weird ways.";
-								//anErrorExists=true;
-							}
-						}
-						else{
-							//then test on selected value
-							if(ballroomR > currentlySelected){
-								document.getElementById(venueName+checklistKey+"Error").innerHTML="Over required.  This 'works' but will forcefully enable more missions in weird ways.";
-								//anErrorExists=true;
-							}
-						}
-						
-					}
-					else{
-						ballroomR--;
-						if(!document.getElementById(venueName+"Gametype0").checked){//if not known mode
-								//test on needed to win
-								if(ballroomR<=Number(document.getElementById(venueName+"Needed").value)){//if less or equal required than need to win
-								document.getElementById(venueName+checklistKey+"Error").innerHTML="";
-								retryError=false;//an error was fixed.
-							}
-						}
-						else{
-							//test on needed to win
-							if(ballroomR<=currentlySelected){ //if not known and less or equal required than need to win
-								document.getElementById(venueName+checklistKey+"Error").innerHTML="";
-								retryError=false;//an error was fixed.
-							}
-						}
-					}
-					break;
-				default:
-					alert("Unknown key in checkListErrors() ["+venueName+":"+checklistKey+"]");
-			}
-			break;//end ballroom
-		case "courtyard":
-			//courtyard
-			switch(checklistKey){//get last character as key
-				case "D":
-					if(isChecked){
-						courtyardD++;
-						if(courtyardD > currentlySelected){
-							document.getElementById(venueName+checklistKey+"Error").innerHTML="Over selected.  It works, but randomly(?) selects the correct number of missions.";
-							//anErrorExists=true;
-						}
-					}
-					else{
-						courtyardD--;
-						if(courtyardD<=currentlySelected){
-							document.getElementById(venueName+checklistKey+"Error").innerHTML="";
-							retryError=false;//an error was fixed.
-						}
-					}
-					break;
-				case "P":
-					if(isChecked){
-						courtyardP++;
-						if(courtyardP > CourtyardMissionsMax-currentlySelected){
-							document.getElementById(venueName+checklistKey+"Error").innerHTML="Over prohibited.  This quickplay prop will not validate.";
-							//anErrorExists=true;
-						}
-					}
-					else{
-						courtyardP--;
-						if(courtyardP<=CourtyardMissionsMax-currentlySelected){
-							document.getElementById(venueName+checklistKey+"Error").innerHTML="";
-							retryError=false;//an error was fixed.
-						}
-					}
-					break;
-				case "R":
-					if(isChecked){
-						courtyardR++;
-						if(!document.getElementById(venueName+"Gametype0").checked){//if not known mode
-							//then test on needed to win value
-							if(courtyardR > Number(document.getElementById(venueName+"Needed").value)){
-								document.getElementById(venueName+checklistKey+"Error").innerHTML="Over required.  This 'works' but will forcefully enable more missions in weird ways.";
-								//anErrorExists=true;
-							}
-						}
-						else{
-							//then test on selected value
-							if(courtyardR > currentlySelected){
-								document.getElementById(venueName+checklistKey+"Error").innerHTML="Over required.  This 'works' but will forcefully enable more missions in weird ways.";
-								//anErrorExists=true;
-							}
-						}
-						
-					}
-					else{
-						courtyardR--;
-						if(!document.getElementById(venueName+"Gametype0").checked){//if not known mode
-								//test on needed to win
-								if(courtyardR<=Number(document.getElementById(venueName+"Needed").value)){//if less or equal required than need to win
-								document.getElementById(venueName+checklistKey+"Error").innerHTML="";
-								retryError=false;//an error was fixed.
-							}
-						}
-						else{
-							//test on needed to win
-							if(courtyardR<=currentlySelected){ //if not known and less or equal required than need to win
-								document.getElementById(venueName+checklistKey+"Error").innerHTML="";
-								retryError=false;//an error was fixed.
-							}
-						}
-					}
-					break;
-				default:
-					alert("Unknown key in checkListErrors() ["+venueName+":"+checklistKey+"]");
-			}
-			break;//end courtyard
-		case "gallery":
-			//gallery
-			switch(checklistKey){//get last character as key
-				case "D":
-					if(isChecked){
-						galleryD++;
-						if(galleryD > currentlySelected){
-							document.getElementById(venueName+checklistKey+"Error").innerHTML="Over selected.  It works, but randomly(?) selects the correct number of missions.";
-							//anErrorExists=true;
-						}
-					}
-					else{
-						galleryD--;
-						if(galleryD<=currentlySelected){
-							document.getElementById(venueName+checklistKey+"Error").innerHTML="";
-							retryError=false;//an error was fixed.
-						}
-					}
-					break;
-				case "P":
-					if(isChecked){
-						galleryP++;
-						if(galleryP > GalleryMissionsMax-currentlySelected){
-							document.getElementById(venueName+checklistKey+"Error").innerHTML="Over prohibited.  This quickplay prop will not validate.";
-							//anErrorExists=true;
-						}
-					}
-					else{
-						galleryP--;
-						if(galleryP<=GalleryMissionsMax-currentlySelected){
-							document.getElementById(venueName+checklistKey+"Error").innerHTML="";
-							retryError=false;//an error was fixed.
-						}
-					}
-					break;
-				case "R":
-					if(isChecked){
-						galleryR++;
-						if(!document.getElementById(venueName+"Gametype0").checked){//if not known mode
-							//then test on needed to win value
-							if(galleryR > Number(document.getElementById(venueName+"Needed").value)){
-								document.getElementById(venueName+checklistKey+"Error").innerHTML="Over required.  This 'works' but will forcefully enable more missions in weird ways.";
-								//anErrorExists=true;
-							}
-						}
-						else{
-							//then test on selected value
-							if(galleryR > currentlySelected){
-								document.getElementById(venueName+checklistKey+"Error").innerHTML="Over required.  This 'works' but will forcefully enable more missions in weird ways.";
-								//anErrorExists=true;
-							}
-						}
-						
-					}
-					else{
-						galleryR--;
-						if(!document.getElementById(venueName+"Gametype0").checked){//if not known mode
-								//test on needed to win
-								if(galleryR<=Number(document.getElementById(venueName+"Needed").value)){//if less or equal required than need to win
-								document.getElementById(venueName+checklistKey+"Error").innerHTML="";
-								retryError=false;//an error was fixed.
-							}
-						}
-						else{
-							//test on needed to win
-							if(galleryR<=currentlySelected){ //if not known and less or equal required than need to win
-								document.getElementById(venueName+checklistKey+"Error").innerHTML="";
-								retryError=false;//an error was fixed.
-							}
-						}
-					}
-					break;
-				default:
-					alert("Unknown key in checkListErrors() ["+venueName+":"+checklistKey+"]");
-			}
-			break;//end gallery
-		case "highrise":
-			//highrise
-			switch(checklistKey){//get last character as key
-				case "D":
-					if(isChecked){
-						highriseD++;
-						if(highriseD > currentlySelected){
-							document.getElementById(venueName+checklistKey+"Error").innerHTML="Over selected.  It works, but randomly(?) selects the correct number of missions.";
-							//anErrorExists=true;
-						}
-					}
-					else{
-						highriseD--;
-						if(highriseD<=currentlySelected){
-							document.getElementById(venueName+checklistKey+"Error").innerHTML="";
-							retryError=false;//an error was fixed.
-						}
-					}
-					break;
-				case "P":
-					if(isChecked){
-						highriseP++;
-						if(highriseP > HighriseMissionsMax-currentlySelected){
-							document.getElementById(venueName+checklistKey+"Error").innerHTML="Over prohibited.  This quickplay prop will not validate.";
-							//anErrorExists=true;
-						}
-					}
-					else{
-						highriseP--;
-						if(highriseP<=HighriseMissionsMax-currentlySelected){
-							document.getElementById(venueName+checklistKey+"Error").innerHTML="";
-							retryError=false;//an error was fixed.
-						}
-					}
-					break;
-				case "R":
-					if(isChecked){
-						highriseR++;
-						if(!document.getElementById(venueName+"Gametype0").checked){//if not known mode
-							//then test on needed to win value
-							if(highriseR > Number(document.getElementById(venueName+"Needed").value)){
-								document.getElementById(venueName+checklistKey+"Error").innerHTML="Over required.  This 'works' but will forcefully enable more missions in weird ways.";
-								//anErrorExists=true;
-							}
-						}
-						else{
-							//then test on selected value
-							if(highriseR > currentlySelected){
-								document.getElementById(venueName+checklistKey+"Error").innerHTML="Over required.  This 'works' but will forcefully enable more missions in weird ways.";
-								//anErrorExists=true;
-							}
-						}
-						
-					}
-					else{
-						highriseR--;
-						if(!document.getElementById(venueName+"Gametype0").checked){//if not known mode
-								//test on needed to win
-								if(highriseR<=Number(document.getElementById(venueName+"Needed").value)){//if less or equal required than need to win
-								document.getElementById(venueName+checklistKey+"Error").innerHTML="";
-								retryError=false;//an error was fixed.
-							}
-						}
-						else{
-							//test on needed to win
-							if(highriseR<=currentlySelected){ //if not known and less or equal required than need to win
-								document.getElementById(venueName+checklistKey+"Error").innerHTML="";
-								retryError=false;//an error was fixed.
-							}
-						}
-					}
-					break;
-				default:
-					alert("Unknown key in checkListErrors() ["+venueName+":"+checklistKey+"]");
-			}
-			break;//end highrise
-		case "library":
-			//library
-			switch(checklistKey){//get last character as key
-				case "D":
-					if(isChecked){
-						libraryD++;
-						if(libraryD > currentlySelected){
-							document.getElementById(venueName+checklistKey+"Error").innerHTML="Over selected.  It works, but randomly(?) selects the correct number of missions.";
-							//anErrorExists=true;
-						}
-					}
-					else{
-						libraryD--;
-						if(libraryD<=currentlySelected){
-							document.getElementById(venueName+checklistKey+"Error").innerHTML="";
-							retryError=false;//an error was fixed.
-						}
-					}
-					break;
-				case "P":
-					if(isChecked){
-						libraryP++;
-						if(libraryP > LibraryMissionsMax-currentlySelected){
-							document.getElementById(venueName+checklistKey+"Error").innerHTML="Over prohibited.  This quickplay prop will not validate.";
-							//anErrorExists=true;
-						}
-					}
-					else{
-						libraryP--;
-						if(libraryP<=LibraryMissionsMax-currentlySelected){
-							document.getElementById(venueName+checklistKey+"Error").innerHTML="";
-							retryError=false;//an error was fixed.
-						}
-					}
-					break;
-				case "R":
-					if(isChecked){
-						libraryR++;
-						if(!document.getElementById(venueName+"Gametype0").checked){//if not known mode
-							//then test on needed to win value
-							if(libraryR > Number(document.getElementById(venueName+"Needed").value)){
-								document.getElementById(venueName+checklistKey+"Error").innerHTML="Over required.  This 'works' but will forcefully enable more missions in weird ways.";
-								//anErrorExists=true;
-							}
-						}
-						else{
-							//then test on selected value
-							if(libraryR > currentlySelected){
-								document.getElementById(venueName+checklistKey+"Error").innerHTML="Over required.  This 'works' but will forcefully enable more missions in weird ways.";
-								//anErrorExists=true;
-							}
-						}
-						
-					}
-					else{
-						libraryR--;
-						if(!document.getElementById(venueName+"Gametype0").checked){//if not known mode
-								//test on needed to win
-								if(libraryR<=Number(document.getElementById(venueName+"Needed").value)){//if less or equal required than need to win
-								document.getElementById(venueName+checklistKey+"Error").innerHTML="";
-								retryError=false;//an error was fixed.
-							}
-						}
-						else{
-							//test on needed to win
-							if(libraryR<=currentlySelected){ //if not known and less or equal required than need to win
-								document.getElementById(venueName+checklistKey+"Error").innerHTML="";
-								retryError=false;//an error was fixed.
-							}
-						}
-					}
-					break;
-				default:
-					alert("Unknown key in checkListErrors() ["+venueName+":"+checklistKey+"]");
-			}
-			break;//end library
-		case "moderne":
-			//moderne
-			switch(checklistKey){//get last character as key
-				case "D":
-					if(isChecked){
-						moderneD++;
-						if(moderneD > currentlySelected){
-							document.getElementById(venueName+checklistKey+"Error").innerHTML="Over selected.  It works, but randomly(?) selects the correct number of missions.";
-							//anErrorExists=true;
-						}
-					}
-					else{
-						moderneD--;
-						if(moderneD<=currentlySelected){
-							document.getElementById(venueName+checklistKey+"Error").innerHTML="";
-							retryError=false;//an error was fixed.
-						}
-					}
-					break;
-				case "P":
-					if(isChecked){
-						moderneP++;
-						if(moderneP > ModerneMissionsMax-currentlySelected){
-							document.getElementById(venueName+checklistKey+"Error").innerHTML="Over prohibited.  This quickplay prop will not validate.";
-							//anErrorExists=true;
-						}
-					}
-					else{
-						moderneP--;
-						if(moderneP<=ModerneMissionsMax-currentlySelected){
-							document.getElementById(venueName+checklistKey+"Error").innerHTML="";
-							retryError=false;//an error was fixed.
-						}
-					}
-					break;
-				case "R":
-					if(isChecked){
-						moderneR++;
-						if(!document.getElementById(venueName+"Gametype0").checked){//if not known mode
-							//then test on needed to win value
-							if(moderneR > Number(document.getElementById(venueName+"Needed").value)){
-								document.getElementById(venueName+checklistKey+"Error").innerHTML="Over required.  This 'works' but will forcefully enable more missions in weird ways.";
-								//anErrorExists=true;
-							}
-						}
-						else{
-							//then test on selected value
-							if(moderneR > currentlySelected){
-								document.getElementById(venueName+checklistKey+"Error").innerHTML="Over required.  This 'works' but will forcefully enable more missions in weird ways.";
-								//anErrorExists=true;
-							}
-						}
-						
-					}
-					else{
-						moderneR--;
-						if(!document.getElementById(venueName+"Gametype0").checked){//if not known mode
-								//test on needed to win
-								if(moderneR<=Number(document.getElementById(venueName+"Needed").value)){//if less or equal required than need to win
-								document.getElementById(venueName+checklistKey+"Error").innerHTML="";
-								retryError=false;//an error was fixed.
-							}
-						}
-						else{
-							//test on needed to win
-							if(moderneR<=currentlySelected){ //if not known and less or equal required than need to win
-								document.getElementById(venueName+checklistKey+"Error").innerHTML="";
-								retryError=false;//an error was fixed.
-							}
-						}
-					}
-					break;
-				default:
-					alert("Unknown key in checkListErrors() ["+venueName+":"+checklistKey+"]");
-			}
-			break;//end moderne
-		case "pub":
-			//pub
-			switch(checklistKey){//get last character as key
-				case "D":
-					if(isChecked){
-						pubD++;
-						if(pubD > currentlySelected){
-							document.getElementById(venueName+checklistKey+"Error").innerHTML="Over selected.  It works, but randomly(?) selects the correct number of missions.";
-							//anErrorExists=true;
-						}
-					}
-					else{
-						pubD--;
-						if(pubD<=currentlySelected){
-							document.getElementById(venueName+checklistKey+"Error").innerHTML="";
-							retryError=false;//an error was fixed.
-						}
-					}
-					break;
-				case "P":
-					if(isChecked){
-						pubP++;
-						if(pubP > PubMissionsMax-currentlySelected){
-							document.getElementById(venueName+checklistKey+"Error").innerHTML="Over prohibited.  This quickplay prop will not validate.";
-							//anErrorExists=true;
-						}
-					}
-					else{
-						pubP--;
-						if(pubP<=PubMissionsMax-currentlySelected){
-							document.getElementById(venueName+checklistKey+"Error").innerHTML="";
-							retryError=false;//an error was fixed.
-						}
-					}
-					break;
-				case "R":
-					if(isChecked){
-						pubR++;
-						if(!document.getElementById(venueName+"Gametype0").checked){//if not known mode
-							//then test on needed to win value
-							if(pubR > Number(document.getElementById(venueName+"Needed").value)){
-								document.getElementById(venueName+checklistKey+"Error").innerHTML="Over required.  This 'works' but will forcefully enable more missions in weird ways.";
-								//anErrorExists=true;
-							}
-						}
-						else{
-							//then test on selected value
-							if(pubR > currentlySelected){
-								document.getElementById(venueName+checklistKey+"Error").innerHTML="Over required.  This 'works' but will forcefully enable more missions in weird ways.";
-								//anErrorExists=true;
-							}
-						}
-						
-					}
-					else{
-						pubR--;
-						if(!document.getElementById(venueName+"Gametype0").checked){//if not known mode
-								//test on needed to win
-								if(pubR<=Number(document.getElementById(venueName+"Needed").value)){//if less or equal required than need to win
-								document.getElementById(venueName+checklistKey+"Error").innerHTML="";
-								retryError=false;//an error was fixed.
-							}
-						}
-						else{
-							//test on needed to win
-							if(pubR<=currentlySelected){ //if not known and less or equal required than need to win
-								document.getElementById(venueName+checklistKey+"Error").innerHTML="";
-								retryError=false;//an error was fixed.
-							}
-						}
-					}
-					break;
-				default:
-					alert("Unknown key in checkListErrors() ["+venueName+":"+checklistKey+"]");
-			}
-			break;//end pub
-		case "redwoods":
-			//redwoods
-			switch(checklistKey){//get last character as key
-				case "D":
-					if(isChecked){
-						redwoodsD++;
-						if(redwoodsD > currentlySelected){
-							document.getElementById(venueName+checklistKey+"Error").innerHTML="Over selected.  It works, but randomly(?) selects the correct number of missions.";
-							//anErrorExists=true;
-						}
-					}
-					else{
-						redwoodsD--;
-						if(redwoodsD<=currentlySelected){
-							document.getElementById(venueName+checklistKey+"Error").innerHTML="";
-							retryError=false;//an error was fixed.
-						}
-					}
-					break;
-				case "P":
-					if(isChecked){
-						redwoodsP++;
-						if(redwoodsP > RedwoodsMissionsMax-currentlySelected){
-							document.getElementById(venueName+checklistKey+"Error").innerHTML="Over prohibited.  This quickplay prop will not validate.";
-							//anErrorExists=true;
-						}
-					}
-					else{
-						redwoodsP--;
-						if(redwoodsP<=RedwoodsMissionsMax-currentlySelected){
-							document.getElementById(venueName+checklistKey+"Error").innerHTML="";
-							retryError=false;//an error was fixed.
-						}
-					}
-					break;
-				case "R":
-					if(isChecked){
-						redwoodsR++;
-						if(!document.getElementById(venueName+"Gametype0").checked){//if not known mode
-							//then test on needed to win value
-							if(redwoodsR > Number(document.getElementById(venueName+"Needed").value)){
-								document.getElementById(venueName+checklistKey+"Error").innerHTML="Over required.  This 'works' but will forcefully enable more missions in weird ways.";
-								//anErrorExists=true;
-							}
-						}
-						else{
-							//then test on selected value
-							if(redwoodsR > currentlySelected){
-								document.getElementById(venueName+checklistKey+"Error").innerHTML="Over required.  This 'works' but will forcefully enable more missions in weird ways.";
-								//anErrorExists=true;
-							}
-						}
-						
-					}
-					else{
-						redwoodsR--;
-						if(!document.getElementById(venueName+"Gametype0").checked){//if not known mode
-								//test on needed to win
-								if(redwoodsR<=Number(document.getElementById(venueName+"Needed").value)){//if less or equal required than need to win
-								document.getElementById(venueName+checklistKey+"Error").innerHTML="";
-								retryError=false;//an error was fixed.
-							}
-						}
-						else{
-							//test on needed to win
-							if(redwoodsR<=currentlySelected){ //if not known and less or equal required than need to win
-								document.getElementById(venueName+checklistKey+"Error").innerHTML="";
-								retryError=false;//an error was fixed.
-							}
-						}
-					}
-					break;
-				default:
-					alert("Unknown key in checkListErrors() ["+venueName+":"+checklistKey+"]");
-			}
-			break;//end redwoods
-		case "teien":
-			//teien
-			switch(checklistKey){//get last character as key
-				case "D":
-					if(isChecked){
-						teienD++;
-						if(teienD > currentlySelected){
-							document.getElementById(venueName+checklistKey+"Error").innerHTML="Over selected.  It works, but randomly(?) selects the correct number of missions.";
-							//anErrorExists=true;
-						}
-					}
-					else{
-						teienD--;
-						if(teienD<=currentlySelected){
-							document.getElementById(venueName+checklistKey+"Error").innerHTML="";
-							retryError=false;//an error was fixed.
-						}
-					}
-					break;
-				case "P":
-					if(isChecked){
-						teienP++;
-						if(teienP > TeienMissionsMax-currentlySelected){
-							document.getElementById(venueName+checklistKey+"Error").innerHTML="Over prohibited.  This quickplay prop will not validate.";
-							//anErrorExists=true;
-						}
-					}
-					else{
-						teienP--;
-						if(teienP<=TeienMissionsMax-currentlySelected){
-							document.getElementById(venueName+checklistKey+"Error").innerHTML="";
-							retryError=false;//an error was fixed.
-						}
-					}
-					break;
-				case "R":
-					if(isChecked){
-						teienR++;
-						if(!document.getElementById(venueName+"Gametype0").checked){//if not known mode
-							//then test on needed to win value
-							if(teienR > Number(document.getElementById(venueName+"Needed").value)){
-								document.getElementById(venueName+checklistKey+"Error").innerHTML="Over required.  This 'works' but will forcefully enable more missions in weird ways.";
-								//anErrorExists=true;
-							}
-						}
-						else{
-							//then test on selected value
-							if(teienR > currentlySelected){
-								document.getElementById(venueName+checklistKey+"Error").innerHTML="Over required.  This 'works' but will forcefully enable more missions in weird ways.";
-								//anErrorExists=true;
-							}
-						}
-						
-					}
-					else{
-						teienR--;
-						if(!document.getElementById(venueName+"Gametype0").checked){//if not known mode
-								//test on needed to win
-								if(teienR<=Number(document.getElementById(venueName+"Needed").value)){//if less or equal required than need to win
-								document.getElementById(venueName+checklistKey+"Error").innerHTML="";
-								retryError=false;//an error was fixed.
-							}
-						}
-						else{
-							//test on needed to win
-							if(teienR<=currentlySelected){ //if not known and less or equal required than need to win
-								document.getElementById(venueName+checklistKey+"Error").innerHTML="";
-								retryError=false;//an error was fixed.
-							}
-						}
-					}
-					break;
-				default:
-					alert("Unknown key in checkListErrors() ["+venueName+":"+checklistKey+"]");
-			}
-			break;//end teien
-		case "terrace":
-			//terrace
-			switch(checklistKey){//get last character as key
-				case "D":
-					if(isChecked){
-						terraceD++;
-						if(terraceD > currentlySelected){
-							document.getElementById(venueName+checklistKey+"Error").innerHTML="Over selected.  It works, but randomly(?) selects the correct number of missions.";
-							//anErrorExists=true;
-						}
-					}
-					else{
-						terraceD--;
-						if(terraceD<=currentlySelected){
-							document.getElementById(venueName+checklistKey+"Error").innerHTML="";
-							retryError=false;//an error was fixed.
-						}
-					}
-					break;
-				case "P":
-					if(isChecked){
-						terraceP++;
-						if(terraceP > TerraceMissionsMax-currentlySelected){
-							document.getElementById(venueName+checklistKey+"Error").innerHTML="Over prohibited.  This quickplay prop will not validate.";
-							//anErrorExists=true;
-						}
-					}
-					else{
-						terraceP--;
-						if(terraceP<=TerraceMissionsMax-currentlySelected){
-							document.getElementById(venueName+checklistKey+"Error").innerHTML="";
-							retryError=false;//an error was fixed.
-						}
-					}
-					break;
-				case "R":
-					if(isChecked){
-						terraceR++;
-						if(!document.getElementById(venueName+"Gametype0").checked){//if not known mode
-							//then test on needed to win value
-							if(terraceR > Number(document.getElementById(venueName+"Needed").value)){
-								document.getElementById(venueName+checklistKey+"Error").innerHTML="Over required.  This 'works' but will forcefully enable more missions in weird ways.";
-								//anErrorExists=true;
-							}
-						}
-						else{
-							//then test on selected value
-							if(terraceR > currentlySelected){
-								document.getElementById(venueName+checklistKey+"Error").innerHTML="Over required.  This 'works' but will forcefully enable more missions in weird ways.";
-								//anErrorExists=true;
-							}
-						}
-						
-					}
-					else{
-						terraceR--;
-						if(!document.getElementById(venueName+"Gametype0").checked){//if not known mode
-								//test on needed to win
-								if(terraceR<=Number(document.getElementById(venueName+"Needed").value)){//if less or equal required than need to win
-								document.getElementById(venueName+checklistKey+"Error").innerHTML="";
-								retryError=false;//an error was fixed.
-							}
-						}
-						else{
-							//test on needed to win
-							if(terraceR<=currentlySelected){ //if not known and less or equal required than need to win
-								document.getElementById(venueName+checklistKey+"Error").innerHTML="";
-								retryError=false;//an error was fixed.
-							}
-						}
-					}
-					break;
-				default:
-					alert("Unknown key in checkListErrors() ["+venueName+":"+checklistKey+"]");
-			}
-			break;//end terrace
-		case "veranda":
-			//veranda
-			switch(checklistKey){//get last character as key
-				case "D":
-					if(isChecked){
-						verandaD++;
-						if(verandaD > currentlySelected){
-							document.getElementById(venueName+checklistKey+"Error").innerHTML="Over selected.  It works, but randomly(?) selects the correct number of missions.";
-							//anErrorExists=true;
-						}
-					}
-					else{
-						verandaD--;
-						if(verandaD<=currentlySelected){
-							document.getElementById(venueName+checklistKey+"Error").innerHTML="";
-							retryError=false;//an error was fixed.
-						}
-					}
-					break;
-				case "P":
-					if(isChecked){
-						verandaP++;
-						if(verandaP > VerandaMissionsMax-currentlySelected){
-							document.getElementById(venueName+checklistKey+"Error").innerHTML="Over prohibited.  This quickplay prop will not validate.";
-							//anErrorExists=true;
-						}
-					}
-					else{
-						verandaP--;
-						if(verandaP<=VerandaMissionsMax-currentlySelected){
-							document.getElementById(venueName+checklistKey+"Error").innerHTML="";
-							retryError=false;//an error was fixed.
-						}
-					}
-					break;
-				case "R":
-					if(isChecked){
-						verandaR++;
-						if(!document.getElementById(venueName+"Gametype0").checked){//if not known mode
-							//then test on needed to win value
-							if(verandaR > Number(document.getElementById(venueName+"Needed").value)){
-								document.getElementById(venueName+checklistKey+"Error").innerHTML="Over required.  This 'works' but will forcefully enable more missions in weird ways.";
-								//anErrorExists=true;
-							}
-						}
-						else{
-							//then test on selected value
-							if(verandaR > currentlySelected){
-								document.getElementById(venueName+checklistKey+"Error").innerHTML="Over required.  This 'works' but will forcefully enable more missions in weird ways.";
-								//anErrorExists=true;
-							}
-						}
-						
-					}
-					else{
-						verandaR--;
-						if(!document.getElementById(venueName+"Gametype0").checked){//if not known mode
-								//test on needed to win
-								if(verandaR<=Number(document.getElementById(venueName+"Needed").value)){//if less or equal required than need to win
-								document.getElementById(venueName+checklistKey+"Error").innerHTML="";
-								retryError=false;//an error was fixed.
-							}
-						}
-						else{
-							//test on needed to win
-							if(verandaR<=currentlySelected){ //if not known and less or equal required than need to win
-								document.getElementById(venueName+checklistKey+"Error").innerHTML="";
-								retryError=false;//an error was fixed.
-							}
-						}
-					}
-					break;
-				default:
-					alert("Unknown key in checkListErrors() ["+venueName+":"+checklistKey+"]");
-			}
-			break;//end veranda
-		
-		default:
-			alert("Unknown venueName in checkListErrors() ["+venueName+"]");
-	}//end venue switch
-}//end checkListErrors
-
-
 function finalCheckForErrors(){
 	//build list of all venues to test
 	let venueList=[];
@@ -2779,374 +1345,84 @@ function finalCheckForErrors(){
 			venueList.push(element);
 	});
 
+	var errorExists=false;
+
 	//test elements of venueList
 	venueList.forEach(element => {
 		let numberlessString=element.replace(/\d+/g, '');
 
 		if(checkListErrors(element,"D",true) || checkListErrors(element,"P",true) || checkListErrors(element,"R",true)){
 			console.log("Error detected with D/P/R checkboxes in venue "+document.getElementById(""+element+"Name").value);
-			return true;
+			errorExists = true;
+			return;//out of this for Each loop
 		}
 
 		if (Number(document.getElementById(""+element+"Guests").value)<4){
 			console.log("Error detected with low guest count in venue "+document.getElementById(""+element+"Name").value);
-			return true;
+			errorExists = true;
+			return;//out of this for Each loop
+		}
+		if (Number(document.getElementById(""+element+"Guests").value)>GlobalMaxGuests){
+			console.log("Error detected with high guest count in venue "+document.getElementById(""+element+"Name").value);
+			errorExists = true;
+			return;//out of this for Each loop
 		}
 		
 		//if not Known, and needed >=selected
 		if (!Boolean(document.getElementById(""+element+"Gametype0").checked) && (Number(document.getElementById(""+element+"Needed").value) >= Number(document.getElementById(""+element+"Selected").value))){
 			console.log("Error detected with required missions count in venue "+document.getElementById(""+element+"Name").value);
-			return true;
+			errorExists = true;
+			return;//out of this for Each loop
 		}
 			
 		//test if a mission is both prohibited and required?
 		if(Boolean(document.getElementById(""+element+"Prohibit").checked) && Boolean(document.getElementById(""+element+"Require").checked)){
 			if(venueHasMission(numberlessString,"Bug")&&Boolean(document.getElementById(""+element+"Prohibit0").checked)&&Boolean(document.getElementById(""+element+"Require0").checked)){
 				console.log("Error detected with prohibited mission being required in venue "+document.getElementById(""+element+"Name").value);
-				return true;
+				errorExists = true;
+				return;//out of this for Each loop
 			}
 			if(venueHasMission(numberlessString,"Contact")&&Boolean(document.getElementById(""+element+"Prohibit1").checked)&&Boolean(document.getElementById(""+element+"Require1").checked)){
 				console.log("Error detected with prohibited mission being required in venue "+document.getElementById(""+element+"Name").value);
-				return true;
+				errorExists = true;
+				return;//out of this for Each loop
 			}
 			if(venueHasMission(numberlessString,"Transfer")&&Boolean(document.getElementById(""+element+"Prohibit2").checked)&&Boolean(document.getElementById(""+element+"Require2").checked)){
 				console.log("Error detected with prohibited mission being required in venue "+document.getElementById(""+element+"Name").value);
-				return true;
+				errorExists = true;
+				return;//out of this for Each loop
 			}
 			if(venueHasMission(numberlessString,"Swap")&&Boolean(document.getElementById(""+element+"Prohibit3").checked)&&Boolean(document.getElementById(""+element+"Require3").checked)){
 				console.log("Error detected with prohibited mission being required in venue "+document.getElementById(""+element+"Name").value);
-				return true;
+				errorExists = true;
+				return;//out of this for Each loop
 			}
 			if(venueHasMission(numberlessString,"Inspect")&&Boolean(document.getElementById(""+element+"Prohibit4").checked)&&Boolean(document.getElementById(""+element+"Require4").checked)){
 				console.log("Error detected with prohibited mission being required in venue "+document.getElementById(""+element+"Name").value);
-				return true;
+				errorExists = true;
+				return;//out of this for Each loop
 			}
 			if(venueHasMission(numberlessString,"Seduce")&&Boolean(document.getElementById(""+element+"Prohibit5").checked)&&Boolean(document.getElementById(""+element+"Require5").checked)){
 				console.log("Error detected with prohibited mission being required in venue "+document.getElementById(""+element+"Name").value);
-				return true;
+				errorExists = true;
+				return;//out of this for Each loop
 			}
 			if(venueHasMission(numberlessString,"Purloin")&&Boolean(document.getElementById(""+element+"Prohibit6").checked)&&Boolean(document.getElementById(""+element+"Require6").checked)){
 				console.log("Error detected with prohibited mission being required in venue "+document.getElementById(""+element+"Name").value);
-				return true;
+				errorExists = true;
+				return;//out of this for Each loop
 			}
 			if(venueHasMission(numberlessString,"Fingerprint")&&Boolean(document.getElementById(""+element+"Prohibit7").checked)&&Boolean(document.getElementById(""+element+"Require7").checked)){
 				console.log("Error detected with prohibited mission being required in venue "+document.getElementById(""+element+"Name").value);
-				return true;
+				errorExists = true;
+				return;//out of this for Each loop
 			}
 		}
 
 	});
 
-	//if all else fails,
-	return false;
+	return errorExists;
 }
-
-function finalCheckForErrors2(){
-	
-	//test all checklists, and test guest minimum
-	//should I also test needed < selected? suuure
-	var venueName= "aquarium";
-	var currentlySelected=Number(document.getElementById(venueName+"Selected").value);
-	if(aquariumD > currentlySelected)
-		return true;
-	if(aquariumP > AquariumMissionsMax-currentlySelected)
-		return true;
-	if(!document.getElementById(venueName+"Gametype0").checked){//if not known mode
-		//then test on needed to win value
-		if(aquariumR > Number(document.getElementById(venueName+"Needed").value)){
-			return true;
-		}
-	}
-	else{//this is known mode
-		//then test on selected value
-		if(aquariumR > currentlySelected){
-			return true;
-		}
-	}
-	if (Number(document.getElementById(venueName+"Guests").value)<4)
-		return true;
-	if (!document.getElementById(venueName+"Gametype0").checked && (Number(document.getElementById(venueName+"Needed").value) >= currentlySelected))
-		return true;
-	
-	venueName= "balcony";
-	currentlySelected=Number(document.getElementById(venueName+"Selected").value);
-	if(balconyD > currentlySelected)
-		return true;
-	if(balconyP > BalconyMissionsMax-currentlySelected)
-		return true;
-	if(!document.getElementById(venueName+"Gametype0").checked){//if not known mode
-		//then test on needed to win value
-		if(balconyR > Number(document.getElementById(venueName+"Needed").value)){
-			return true;
-		}
-	}
-	else{
-		//then test on selected value
-		if(balconyR > currentlySelected){
-			return true;
-		}
-	}
-	if (Number(document.getElementById(venueName+"Guests").value)<4)
-		return true;
-	if (!document.getElementById(venueName+"Gametype0").checked && (Number(document.getElementById(venueName+"Needed").value) >= currentlySelected))
-		return true;
-	
-	venueName= "ballroom";
-	currentlySelected=Number(document.getElementById(venueName+"Selected").value);
-	if(ballroomD > currentlySelected)
-		return true;
-	if(ballroomP > BallroomMissionsMax-currentlySelected)
-		return true;
-	if(!document.getElementById(venueName+"Gametype0").checked){//if not known mode
-		//then test on needed to win value
-		if(ballroomR > Number(document.getElementById(venueName+"Needed").value)){
-			return true;
-		}
-	}
-	else{
-		//then test on selected value
-		if(ballroomR > currentlySelected){
-			return true;
-		}
-	}
-	if (Number(document.getElementById(venueName+"Guests").value)<4)
-		return true;
-	if (!document.getElementById(venueName+"Gametype0").checked && (Number(document.getElementById(venueName+"Needed").value) >= currentlySelected))
-		return true;
-	
-	venueName= "courtyard";
-	currentlySelected=Number(document.getElementById(venueName+"Selected").value);
-	if(courtyardD > currentlySelected)
-		return true;
-	if(courtyardP > CourtyardMissionsMax-currentlySelected)
-		return true;
-	if(!document.getElementById(venueName+"Gametype0").checked){//if not known mode
-		//then test on needed to win value
-		if(courtyardR > Number(document.getElementById(venueName+"Needed").value)){
-			return true;
-		}
-	}
-	else{
-		//then test on selected value
-		if(courtyardR > currentlySelected){
-			return true;
-		}
-	}
-	if (Number(document.getElementById(venueName+"Guests").value)<4)
-		return true;
-	if (!document.getElementById(venueName+"Gametype0").checked && (Number(document.getElementById(venueName+"Needed").value) >= currentlySelected))
-		return true;
-	
-	venueName= "gallery";
-	currentlySelected=Number(document.getElementById(venueName+"Selected").value);
-	if(galleryD > currentlySelected)
-		return true;
-	if(galleryP > GalleryMissionsMax-currentlySelected)
-		return true;
-	if(!document.getElementById(venueName+"Gametype0").checked){//if not known mode
-		//then test on needed to win value
-		if(galleryR > Number(document.getElementById(venueName+"Needed").value)){
-			return true;
-		}
-	}
-	else{
-		//then test on selected value
-		if(galleryR > currentlySelected){
-			return true;
-		}
-	}
-	if (Number(document.getElementById(venueName+"Guests").value)<4)
-		return true;
-	if (!document.getElementById(venueName+"Gametype0").checked && (Number(document.getElementById(venueName+"Needed").value) >= currentlySelected))
-		return true;
-	
-	venueName= "highrise";
-	currentlySelected=Number(document.getElementById(venueName+"Selected").value);
-	if(highriseD > currentlySelected)
-		return true;
-	if(highriseP > HighriseMissionsMax-currentlySelected)
-		return true;
-	if(!document.getElementById(venueName+"Gametype0").checked){//if not known mode
-		//then test on needed to win value
-		if(highriseR > Number(document.getElementById(venueName+"Needed").value)){
-			return true;
-		}
-	}
-	else{
-		//then test on selected value
-		if(highriseR > currentlySelected){
-			return true;
-		}
-	}
-	if (Number(document.getElementById(venueName+"Guests").value)<4)
-		return true;
-	if (!document.getElementById(venueName+"Gametype0").checked && (Number(document.getElementById(venueName+"Needed").value) >= currentlySelected))
-		return true;
-	
-	venueName= "library";
-	currentlySelected=Number(document.getElementById(venueName+"Selected").value);
-	if(libraryD > currentlySelected)
-		return true;
-	if(libraryP > LibraryMissionsMax-currentlySelected)
-		return true;
-	if(!document.getElementById(venueName+"Gametype0").checked){//if not known mode
-		//then test on needed to win value
-		if(libraryR > Number(document.getElementById(venueName+"Needed").value)){
-			return true;
-		}
-	}
-	else{
-		//then test on selected value
-		if(libraryR > currentlySelected){
-			return true;
-		}
-	}
-	if (Number(document.getElementById(venueName+"Guests").value)<4)
-		return true;
-	if (!document.getElementById(venueName+"Gametype0").checked && (Number(document.getElementById(venueName+"Needed").value) >= currentlySelected))
-		return true;
-	
-	venueName= "moderne";
-	currentlySelected=Number(document.getElementById(venueName+"Selected").value);
-	if(moderneD > currentlySelected)
-		return true;
-	if(moderneP > ModerneMissionsMax-currentlySelected)
-		return true;
-	if(!document.getElementById(venueName+"Gametype0").checked){//if not known mode
-		//then test on needed to win value
-		if(moderneR > Number(document.getElementById(venueName+"Needed").value)){
-			return true;
-		}
-	}
-	else{
-		//then test on selected value
-		if(moderneR > currentlySelected){
-			return true;
-		}
-	}
-	if (Number(document.getElementById(venueName+"Guests").value)<4)
-		return true;
-	if (!document.getElementById(venueName+"Gametype0").checked && (Number(document.getElementById(venueName+"Needed").value) >= currentlySelected))
-		return true;
-	
-	venueName= "pub";
-	currentlySelected=Number(document.getElementById(venueName+"Selected").value);
-	if(pubD > currentlySelected)
-		return true;
-	if(pubP > PubMissionsMax-currentlySelected)
-		return true;
-	if(!document.getElementById(venueName+"Gametype0").checked){//if not known mode
-		//then test on needed to win value
-		if(pubR > Number(document.getElementById(venueName+"Needed").value)){
-			return true;
-		}
-	}
-	else{
-		//then test on selected value
-		if(pubR > currentlySelected){
-			return true;
-		}
-	}
-	if (Number(document.getElementById(venueName+"Guests").value)<4)
-		return true;
-	if (!document.getElementById(venueName+"Gametype0").checked && (Number(document.getElementById(venueName+"Needed").value) >= currentlySelected))
-		return true;
-	
-	venueName= "redwoods";
-	currentlySelected=Number(document.getElementById(venueName+"Selected").value);
-	if(redwoodsD > currentlySelected)
-		return true;
-	if(redwoodsP > RedwoodsMissionsMax-currentlySelected)
-		return true;
-	if(!document.getElementById(venueName+"Gametype0").checked){//if not known mode
-		//then test on needed to win value
-		if(redwoodsR > Number(document.getElementById(venueName+"Needed").value)){
-			return true;
-		}
-	}
-	else{
-		//then test on selected value
-		if(redwoodsR > currentlySelected){
-			return true;
-		}
-	}
-	if (Number(document.getElementById(venueName+"Guests").value)<4)
-		return true;
-	if (!document.getElementById(venueName+"Gametype0").checked && (Number(document.getElementById(venueName+"Needed").value) >= currentlySelected))
-		return true;
-	
-	venueName= "teien";
-	currentlySelected=Number(document.getElementById(venueName+"Selected").value);
-	if(teienD > currentlySelected)
-		return true;
-	if(teienP > TeienMissionsMax-currentlySelected)
-		return true;
-	if(!document.getElementById(venueName+"Gametype0").checked){//if not known mode
-		//then test on needed to win value
-		if(teienR > Number(document.getElementById(venueName+"Needed").value)){
-			return true;
-		}
-	}
-	else{
-		//then test on selected value
-		if(teienR > currentlySelected){
-			return true;
-		}
-	}
-	if (Number(document.getElementById(venueName+"Guests").value)<4)
-		return true;
-	if (!document.getElementById(venueName+"Gametype0").checked && (Number(document.getElementById(venueName+"Needed").value) >= currentlySelected))
-		return true;
-	
-	venueName= "terrace";
-	currentlySelected=Number(document.getElementById(venueName+"Selected").value);
-	if(terraceD > currentlySelected)
-		return true;
-	if(terraceP > TerraceMissionsMax-currentlySelected)
-		return true;
-	if(!document.getElementById(venueName+"Gametype0").checked){//if not known mode
-		//then test on needed to win value
-		if(terraceR > Number(document.getElementById(venueName+"Needed").value)){
-			return true;
-		}
-	}
-	else{
-		//then test on selected value
-		if(terraceR > currentlySelected){
-			return true;
-		}
-	}
-	if (Number(document.getElementById(venueName+"Guests").value)<4)
-		return true;
-	if (!document.getElementById(venueName+"Gametype0").checked && (Number(document.getElementById(venueName+"Needed").value) >= currentlySelected))
-		return true;
-	
-	venueName= "veranda";
-	currentlySelected=Number(document.getElementById(venueName+"Selected").value);
-	if(verandaD > currentlySelected)
-		return true;
-	if(verandaP > VerandaMissionsMax-currentlySelected)
-		return true;
-	if(!document.getElementById(venueName+"Gametype0").checked){//if not known mode
-		//then test on needed to win value
-		if(verandaR > Number(document.getElementById(venueName+"Needed").value)){
-			return true;
-		}
-	}
-	else{
-		//then test on selected value
-		if(verandaR > currentlySelected){
-			return true;
-		}
-	}
-	if (Number(document.getElementById(venueName+"Guests").value)<4)
-		return true;
-	if (!document.getElementById(venueName+"Gametype0").checked && (Number(document.getElementById(venueName+"Needed").value) >= currentlySelected))
-		return true;
-	
-	return false;
-}
-
 
 function displayTime(venueName){
 
@@ -3188,9 +1464,19 @@ function onNameChange(fieldName){
 
 
 function onLoad(){
-	//set display time for each venue
+	
 	listOfVenuesLowercase.forEach(element => {
 		displayTime(""+element);
+		document.getElementById(""+element+"Guests").max=GlobalMaxGuests;
+
+		/*
+		//set blur detectors for mission count text boxes, and call missionsUpdated on blur
+		document.getElementById(""+element+"Needed").addEventListener('blur', (event) => {
+			missionsUpdated(element);
+		});
+		document.getElementById(""+element+"Selected").addEventListener('blur', (event) => {
+			missionsUpdated(element);
+		});*/
 	});
 	
 
@@ -3221,9 +1507,4 @@ function onLoad(){
 	document.getElementById("verandaSelected").max=VerandaMissionsMax;
 	document.getElementById("verandaNeeded").max=VerandaMissionsMax-1;
 
-
-	listOfVenuesLowercase.forEach( venue => {
-		document.getElementById(""+venue+"Guests").max=GlobalMaxGuests;
-	});
-	
 }
