@@ -11,7 +11,7 @@ check all text values against max and min on error checking.  should be future p
 
 
 	error check doesn't know if a mission is both required and prohibited.  what happens? test in game, and detect
-
+	fails to validate.  preselected plus prohibit is fine
 */
 
 const AquariumMissionsMax=8;
@@ -31,7 +31,7 @@ const VerandaMissionsMax=8;
 const GlobalMaxGuests=21;
 
 const listOfVenuesLowercase=["aquarium","balcony","ballroom","courtyard","gallery","highrise","library","moderne","pub","redwoods","teien","terrace","veranda"];
-
+let listOfDupeVenues=[];
 // if new venue or mission is added, also update venueHasMission function
 //that should not be hardcoded like it is, but it's probably prettier than declaring 13*8 global booleans?
 
@@ -552,7 +552,8 @@ function addExtraVenue(venueName){
 
 
 	//then switch venueName and...
-	
+	//track extra venues for error checking
+	listOfDupeVenues.push(""+venueName+currentExtra);
 	//take care of things that don't require accessing named globals
 	displayTime(""+venueName+currentExtra);
 	
@@ -691,8 +692,11 @@ function addExtraVenue(venueName){
 }
 
 function venueHasMission(venueName,missionName){
+	//I don't think this is needed, but just in case
+	var numberlessString=venueName.replace(/\d+/g, '');
+
 	//everybody loves nested switch statments
-	switch (venueName) {
+	switch (numberlessString) {
 		case 'aquarium':
 			switch(missionName){
 				case "Bug":
@@ -903,7 +907,7 @@ function venueHasMission(venueName,missionName){
 					return false;
 			}
 			break;
-		case 'modderne':
+		case 'moderne':
 			switch(missionName){
 				case "Bug":
 					return true;
@@ -942,7 +946,7 @@ function venueHasMission(venueName,missionName){
 					return true;
 					break;
 				case "Transfer":
-					return true;
+					return false;
 					break;
 				case "Swap":
 					return true;
@@ -1032,7 +1036,7 @@ function venueHasMission(venueName,missionName){
 					return true;
 					break;
 				case "Transfer":
-					return true;
+					return false;
 					break;
 				case "Swap":
 					return true;
@@ -1084,7 +1088,7 @@ function venueHasMission(venueName,missionName){
 			}
 			break;
 		default:
-			console.log("Venue name doesn't match in venueHasMission");
+			console.log("Venue name doesn't match in venueHasMission: "+numberlessString);
 			return false;//just in case
 	}
 	return false;//just in case
@@ -1616,8 +1620,148 @@ function missionsUpdated(venueName){//when one of the Selected Missions counter 
 		
 }
 
+function countDsForVenue(venueName){
+	let count = 0;
+	let numberlessString=venueName.replace(/\d+/g, '');
 
-function checkListErrors(venueName,checklistKey, isChecked){
+	console.log("testing: counting Ds for venue: "+venueName+" | numberless = "+numberlessString);
+
+	if (venueHasMission(numberlessString,"Bug") && Boolean(document.getElementById(""+venueName+"Default0").checked))
+		count++;
+	if (venueHasMission(numberlessString,"Contact") && Boolean(document.getElementById(""+venueName+"Default1").checked))
+		count++;
+	if (venueHasMission(numberlessString,"Transfer") && Boolean(document.getElementById(""+venueName+"Default2").checked))
+		count++;
+	if (venueHasMission(numberlessString,"Swap") && Boolean(document.getElementById(""+venueName+"Default3").checked))
+		count++;
+	if (venueHasMission(numberlessString,"Inspect") && Boolean(document.getElementById(""+venueName+"Default4").checked))
+		count++;
+	if (venueHasMission(numberlessString,"Seduce") && Boolean(document.getElementById(""+venueName+"Default5").checked))
+		count++;
+	if (venueHasMission(numberlessString,"Purloin") && Boolean(document.getElementById(""+venueName+"Default6").checked))
+		count++;
+	if (venueHasMission(numberlessString,"Fingerprint") && Boolean(document.getElementById(""+venueName+"Default7").checked))
+		count++;
+
+	return count;
+}
+function countPsForVenue(venueName){
+	let count = 0;
+	let numberlessString=venueName.replace(/\d+/g, '');
+
+	if (venueHasMission(numberlessString,"Bug") && Boolean(document.getElementById(""+venueName+"Prohibit0").checked))
+		count++;
+	if (venueHasMission(numberlessString,"Contact") && Boolean(document.getElementById(""+venueName+"Prohibit1").checked))
+		count++;
+	if (venueHasMission(numberlessString,"Transfer") && Boolean(document.getElementById(""+venueName+"Prohibit2").checked))
+		count++;
+	if (venueHasMission(numberlessString,"Swap") && Boolean(document.getElementById(""+venueName+"Prohibit3").checked))
+		count++;
+	if (venueHasMission(numberlessString,"Inspect") && Boolean(document.getElementById(""+venueName+"Prohibit4").checked))
+		count++;
+	if (venueHasMission(numberlessString,"Seduce") && Boolean(document.getElementById(""+venueName+"Prohibit5").checked))
+		count++;
+	if (venueHasMission(numberlessString,"Purloin") && Boolean(document.getElementById(""+venueName+"Prohibit6").checked))
+		count++;
+	if (venueHasMission(numberlessString,"Fingerprint") && Boolean(document.getElementById(""+venueName+"Prohibit7").checked))
+		count++;
+
+	return count;
+}
+function countRsForVenue(venueName){
+	let count = 0;
+	let numberlessString=venueName.replace(/\d+/g, '');
+
+	if (venueHasMission(numberlessString,"Bug") && Boolean(document.getElementById(""+venueName+"Require0").checked))
+		count++;
+	if (venueHasMission(numberlessString,"Contact") && Boolean(document.getElementById(""+venueName+"Require1").checked))
+		count++;
+	if (venueHasMission(numberlessString,"Transfer") && Boolean(document.getElementById(""+venueName+"Require2").checked))
+		count++;
+	if (venueHasMission(numberlessString,"Swap") && Boolean(document.getElementById(""+venueName+"Require3").checked))
+		count++;
+	if (venueHasMission(numberlessString,"Inspect") && Boolean(document.getElementById(""+venueName+"Require4").checked))
+		count++;
+	if (venueHasMission(numberlessString,"Seduce") && Boolean(document.getElementById(""+venueName+"Require5").checked))
+		count++;
+	if (venueHasMission(numberlessString,"Purloin") && Boolean(document.getElementById(""+venueName+"Require6").checked))
+		count++;
+	if (venueHasMission(numberlessString,"Fingerprint") && Boolean(document.getElementById(""+venueName+"Require7").checked))
+		count++;
+
+	return count;
+}
+
+function checkListErrors(venueName,checklistKey,isChecked){
+	//console.log(""+venueName);
+	var currentlySelected=Number(document.getElementById(venueName+"Selected").value);
+	
+	//strip numbers in case we're calling a dupe.  this might mess up error checking
+	var numberlessString=venueName.replace(/\d+/g, '');
+
+	var count =-1;
+
+	//if something was removed, allow full recheck
+	if(!Boolean(isChecked))
+		retryError=false;
+
+	switch(checklistKey){//get last character as key
+		case "D":
+			count = countDsForVenue(venueName);
+
+			if (count>currentlySelected){
+				document.getElementById(venueName+checklistKey+"Error").innerHTML="Over selected.  It works, but randomly(?) selects the correct number of missions.";
+				return true;
+			}
+			else{//if(count<=currentlySelected)
+				document.getElementById(venueName+checklistKey+"Error").innerHTML="";
+				return false;
+			}
+			break;
+		case "P":
+			count = countPsForVenue(venueName);
+
+			if (count>AquariumMissionsMax-currentlySelected){
+				document.getElementById(venueName+checklistKey+"Error").innerHTML="Over prohibited.  This quickplay prop will not validate.";
+				return true;
+			}
+			else{
+				document.getElementById(venueName+checklistKey+"Error").innerHTML="";
+				return false;
+			}
+			break;
+		case "R":
+			count = countRsForVenue(venueName);
+
+			if(!Boolean(document.getElementById(venueName+"Gametype0").checked)){//if not known mode
+				if (count>Number(document.getElementById(venueName+"Needed").value)){
+					document.getElementById(venueName+checklistKey+"Error").innerHTML="Over required.  This 'works' but will forcefully enable more missions in weird ways.";
+					return true;
+				}
+				else{
+					document.getElementById(venueName+checklistKey+"Error").innerHTML="";
+					return false;
+				}
+			}
+			else{//known mode
+				//then test on selected value
+				if (count>currentlySelected){
+					document.getElementById(venueName+checklistKey+"Error").innerHTML="Over required.  This 'works' but will forcefully enable more missions in weird ways.";
+					return true;
+				}
+				else{
+					document.getElementById(venueName+checklistKey+"Error").innerHTML="";
+					return false;
+				}
+			}
+			break;
+		default:
+			alert("Unknown key in checkListErrors() ["+venueName+":"+checklistKey+"]");
+	}//end switch
+}
+
+
+function checkListErrors2(venueName,checklistKey, isChecked){
 	//console.log(""+venueName);
 	var currentlySelected=Number(document.getElementById(venueName+"Selected").value);
 	
@@ -2620,7 +2764,84 @@ function checkListErrors(venueName,checklistKey, isChecked){
 	}//end venue switch
 }//end checkListErrors
 
+
 function finalCheckForErrors(){
+	//build list of all venues to test
+	let venueList=[];
+	listOfVenuesLowercase.forEach(element => {
+		if(Boolean(document.getElementById(""+element+"Allow").checked))
+			venueList.push(element);
+	});
+	listOfDupeVenues.forEach(element=> {
+		let numberlessString=element.replace(/\d+/g, '');
+		//if base venue is einabled
+		if(Boolean(document.getElementById(""+numberlessString+"Allow").checked))
+			venueList.push(element);
+	});
+
+	//test elements of venueList
+	venueList.forEach(element => {
+		let numberlessString=element.replace(/\d+/g, '');
+
+		if(checkListErrors(element,"D",true) || checkListErrors(element,"P",true) || checkListErrors(element,"R",true)){
+			console.log("Error detected with D/P/R checkboxes in venue "+document.getElementById(""+element+"Name").value);
+			return true;
+		}
+
+		if (Number(document.getElementById(""+element+"Guests").value)<4){
+			console.log("Error detected with low guest count in venue "+document.getElementById(""+element+"Name").value);
+			return true;
+		}
+		
+		//if not Known, and needed >=selected
+		if (!Boolean(document.getElementById(""+element+"Gametype0").checked) && (Number(document.getElementById(""+element+"Needed").value) >= Number(document.getElementById(""+element+"Selected").value))){
+			console.log("Error detected with required missions count in venue "+document.getElementById(""+element+"Name").value);
+			return true;
+		}
+			
+		//test if a mission is both prohibited and required?
+		if(Boolean(document.getElementById(""+element+"Prohibit").checked) && Boolean(document.getElementById(""+element+"Require").checked)){
+			if(venueHasMission(numberlessString,"Bug")&&Boolean(document.getElementById(""+element+"Prohibit0").checked)&&Boolean(document.getElementById(""+element+"Require0").checked)){
+				console.log("Error detected with prohibited mission being required in venue "+document.getElementById(""+element+"Name").value);
+				return true;
+			}
+			if(venueHasMission(numberlessString,"Contact")&&Boolean(document.getElementById(""+element+"Prohibit1").checked)&&Boolean(document.getElementById(""+element+"Require1").checked)){
+				console.log("Error detected with prohibited mission being required in venue "+document.getElementById(""+element+"Name").value);
+				return true;
+			}
+			if(venueHasMission(numberlessString,"Transfer")&&Boolean(document.getElementById(""+element+"Prohibit2").checked)&&Boolean(document.getElementById(""+element+"Require2").checked)){
+				console.log("Error detected with prohibited mission being required in venue "+document.getElementById(""+element+"Name").value);
+				return true;
+			}
+			if(venueHasMission(numberlessString,"Swap")&&Boolean(document.getElementById(""+element+"Prohibit3").checked)&&Boolean(document.getElementById(""+element+"Require3").checked)){
+				console.log("Error detected with prohibited mission being required in venue "+document.getElementById(""+element+"Name").value);
+				return true;
+			}
+			if(venueHasMission(numberlessString,"Inspect")&&Boolean(document.getElementById(""+element+"Prohibit4").checked)&&Boolean(document.getElementById(""+element+"Require4").checked)){
+				console.log("Error detected with prohibited mission being required in venue "+document.getElementById(""+element+"Name").value);
+				return true;
+			}
+			if(venueHasMission(numberlessString,"Seduce")&&Boolean(document.getElementById(""+element+"Prohibit5").checked)&&Boolean(document.getElementById(""+element+"Require5").checked)){
+				console.log("Error detected with prohibited mission being required in venue "+document.getElementById(""+element+"Name").value);
+				return true;
+			}
+			if(venueHasMission(numberlessString,"Purloin")&&Boolean(document.getElementById(""+element+"Prohibit6").checked)&&Boolean(document.getElementById(""+element+"Require6").checked)){
+				console.log("Error detected with prohibited mission being required in venue "+document.getElementById(""+element+"Name").value);
+				return true;
+			}
+			if(venueHasMission(numberlessString,"Fingerprint")&&Boolean(document.getElementById(""+element+"Prohibit7").checked)&&Boolean(document.getElementById(""+element+"Require7").checked)){
+				console.log("Error detected with prohibited mission being required in venue "+document.getElementById(""+element+"Name").value);
+				return true;
+			}
+		}
+
+	});
+
+	//if all else fails,
+	return false;
+}
+
+function finalCheckForErrors2(){
 	
 	//test all checklists, and test guest minimum
 	//should I also test needed < selected? suuure
@@ -3004,6 +3225,5 @@ function onLoad(){
 	listOfVenuesLowercase.forEach( venue => {
 		document.getElementById(""+venue+"Guests").max=GlobalMaxGuests;
 	});
-
 	
 }
