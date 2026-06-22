@@ -7,6 +7,10 @@ check all text values against max and min on error checking.  should be future p
 	//include new results in output
 	//consider if there's value in tracking a list of added venue# ?
 
+	finalcheckforerrors currently doesn't hit any extra venues
+
+
+	error check doesn't know if a mission is both required and prohibited.  what happens? test in game, and detect
 
 */
 
@@ -109,32 +113,97 @@ function onClickSave(){//build the prop string, and prompt for download
 		else
 			propText= propText+"int Minimal = 0\n\t}\n";
 		
-		if(document.getElementById("aquariumAllow").checked)//if we are using aquarium?
-			propText = propText+getQuickplayGroupFromVenue("aquarium")+"\n\n";
-		if(document.getElementById("balconyAllow").checked)//if we are using balcony?
-			propText = propText+getQuickplayGroupFromVenue("balcony")+"\n\n";
-		if(document.getElementById("ballroomAllow").checked)//if we are using ballroom?
-			propText = propText+getQuickplayGroupFromVenue("ballroom")+"\n\n";
-		if(document.getElementById("courtyardAllow").checked)//if we are using courtyard?
-			propText = propText+getQuickplayGroupFromVenue("courtyard")+"\n\n";
-		if(document.getElementById("galleryAllow").checked)//if we are using gallery?
-			propText = propText+getQuickplayGroupFromVenue("gallery")+"\n\n";
-		if(document.getElementById("highriseAllow").checked)//if we are using highrise?
-			propText = propText+getQuickplayGroupFromVenue("highrise")+"\n\n";
-		if(document.getElementById("libraryAllow").checked)//if we are using library?
-			propText = propText+getQuickplayGroupFromVenue("library")+"\n\n";
-		if(document.getElementById("moderneAllow").checked)//if we are using moderne?
-			propText = propText+getQuickplayGroupFromVenue("moderne")+"\n\n";	
-		if(document.getElementById("pubAllow").checked)//if we are using pub?
-			propText = propText+getQuickplayGroupFromVenue("pub")+"\n\n";	
-		if(document.getElementById("redwoodsAllow").checked)//if we are using redwoods?
-			propText = propText+getQuickplayGroupFromVenue("redwoods")+"\n\n";	
-		if(document.getElementById("teienAllow").checked)//if we are using teien?
-			propText = propText+getQuickplayGroupFromVenue("teien")+"\n\n";	
-		if(document.getElementById("terraceAllow").checked)//if we are using terrace?
-			propText = propText+getQuickplayGroupFromVenue("terrace")+"\n\n";		
-		if(document.getElementById("verandaAllow").checked)//if we are using veranda?
-			propText = propText+getQuickplayGroupFromVenue("veranda")+"\n\n";		
+		if(Boolean(document.getElementById("aquariumAllow").checked)){//if we are using aquarium?
+			propText = propText+getQuickplayGroupFromVenue("aquarium")+"\n";
+			for(let i=1;i<=numExtraAquarium;i++){
+				propText+=getQuickplayGroupFromVenue("aquarium"+i)+"\n";
+			}
+			propText+="\n";
+		}
+		if(Boolean(document.getElementById("balconyAllow").checked)){//if we are using balcony?
+			propText = propText+getQuickplayGroupFromVenue("balcony")+"\n";
+			for(let i=1;i<=numExtraAquarium;i++){
+				propText+=getQuickplayGroupFromVenue("balcony"+i)+"\n";
+			}
+			propText+="\n";
+		}
+		if(Boolean(document.getElementById("ballroomAllow").checked)){//if we are using ballroom?
+			propText = propText+getQuickplayGroupFromVenue("ballroom")+"\n";
+			for(let i=1;i<=numExtraAquarium;i++){
+				propText+=getQuickplayGroupFromVenue("ballroom"+i)+"\n";
+			}
+			propText+="\n";
+		}
+		if(Boolean(document.getElementById("courtyardAllow").checked)){//if we are using courtyard?
+			propText = propText+getQuickplayGroupFromVenue("courtyard")+"\n";
+			for(let i=1;i<=numExtraAquarium;i++){
+				propText+=getQuickplayGroupFromVenue("courtyard"+i)+"\n";
+			}
+			propText+="\n";
+		}
+		if(Boolean(document.getElementById("galleryAllow").checked)){//if we are using gallery?
+			propText = propText+getQuickplayGroupFromVenue("gallery")+"\n";
+			for(let i=1;i<=numExtraAquarium;i++){
+				propText+=getQuickplayGroupFromVenue("gallery"+i)+"\n";
+			}
+			propText+="\n";
+		}
+		if(Boolean(document.getElementById("highriseAllow").checked)){//if we are using highrise?
+			propText = propText+getQuickplayGroupFromVenue("highrise")+"\n";
+			for(let i=1;i<=numExtraAquarium;i++){
+				propText+=getQuickplayGroupFromVenue("highrise"+i)+"\n";
+			}
+			propText+="\n";
+		}
+		if(Boolean(document.getElementById("libraryAllow").checked)){//if we are using library?
+			propText = propText+getQuickplayGroupFromVenue("library")+"\n";
+			for(let i=1;i<=numExtraAquarium;i++){
+				propText+=getQuickplayGroupFromVenue("library"+i)+"\n";
+			}
+			propText+="\n";
+		}
+		if(Boolean(document.getElementById("moderneAllow").checked)){//if we are using moderne?
+			propText = propText+getQuickplayGroupFromVenue("moderne")+"\n";	
+			for(let i=1;i<=numExtraAquarium;i++){
+				propText+=getQuickplayGroupFromVenue("moderne"+i)+"\n";
+			}
+			propText+="\n";
+		}
+		if(Boolean(document.getElementById("pubAllow").checked)){//if we are using pub?
+			propText = propText+getQuickplayGroupFromVenue("pub")+"\n";	
+			for(let i=1;i<=numExtraAquarium;i++){
+				propText+=getQuickplayGroupFromVenue("pub"+i)+"\n";
+			}
+			propText+="\n";
+		}
+		if(Boolean(document.getElementById("redwoodsAllow").checked)){//if we are using redwoods?
+			propText = propText+getQuickplayGroupFromVenue("redwoods")+"\n";
+			for(let i=1;i<=numExtraAquarium;i++){
+				propText+=getQuickplayGroupFromVenue("redwoods"+i)+"\n";
+			}
+			propText+="\n";
+		}
+		if(Boolean(document.getElementById("teienAllow").checked)){//if we are using teien?
+			propText = propText+getQuickplayGroupFromVenue("teien")+"\n";	
+			for(let i=1;i<=numExtraAquarium;i++){
+				propText+=getQuickplayGroupFromVenue("teien"+i)+"\n";
+			}
+			propText+="\n";
+		}
+		if(Boolean(document.getElementById("terraceAllow").checked)){//if we are using terrace?
+			propText = propText+getQuickplayGroupFromVenue("terrace")+"\n";	
+			for(let i=1;i<=numExtraAquarium;i++){
+				propText+=getQuickplayGroupFromVenue("terrace"+i)+"\n";
+			}
+			propText+="\n";
+		}
+		if(Boolean(document.getElementById("verandaAllow").checked)){//if we are using veranda?
+			propText = propText+getQuickplayGroupFromVenue("veranda")+"\n";	
+			for(let i=1;i<=numExtraAquarium;i++){
+				propText+=getQuickplayGroupFromVenue("veranda"+i)+"\n";
+			}
+			propText+="\n";
+		}
 			
 			
 		//close prop
@@ -169,14 +238,21 @@ function onClickSave(){//build the prop string, and prompt for download
 }
 
 function getQuickplayGroupFromVenue(venueName){
+	var numberlessString=venueName.replace(/\d+/g, '');
+	var numbersOnly=venueName.replace(/[a-zA-Z]/g, '');
+	
 	//copy custom group
-	var propText="\n\t//"+venueName+"\n\tgroup quickplay =\n\t{\n\t\tint Version=1\n\t\tstring CustomGroup=\""+document.getElementById("group").value+"\"\n\t\tstring Name=\"";
+	var propText="\n\t//"+numberlessString;
+	if (numbersOnly.length >0)
+		propText+=" #"+(Number(numbersOnly)+1);
+
+	propText+="\n\tgroup quickplay =\n\t{\n\t\tint Version=1\n\t\tstring CustomGroup=\""+document.getElementById("group").value+"\"\n\t\tstring Name=\"";
 	
 	//quickplay name
 	propText=propText+document.getElementById(venueName+"Name").value+"\"\n\t\tint LevelHash = "
 	
 	//get level hash
-	switch(venueName)
+	switch(numberlessString)
 	{
 		case "aquarium":
 			propText+="0x98e45d99";break;
@@ -205,7 +281,7 @@ function getQuickplayGroupFromVenue(venueName){
 		case "veranda":
 			propText+="0x6F81A558";break;
 		default:
-			alert("Unknown venue name in venue hash switch code: "+venueName);
+			alert("Unknown venue name in venue hash switch code: "+numberlessString);
 	}
 	propText=propText+"\n\t\tint DurationSeconds = ";
 	
@@ -251,93 +327,93 @@ function getQuickplayGroupFromVenue(venueName){
 	
 	//get default selections
 	if (document.getElementById(venueName+"Preselect").checked){
-		propText=propText+"\n\t\tgroup default_missions = \n\t\t{\n\t\t\t"
+		propText=propText+"\n\t\tgroup default_missions = \n\t\t{"
 		
 		if(document.getElementById(venueName+"Default0") !== null && document.getElementById(venueName+"Default0").checked){//bug
-			propText=propText+"strings mission = \"bug_ambassador\"\n\t\t\t"
+			propText=propText+"\n\t\t\tstrings mission = \"bug_ambassador\""
 		}
 		if(document.getElementById(venueName+"Default1") !== null && document.getElementById(venueName+"Default1").checked){//Contact
-			propText=propText+"strings mission = \"double_agent\"\n\t\t\t"
+			propText=propText+"\n\t\t\tstrings mission = \"double_agent\""
 		}
 		if(document.getElementById(venueName+"Default2") !== null && document.getElementById(venueName+"Default2").checked){//transfer
-			propText=propText+"strings mission = \"transfer_microfilm\"\n\t\t\t"
+			propText=propText+"\n\t\t\tstrings mission = \"transfer_microfilm\""
 		}
 		if(document.getElementById(venueName+"Default3") !== null && document.getElementById(venueName+"Default3").checked){//swap
-			propText=propText+"strings mission = \"swap_statue\"\n\t\t\t"
+			propText=propText+"\n\t\t\tstrings mission = \"swap_statue\""
 		}
 		if(document.getElementById(venueName+"Default4") !== null && document.getElementById(venueName+"Default4").checked){//inspect
-			propText=propText+"strings mission = \"inspect_statues\"\n\t\t\t"
+			propText=propText+"\n\t\t\tstrings mission = \"inspect_statues\""
 		}
 		if(document.getElementById(venueName+"Default5") !== null && document.getElementById(venueName+"Default5").checked){//seduce
-			propText=propText+"strings mission = \"seduction\"\n\t\t\t"
+			propText=propText+"\n\t\t\tstrings mission = \"seduction\""
 		}
 		if(document.getElementById(venueName+"Default6") !== null && document.getElementById(venueName+"Default6").checked){//purlin
-			propText=propText+"strings mission = \"purloin_guestlist\"\n\t\t\t"
+			propText=propText+"\n\t\t\tstrings mission = \"purloin_guestlist\""
 		}
 		if(document.getElementById(venueName+"Default7") !== null && document.getElementById(venueName+"Default7").checked){//fingerprint
-			propText=propText+"strings mission = \"fingerprint_ambassador\"\n\t\t\t"
+			propText=propText+"\n\t\t\tstrings mission = \"fingerprint_ambassador\""
 		}
 		//close group
 		propText=propText+"\n\t\t}";
 	}
 	
 	if (document.getElementById(venueName+"Prohibit").checked){
-		propText=propText+"\n\t\tgroup prohibited_missions = \n\t\t{\n\t\t\t"
+		propText=propText+"\n\t\tgroup prohibited_missions = \n\t\t{"
 		
 		if(document.getElementById(venueName+"Prohibit0") !== null && document.getElementById(venueName+"Prohibit0").checked){//bug
-			propText=propText+"strings mission = \"bug_ambassador\"\n\t\t\t"
+			propText=propText+"\n\t\t\tstrings mission = \"bug_ambassador\""
 		}
 		if(document.getElementById(venueName+"Prohibit1") !== null && document.getElementById(venueName+"Prohibit1").checked){//Contact
-			propText=propText+"strings mission = \"double_agent\"\n\t\t\t"
+			propText=propText+"\n\t\t\tstrings mission = \"double_agent\""
 		}
 		if(document.getElementById(venueName+"Prohibit2") !== null && document.getElementById(venueName+"Prohibit2").checked){//transfer
-			propText=propText+"strings mission = \"transfer_microfilm\"\n\t\t\t"
+			propText=propText+"\n\t\t\tstrings mission = \"transfer_microfilm\""
 		}
 		if(document.getElementById(venueName+"Prohibit3") !== null && document.getElementById(venueName+"Prohibit3").checked){//swap
-			propText=propText+"strings mission = \"swap_statue\"\n\t\t\t"
+			propText=propText+"\n\t\t\tstrings mission = \"swap_statue\""
 		}
 		if(document.getElementById(venueName+"Prohibit4") !== null && document.getElementById(venueName+"Prohibit4").checked){//inspect
-			propText=propText+"strings mission = \"inspect_statues\"\n\t\t\t"
+			propText=propText+"\n\t\t\tstrings mission = \"inspect_statues\""
 		}
 		if(document.getElementById(venueName+"Prohibit5") !== null && document.getElementById(venueName+"Prohibit5").checked){//seduce
-			propText=propText+"strings mission = \"seduction\"\n\t\t\t"
+			propText=propText+"\n\t\t\tstrings mission = \"seduction\""
 		}
 		if(document.getElementById(venueName+"Prohibit6") !== null && document.getElementById(venueName+"Prohibit6").checked){//purlin
-			propText=propText+"strings mission = \"purloin_guestlist\"\n\t\t\t"
+			propText=propText+"\n\t\t\tstrings mission = \"purloin_guestlist\""
 		}
 		if(document.getElementById(venueName+"Prohibit7") !== null && document.getElementById(venueName+"Prohibit7").checked){//fingerprint
-			propText=propText+"strings mission = \"fingerprint_ambassador\"\n\t\t\t"
+			propText=propText+"\n\t\t\tstrings mission = \"fingerprint_ambassador\""
 		}
 		//close group
 		propText=propText+"\n\t\t}";
 	}
 	
 	if (document.getElementById(venueName+"Require").checked){
-		propText=propText+"\n\t\tgroup required_missions = \n\t\t{\n\t\t\t"
+		propText=propText+"\n\t\tgroup required_missions = \n\t\t{"
 		
 		if(document.getElementById(venueName+"Require0") !== null && document.getElementById(venueName+"Require0").checked){//bug
-			propText=propText+"strings mission = \"bug_ambassador\"\n\t\t\t"
+			propText=propText+"\n\t\t\tstrings mission = \"bug_ambassador\""
 		}
 		if(document.getElementById(venueName+"Require1") !== null && document.getElementById(venueName+"Require1").checked){//Contact
-			propText=propText+"strings mission = \"double_agent\"\n\t\t\t"
+			propText=propText+"\n\t\t\tstrings mission = \"double_agent\""
 		}
 		if(document.getElementById(venueName+"Require2") !== null && document.getElementById(venueName+"Require2").checked){//transfer
-			propText=propText+"strings mission = \"transfer_microfilm\"\n\t\t\t"
+			propText=propText+"\n\t\t\tstrings mission = \"transfer_microfilm\""
 		}
 		if(document.getElementById(venueName+"Require3") !== null && document.getElementById(venueName+"Require3").checked){//swap
-			propText=propText+"strings mission = \"swap_statue\"\n\t\t\t"
+			propText=propText+"\n\t\t\tstrings mission = \"swap_statue\""
 		}
 		if(document.getElementById(venueName+"Require4") !== null && document.getElementById(venueName+"Require4").checked){//inspect
-			propText=propText+"strings mission = \"inspect_statues\"\n\t\t\t"
+			propText=propText+"\n\t\t\tstrings mission = \"inspect_statues\""
 		}
 		if(document.getElementById(venueName+"Require5") !== null && document.getElementById(venueName+"Require5").checked){//seduce
-			propText=propText+"strings mission = \"seduction\"\n\t\t\t"
+			propText=propText+"\n\t\t\tstrings mission = \"seduction\""
 		}
 		if(document.getElementById(venueName+"Require6") !== null && document.getElementById(venueName+"Require6").checked){//purlin
-			propText=propText+"strings mission = \"purloin_guestlist\"\n\t\t\t"
+			propText=propText+"\n\t\t\tstrings mission = \"purloin_guestlist\""
 		}
 		if(document.getElementById(venueName+"Require7") !== null && document.getElementById(venueName+"Require7").checked){//fingerprint
-			propText=propText+"strings mission = \"fingerprint_ambassador\"\n\t\t\t"
+			propText=propText+"\n\t\t\tstrings mission = \"fingerprint_ambassador\""
 		}
 		//close group
 		propText=propText+"\n\t\t}";
@@ -1539,6 +1615,7 @@ function missionsUpdated(venueName){//when one of the Selected Missions counter 
 	}
 		
 }
+
 
 function checkListErrors(venueName,checklistKey, isChecked){
 	//console.log(""+venueName);
